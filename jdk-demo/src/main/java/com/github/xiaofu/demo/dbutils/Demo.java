@@ -18,6 +18,8 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 public class Demo {
 
 	 static String QUERY_SQL="select * from test";
+	 
+	 static String INSERT_SQL="insert into test(t4,t5,t6,t7) values(?,?,?,?)";
 	/**
 	 * 字段名大小和属性名大小是没有问题的，DBUTILS会进行忽略大小的比较
 	 * @param args
@@ -35,6 +37,8 @@ public class Demo {
 			BeanUtils.copyProperties(destModel, model);
 			System.out.println(model.getT3());
 		}
+		//空字符串插入DATE,DATETIME,INT,FLOAT
+		runner.update(INSERT_SQL,"","","","");
 	}
 
 }
