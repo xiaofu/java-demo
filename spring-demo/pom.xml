@@ -6,7 +6,7 @@
 		<artifactId>java-demo-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>spring</artifactId>
+	<artifactId>spring-demo</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
