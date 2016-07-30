@@ -121,7 +121,7 @@ public class ListenerParentNode implements IZkStateListener, IZkDataListener,
 
 	}
 	/**
-	 * 当前节点的创建与删除;当前节点的子节点删除与创建;如果会话过期此方法还要被调用一次
+	 * 当前节点的创建与删除或数据修改（对当前节点设置了exists方法）;当前节点的子节点删除与创建;如果会话过期此方法还要被调用一次
 	 * @param parentPath 父节点，一直有值，不会为NULL
 	 * @param currentChilds 子节点列表，如果没有子节点，返回一个空集合，若是父节点不存在（被删除等），此参数为NULL
 	 */
