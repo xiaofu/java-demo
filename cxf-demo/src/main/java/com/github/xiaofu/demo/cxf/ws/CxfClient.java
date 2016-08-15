@@ -1,5 +1,10 @@
 package com.github.xiaofu.demo.cxf.ws;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.endpoint.dynamic.DynamicClientFactory;
 import org.apache.cxf.frontend.ClientProxyFactoryBean;
@@ -8,6 +13,7 @@ import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxws.JaxWsClientFactoryBean;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
+import org.apache.cxf.message.Message;
 import org.springframework.http.converter.xml.Jaxb2CollectionHttpMessageConverter;
 
 public class CxfClient {
@@ -41,6 +47,11 @@ public class CxfClient {
 		//会生成服务端的类
 		JaxWsDynamicClientFactory clientFactory= JaxWsDynamicClientFactory.newInstance();
 		Client client=clientFactory.createClient("http://localhost:9100/helloWorld?wsdl");
+		Map<String, List<String>> headers = new HashMap<String, List<String>>();
+		headers.put("userName", Arrays.asList("aaaa"));
+		headers.put("pwd", Arrays.asList("123456"));
+		client.getRequestContext().put(Message.PROTOCOL_HEADERS, headers);
+		client.getOutInterceptors().add(new LoggingOutInterceptor());
 		Object[] results= client.invoke("sayHi","hello");
 		System.out.println(results[0]);
 	}
