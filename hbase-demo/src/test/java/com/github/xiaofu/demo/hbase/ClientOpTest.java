@@ -8,21 +8,44 @@ import java.util.List;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.HColumnDescriptor;
+import org.apache.hadoop.hbase.HRegionInfo;
+import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.catalog.CatalogTracker;
+import org.apache.hadoop.hbase.catalog.MetaEditor;
+import org.apache.hadoop.hbase.catalog.MetaReader;
 import org.apache.hadoop.hbase.client.Append;
 import org.apache.hadoop.hbase.client.Delete;
+import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Increment;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.util.Bytes;
+import org.apache.hadoop.hbase.util.RegionSplitter;
+import org.apache.hadoop.hbase.util.RegionSplitter.SplitAlgorithm;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ClientOpTest {
 	private static Configuration conf = null;
+	private static String TABLE = "flh_test";
 	static {
 		conf = HBaseConfiguration.create();
+		try {
+
+			conf.set("hbase.zookeeper.quorum",
+					"node203.vipcloud,node204.vipcloud,node205.vipcloud");
+			/*
+			 * conf.set( "hbase.zookeeper.quorum",
+			 * "node600.vipcloud,node601.vipcloud,node602.vipcloud,node603.vipcloud,node604.vipcloud"
+			 * ); onlineTable = new HTable(conf, "file_uploader");
+			 */
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 	}
-	private static String TABLE = "test_flh";
+
 
 	@Before
 	public void setUp() throws Exception {
@@ -88,5 +111,47 @@ public class ClientOpTest {
 		System.out.println(increment.toString());
 		ClientOp.selectRow(TABLE, "row1");
 		ClientOp.deleteRow(TABLE, "row1");
+	}
+	@Test
+	public  void testMetaReader() throws IOException
+	{
+		CatalogTracker catalogTracker=new CatalogTracker(HBaseConfiguration.create());
+	 
+		if(MetaReader.tableExists(catalogTracker, TABLE))
+		{
+			System.out.println("ok");
+		}
+	}
+	
+	/**
+	 * TODO：操作元数据的标准方式
+	 * @throws IOException 
+	 */
+	@Test
+	public  void testMetaEditor() throws IOException
+	{
+		CatalogTracker catalogTracker=new CatalogTracker(HBaseConfiguration.create());
+		HRegionInfo regionInfo=new HRegionInfo(Bytes.toBytes(TABLE), Bytes.toBytes("b3333313"), null,false,1471342179526l);
+		MetaEditor.deleteRegion(catalogTracker, regionInfo);
+	 
+	}
+	
+	@Test
+	public   void createTable()
+			throws IOException {
+		HBaseAdmin admin = new HBaseAdmin(conf);
+		if (admin.tableExists(TABLE)) {
+			System.out.println("表已经存在！");
+		} else {
+			HTableDescriptor tableDesc = new HTableDescriptor(TABLE);
+			String[] cfs=new String[]{"main"};
+			for (int i = 0; i < cfs.length; i++) {
+				tableDesc.addFamily(new HColumnDescriptor(cfs[i]));
+			}
+			SplitAlgorithm splitAlgor = new RegionSplitter.HexStringSplit();
+			admin.createTableWithAutoSplittableQualifier(tableDesc,
+					splitAlgor.split(50));
+			System.out.println("表创建成功！");
+		}
 	}
 }
