@@ -12,7 +12,7 @@
 		<servlet-class> org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
 		<init-param>
 			<param-name>config-location</param-name>
-			<param-value>/WEB-INF/classes/cxf-servlet.xml</param-value>
+			<param-value>/WEB-INF/classes/springConfiguration.xml</param-value>
 		</init-param>
 	</servlet>
 	<servlet>

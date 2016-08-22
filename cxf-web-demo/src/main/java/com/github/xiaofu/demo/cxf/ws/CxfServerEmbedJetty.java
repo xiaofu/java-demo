@@ -50,18 +50,24 @@ public class CxfServerEmbedJetty {
 		server.setConnectors(new Connector[] { createConnector() });
 		server.setThreadPool(createThreadPool());
 		ServletHolder servletHolder = new ServletHolder(new CXFServlet());
+		//可以使用SERVLET来加载SPRING
+		servletHolder.getInitParameters().put("config-location", "classpath*:springConfiguration.xml");
 		final ServletContextHandler context = new ServletContextHandler();
 		context.setContextPath("/");
-		context.addServlet(servletHolder, "/webService/*"); // 使用它来加载SPRING
-		context.addEventListener(new ContextLoaderListener());
+		context.addServlet(servletHolder, "/webService/*"); 
+		//可以使用上下文侦听器来加载SPRING
+	/*	context.addEventListener(new ContextLoaderListener());
 		context.setInitParameter("contextConfigLocation",
-				"classpath*:cxf-beans.xml");
+				"classpath*:springConfiguration.xml");*/
 		server.setHandler(context);
 		server.start();
 		server.join();
 
 	}
-
+   /**
+    * TODO：这里的JETTY还不如使用SPRING配置文件配置，CXF自身就带有JETTY的配置说明
+    * @throws Exception
+    */
 	public static void CxfWithSpringConfiguration() throws Exception {
 		Resource fileserver_xml = Resource.newSystemResource("jetty.xml");
 		XmlConfiguration configuration = new XmlConfiguration(

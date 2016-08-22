@@ -18,7 +18,7 @@
 		</Call>
 		<Call name="setInitParameter">
 			<Arg>contextConfigLocation</Arg>
-			<Arg>classpath*:cxf-beans.xml</Arg>
+			<Arg>classpath*:springConfiguration.xml</Arg>
 		</Call>
 		<Call name="addServlet">
 			<Arg>
