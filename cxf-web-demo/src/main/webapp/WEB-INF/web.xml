@@ -21,9 +21,9 @@
 		<init-param>
 			<param-name>jaxrs.serviceClasses</param-name>
 			<param-value>
-				com.github.xiaofu.demo.cxf.web.PersonServiceImpl,
-				com.github.xiaofu.demo.cxf.web.CustomerService,
-				com.github.xiaofu.demo.cxf.web.BooksService
+				com.github.xiaofu.demo.cxf.rs.PersonServiceImpl,
+				com.github.xiaofu.demo.cxf.rs.CustomerService,
+				com.github.xiaofu.demo.cxf.rs.BooksService
 			</param-value>
 		</init-param>
 		<init-param>
@@ -57,7 +57,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>cxf-nonspring</servlet-name>
-		<url-pattern>/nonspring/*</url-pattern>
+		<url-pattern>/nonSpring/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>cxf-spring</servlet-name>

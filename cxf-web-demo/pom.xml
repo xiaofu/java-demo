@@ -24,14 +24,20 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
-		<!-- cxf rest -->
+		<!-- cxf  ws begin-->
+		<!-- <dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-bindings-soap</artifactId>
+		</dependency>  -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+		</dependency>
+		<!-- cxf ws end -->
+		<!-- cxf rs  begin-->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
@@ -48,15 +54,7 @@
 			<artifactId>cxf-rt-rs-extension-search</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
-		<!-- cxf webservice -->
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-bindings-soap</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxws</artifactId>
-		</dependency>
+		<!-- cxf rs end -->
 		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -67,10 +65,16 @@
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+			<!-- jetty -->
 		<dependency>
-			<groupId>com.github.xiaofu.demo</groupId>
-			<artifactId>common-demo</artifactId>
-			<version>${project.version}</version>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlet</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-xml</artifactId>
+			<version>${jetty.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>

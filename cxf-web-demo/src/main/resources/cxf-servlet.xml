@@ -7,10 +7,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-	<bean id="personService" class="com.github.xiaofu.demo.cxf.web.PersonServiceImpl" />
-	<bean id="customeService" class="com.github.xiaofu.demo.cxf.web.CustomerService" />
-	<bean id="booksService" class="com.github.xiaofu.demo.cxf.web.BooksService" />
-	<jaxrs:server id="RestService" address="/RestService">
+	<bean id="personService" class="com.github.xiaofu.demo.cxf.rs.PersonServiceImpl" />
+	<bean id="customeService" class="com.github.xiaofu.demo.cxf.rs.CustomerService" />
+	<bean id="booksService" class="com.github.xiaofu.demo.cxf.rs.BooksService" />
+	<jaxrs:server id="restService" address="/RestService">
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
 			<bean class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider" />
@@ -28,10 +28,9 @@
 		</jaxrs:outInterceptors>
 	</jaxrs:server>
 	<jaxws:endpoint id="webService"
-		implementor="com.github.xiaofu.demo.cxf.web.MyService" 
-		endpointName="e:HelloEndpointCustomized"
-		serviceName="s:HelloServiceCustomized" address="/MyService"
-		xmlns:e="http://service.jaxws.cxf.apache.org/endpoint" 
+		implementor="com.github.xiaofu.demo.cxf.ws.HelloWorld" 
+		endpointName="s:HelloWorld"
+		serviceName="s:HelloWorld" address="/WebService"
 		xmlns:s="http://service.jaxws.cxf.apache.org/service" >
 	</jaxws:endpoint>
 
