@@ -46,7 +46,7 @@ public class CxfClient {
 		//JaxWsDynamicClientFactory
 		//会生成服务端的类
 		JaxWsDynamicClientFactory clientFactory= JaxWsDynamicClientFactory.newInstance();
-		Client client=clientFactory.createClient("http://localhost:9100/helloWorld?wsdl");
+		Client client=clientFactory.createClient("http://localhost:8080/webService/HelloWorld?wsdl");
 		Map<String, List<String>> headers = new HashMap<String, List<String>>();
 		headers.put("userName", Arrays.asList("aaaa"));
 		headers.put("pwd", Arrays.asList("123456"));

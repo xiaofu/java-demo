@@ -26,7 +26,7 @@ public class CxfServer {
 		  HelloWorldImpl implementor = new HelloWorldImpl();
 		  JaxWsServerFactoryBean svrFactory = new JaxWsServerFactoryBean();
 		  svrFactory.setServiceClass(HelloWorld.class);
-		  svrFactory.setAddress("http://localhost:9100/helloWorld");
+		  svrFactory.setAddress("http://localhost:8080/webService/HelloWorld");
 		  svrFactory.setServiceBean(implementor);
 		/*  svrFactory.getInInterceptors().add(new LoggingInInterceptor());
 		  svrFactory.getOutInterceptors().add(new LoggingOutInterceptor());*/

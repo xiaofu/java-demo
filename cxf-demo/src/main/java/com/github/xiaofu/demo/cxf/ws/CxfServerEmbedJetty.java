@@ -88,7 +88,7 @@ public class CxfServerEmbedJetty {
 		// 发布必须放在后面是因为在CXFNonSpringServlet中重新创建了一个BUS
 		// JETTY和CXF是通过共用一个BUS来连接的。CXFNonSpringServlet我觉得有改进的必要！
 		JaxWsServerFactoryBean factoryBean = new JaxWsServerFactoryBean();
-		factoryBean.setAddress("/Test");
+		factoryBean.setAddress("/HelloWorld");
 		factoryBean.setServiceClass(HelloWorld.class);
 		factoryBean.setServiceBean(new HelloWorldImpl());
 		factoryBean.create();
