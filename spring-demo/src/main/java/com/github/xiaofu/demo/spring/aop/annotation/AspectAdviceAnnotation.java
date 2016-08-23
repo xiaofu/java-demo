@@ -1,7 +1,8 @@
-package com.github.xiaofu.demo.spring.aop;
+package com.github.xiaofu.demo.spring.aop.annotation;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
@@ -16,7 +17,7 @@ public class AspectAdviceAnnotation {
 	/**
      * 指定切入点匹配表达式，注意它是以方法的形式进行声明的。
      */
-    @Pointcut("execution(* com.github.xiaofu.demo.spring.aop.*.*(..))")
+    @Pointcut("execution(* com.github.xiaofu.demo.spring.aop.annotation.*.*(..))")
     public void anyMethod() {
     }
 
@@ -25,7 +26,7 @@ public class AspectAdviceAnnotation {
      * 
      * @param jp
      */
-    @Before(value = "execution(* com.github.xiaofu.demo.spring.aop.*.*(..))")
+    @Before(value = "execution(* com.github.xiaofu.demo.spring.aop.annotation.*.*(..))")
     public void doBefore(JoinPoint jp) {
         System.out.println("===========进入before advice============ \n");
 
@@ -61,7 +62,7 @@ public class AspectAdviceAnnotation {
      * @param pjp
      *            连接点
      */
-    @Around(value = "execution(* com.github.xiaofu.demo.spring.aop.*.*(..))")
+    @Around(value = "execution(* com.github.xiaofu.demo.spring.aop.annotation.*.*(..))")
     public void doAround(ProceedingJoinPoint pjp) throws Throwable {
         System.out.println("===========进入around环绕方法！=========== \n");
 
@@ -87,7 +88,7 @@ public class AspectAdviceAnnotation {
      * @param jp
      * @param e
      */
-    @AfterThrowing(value = "execution(* com.github.xiaofu.demo.spring.aop.*.*(..))", throwing = "e")
+    @AfterThrowing(value = "execution(* com.github.xiaofu.demo.spring.aop.annotation.*.*(..))", throwing = "e")
     public void doThrow(JoinPoint jp, Throwable e) {
         System.out.println("删除出错啦");
     }

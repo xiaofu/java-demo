@@ -1,4 +1,4 @@
-package com.github.xiaofu.demo.spring.aop;
+package com.github.xiaofu.demo.spring.aop.annotation;
 
 import org.springframework.stereotype.Component;
 
