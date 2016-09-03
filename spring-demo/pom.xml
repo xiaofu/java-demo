@@ -21,6 +21,11 @@
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
@@ -39,11 +44,7 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.8.6</version>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.version}</version>
-		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
 		<dependency>
 			<groupId>com.mchange</groupId>

@@ -45,4 +45,7 @@
 	<bean id="studentJDBCTemplate" class="com.github.xiaofu.demo.spring.jdbc.StudentJDBCTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="studentNameParamTemplate" class="com.github.xiaofu.demo.spring.jdbc.StudentNameParamTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 </beans>
