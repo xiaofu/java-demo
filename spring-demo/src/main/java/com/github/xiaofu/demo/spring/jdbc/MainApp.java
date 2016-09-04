@@ -1,5 +1,6 @@
 package com.github.xiaofu.demo.spring.jdbc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -36,7 +37,10 @@ public class MainApp {
 			studentJDBCTemplate.create(model1);
 		}
 		System.out.println("------Listing Multiple Records--------");
-		List<Student> students = studentJDBCTemplate.listStudents();
+		List<Object> lists=new ArrayList<Object>(5);
+		lists.add(22);
+		lists.add(23);
+		List<Student> students = studentJDBCTemplate.listStudents(lists);
 		for (Student record : students) {
 			System.out.print("ID : " + record.getId());
 			System.out.print(", Name : " + record.getName());

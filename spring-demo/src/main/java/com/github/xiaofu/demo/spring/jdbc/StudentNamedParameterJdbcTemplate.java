@@ -72,5 +72,16 @@ public class StudentNamedParameterJdbcTemplate implements StudentDAO {
 		System.out.println("Updated Record with ID = " + id);
 		return;
 	}
+	@Override
+	public List<Student> listStudents(List<Object> idLists) {
+		 
+		String SQL = "select * from Student where id in (:id)";
+		Map<String, Object> namedParameters = new HashMap<String,Object>();
+		namedParameters.put("id", idLists);
+		//TODO:自动扩展替换占位符，jdbcTemplate不行没有这个处理过程 
+		List<Student> students = namedParameterJdbcTemplate.query(SQL,
+				namedParameters, new StudentMapper());
+		return students;
+	}
 
 }

@@ -1,7 +1,11 @@
 package com.github.xiaofu.demo.spring.jdbc;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.sql.DataSource;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class StudentJdbcTemplate implements StudentDAO {
@@ -11,6 +15,7 @@ public class StudentJdbcTemplate implements StudentDAO {
 	public void setDataSource(DataSource dataSource) {
 
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+		 
 	}
 	
 	@Override
@@ -54,6 +59,11 @@ public class StudentJdbcTemplate implements StudentDAO {
 		return;
 	}
 
-	
+	 
+	@Override
+	public List<Student> listStudents(List<Object> idLists) {
+		 
+	 return null;
+	}
 
 }

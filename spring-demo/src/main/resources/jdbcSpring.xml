@@ -42,13 +42,11 @@
 		p:testConnectionOnCheckin="${database.pool.testConnectionOnCheckin}" />
 
 	<context:annotation-config />
-	<!-- <bean id="jdbcTemplate" class="com.github.xiaofu.demo.spring.jdbc.StudentJDBCTemplate">
+	 <bean id="jdbcTemplate1" class="com.github.xiaofu.demo.spring.jdbc.StudentJdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean> 
+	 <bean id="jdbcTemplate" class="com.github.xiaofu.demo.spring.jdbc.StudentNamedParameterJdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<bean id="jdbcTemplate" class="com.github.xiaofu.demo.spring.jdbc.StudentNameParamTemplate">
-		<property name="dataSource" ref="dataSource" />
-	</bean> -->
-	<bean id="jdbcTemplate" class="com.github.xiaofu.demo.spring.jdbc.StudentSimpleJdbcInsertTemplate">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+	 
 </beans>

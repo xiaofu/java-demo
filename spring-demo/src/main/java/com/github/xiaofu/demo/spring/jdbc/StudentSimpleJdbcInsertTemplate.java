@@ -62,4 +62,10 @@ public class StudentSimpleJdbcInsertTemplate implements StudentDAO {
 
 	}
 
+	@Override
+	public List<Student> listStudents(List<Object> idLists) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

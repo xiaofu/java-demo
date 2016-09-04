@@ -38,4 +38,6 @@ public interface StudentDAO {
     * a record into the Student table.
     */
    public void update(Integer id, Integer age);
+   
+   public List<Student> listStudents(List<Object> idLists);
 }
