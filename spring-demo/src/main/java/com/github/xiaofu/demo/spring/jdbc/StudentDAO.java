@@ -1,9 +1,11 @@
 package com.github.xiaofu.demo.spring.jdbc;
 
 import java.util.List;
+
 import javax.sql.DataSource;
 
 public interface StudentDAO {
+	public void create(Student student);
    /** 
     * This is the method to be used to initialize
     * database resources ie. connection.

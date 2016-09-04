@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-public class StudentNameParamTemplate implements StudentDAO {
+public class StudentNamedParameterJdbcTemplate implements StudentDAO {
 
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
