@@ -4,6 +4,7 @@
 package com.github.xiaofu.demo.dbutils;
 
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class Demo {
 	 */
 	public static void main(String[] args) throws SQLException, IllegalAccessException, InvocationTargetException {
 		
-		QueryRunner runner=new QueryRunner(DBCPUtils.getDataSource());
+		/*QueryRunner runner=new QueryRunner(DBCPUtils.getDataSource());
 		List<TestModel> lists= runner.query(QUERY_SQL, new BeanListHandler<TestModel>(TestModel.class));
 		System.out.println(lists.size());
 		TestModel destModel=new TestModel();
@@ -38,7 +39,24 @@ public class Demo {
 			System.out.println(model.getT3());
 		}
 		//空字符串插入DATE,DATETIME,INT,FLOAT
-		runner.update(INSERT_SQL,"","","","");
+		runner.update(INSERT_SQL,"","","","");*/
+		 batchTest();
+	}
+	
+	public static void batchTest() throws SQLException
+	{
+		QueryRunner runner=new QueryRunner();
+		Connection conn= DBCPUtils.getDataSource().getConnection();
+		conn.setAutoCommit(false);
+		for (int i = 0; i < 100; i++) {
+			Object[][] params=new Object[1][4];
+			params[0][0]="";
+			params[0][1]="";
+			params[0][2]="";
+			params[0][3]="";
+			runner.batch(conn, INSERT_SQL, params);
+		}
+		//conn.rollback();
 	}
 
 }
