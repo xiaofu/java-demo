@@ -9,7 +9,8 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-
+import org.springframework.transaction.annotation.Transactional;
+@Transactional
 public class StudentNamedParameterJdbcTemplate implements StudentDAO {
 
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -19,6 +20,7 @@ public class StudentNamedParameterJdbcTemplate implements StudentDAO {
 		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(
 				dataSource);
 	}
+
 	public void create(Student student) {
 		String SQL = "insert into Student (name, age) values (:name, :age)";
 		

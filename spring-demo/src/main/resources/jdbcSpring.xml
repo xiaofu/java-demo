@@ -40,7 +40,9 @@
 		p:idleConnectionTestPeriod="${database.pool.idleConnectionTestPeriod}"
 		p:preferredTestQuery="${database.pool.connectionHealthQuery}"
 		p:testConnectionOnCheckin="${database.pool.testConnectionOnCheckin}" />
-
+	<!-- must configuration,active aop  -->
+	<tx:annotation-driven />
+	<!-- dont't active @Transactional or EJB3's @TransactionAttribute -->
 	<context:annotation-config />
 	 <bean id="jdbcTemplate1" class="com.github.xiaofu.demo.spring.jdbc.StudentJdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
@@ -48,5 +50,7 @@
 	 <bean id="jdbcTemplate" class="com.github.xiaofu.demo.spring.jdbc.StudentNamedParameterJdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	 
+	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 </beans>

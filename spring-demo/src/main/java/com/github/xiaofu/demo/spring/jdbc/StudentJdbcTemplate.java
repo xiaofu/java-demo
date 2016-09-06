@@ -7,7 +7,10 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionalEventListener;
 
+@Transactional
 public class StudentJdbcTemplate implements StudentDAO {
 
 	private JdbcTemplate jdbcTemplateObject;
@@ -17,7 +20,7 @@ public class StudentJdbcTemplate implements StudentDAO {
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 		 
 	}
-	
+	 
 	@Override
 	public void create(Student student) {
 		// TODO Auto-generated method stub
