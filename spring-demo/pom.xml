@@ -11,6 +11,19 @@
 		<hibernate.version>4.3.11.Final</hibernate.version>
 	</properties>
 	<artifactId>spring-demo</artifactId>
+	<repositories>
+		<repository>
+			<id>file-repo</id>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>ignore</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<url>file://${project.basedir}/lib</url>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -92,5 +105,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.39</version>
 		</dependency>
+		<dependency>
+			<groupId>mssql</groupId>
+			<artifactId>sqljdbc</artifactId>
+			<version>4</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/sqljdbc4.jar</systemPath>
+		</dependency>
 	</dependencies>
+
 </project>
