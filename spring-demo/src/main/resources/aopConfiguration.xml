@@ -9,18 +9,18 @@
      http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
     http://www.springframework.org/schema/context 
     http://www.springframework.org/schema/context/spring-context-4.0.xsd">
-	<context:component-scan base-package="com.github.xiaofu.demo.spring.aop" />
+	<context:component-scan base-package="com.github.xiaofu.demo.spring.aop.config" />
 	<aop:aspectj-autoproxy/>  
 	 <!-- 声明一个业务类 -->
-    <bean id="aspectBusiness" class="com.github.xiaofu.demo.spring.aop.AspectBusiness" />
+    <bean id="aspectBusiness" class="com.github.xiaofu.demo.spring.aop.config.AspectBusiness" />
 
     <!-- 声明通知类 -->
-    <bean id="aspectAdvice" class="com.github.xiaofu.demo.spring.aop.AspectAdvice" />
+    <bean id="aspectAdvice" class="com.github.xiaofu.demo.spring.aop.config.AspectAdvice" />
 
     <aop:config>
         <aop:aspect id="test" ref="aspectAdvice">
             <!-- 配置指定切入的对象 -->
-            <aop:pointcut id="point_cut" expression="execution(* com.github.xiaofu.demo.spring.aop.*.*(..))" />
+            <aop:pointcut id="point_cut" expression="execution(* com.github.xiaofu.demo.spring.aop.config.*.*(..))" />
             <!-- 只匹配add方法作为切入点
             <aop:pointcut id="except_add" expression="execution(* aop.schema.*.add(..))" />
              -->

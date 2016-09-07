@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.github.xiaofu.demo.spring;
+package com.github.xiaofu.demo.spring.ioc;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -15,7 +15,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("iocSpring.xml");
 		Entity t=new Entity();
 		t.setT1("abc");
 		context.getBean(IService.class).test(t);

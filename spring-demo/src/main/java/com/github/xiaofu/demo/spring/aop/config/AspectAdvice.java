@@ -1,4 +1,4 @@
-package com.github.xiaofu.demo.spring.aop;
+package com.github.xiaofu.demo.spring.aop.config;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.github.xiaofu.demo.spring.aop.config.AspectBusiness;
+
 public class AspectBusinessTest {
 
 	@Test

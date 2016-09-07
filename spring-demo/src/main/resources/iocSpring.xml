@@ -3,10 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
-	<context:component-scan base-package="com.github.xiaofu" />
-	<bean id="service" class="com.github.xiaofu.demo.spring.Service"
+	<!-- it will scan all child package from this base package -->
+	<context:component-scan base-package="com.github.xiaofu.demo.spring.ioc"  >
+ 
+	</context:component-scan>
+	<bean id="service" class="com.github.xiaofu.demo.spring.ioc.Service"
 		autowire="byName"></bean>
-	<bean id="test1" name="test2,test3" class=" com.github.xiaofu.demo.spring.Entity"></bean>
+	<bean id="test1" name="test2,test3" class=" com.github.xiaofu.demo.spring.ioc.Entity"></bean>
 	<alias alias="alias1" name="test1" />
 	<alias alias="alias2" name="test1" />
 </beans>

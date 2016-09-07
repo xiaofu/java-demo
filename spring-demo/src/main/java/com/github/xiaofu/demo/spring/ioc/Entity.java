@@ -1,4 +1,4 @@
-package com.github.xiaofu.demo.spring;
+package com.github.xiaofu.demo.spring.ioc;
 
 public class Entity {
 	private String t1;
