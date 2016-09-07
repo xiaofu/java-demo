@@ -10,7 +10,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"jtaSpring.xml");
+				"jpaSpring.xml");
 		UserService service = ctx.getBean("userService", UserService.class);
 		service.createNewAccount("ZhangJianPing", "123456", 1);
 
