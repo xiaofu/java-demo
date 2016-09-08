@@ -9,6 +9,7 @@
 	<properties>
 		<spring.version>4.3.2.RELEASE</spring.version>
 		<hibernate.version>4.3.11.Final</hibernate.version>
+		<querydsl>4.1.4</querydsl>
 	</properties>
 	<artifactId>spring-demo</artifactId>
 	<repositories>
@@ -112,6 +113,8 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/sqljdbc4.jar</systemPath>
 		</dependency>
+
+	
 	</dependencies>
 
 </project>

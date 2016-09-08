@@ -40,7 +40,7 @@
 		p:idleConnectionTestPeriod="${database.pool.idleConnectionTestPeriod}"
 		p:preferredTestQuery="${database.pool.connectionHealthQuery}"
 		p:testConnectionOnCheckin="${database.pool.testConnectionOnCheckin}" />
-	<!-- must configuration,active aop  -->
+	<!-- must configuration,active  @Transactional or EJB3's @TransactionAttribute  -->
 	<tx:annotation-driven />
 	<!-- dont't active @Transactional or EJB3's @TransactionAttribute -->
 	<context:annotation-config />
