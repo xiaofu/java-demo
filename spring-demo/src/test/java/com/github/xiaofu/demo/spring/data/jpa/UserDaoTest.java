@@ -2,6 +2,8 @@ package com.github.xiaofu.demo.spring.data.jpa;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.domain.Page;
@@ -16,25 +18,30 @@ public class UserDaoTest {
 	UserDao service = ctx.getBean(UserDao.class);
 	@Test
 	public void testSaveAccountInfo() {
-		AccountInfo model=new AccountInfo();
-		model.setBalance(22);
-		model.setUserInfo(null);
-		service.save(model);
+		for (int i = 0; i < 20; i++) {
+			AccountInfo model=new AccountInfo();
+			model.setBalance(22);
+			model.setUserInfo(null);
+			service.save(model);
+		}
+		
 	}
 
 	@Test
 	public void testFindByAccountId() {
-		fail("Not yet implemented");
+		 service.findByAccountId(22);
 	}
 
 	@Test
 	public void testFindByAccountIdOrderByAccountIdAsc() {
-		fail("Not yet implemented");
+		 
 	}
 
 	@Test
 	public void testFindBybalance() {
-		  
+		List<AccountInfo> result= service.findBybalance(22, new PageRequest(1,10));
+		 
+		   System.out.println(result.size());
 	}
 
 	@Test
@@ -51,5 +58,10 @@ public class UserDaoTest {
 	   System.out.println(result.getTotalPages());
 	   System.out.println(result.getNumberOfElements());
 	}
-
+	
+	@Test
+	public void testUpdate() {
+		System.out.println(service.updateData( 33,2));
+		
+	}
 }
