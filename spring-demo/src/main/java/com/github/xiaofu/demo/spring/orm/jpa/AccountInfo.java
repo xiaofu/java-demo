@@ -20,7 +20,7 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 @Entity
 @Table(name = "t_accountinfo")
 @NamedQuery(name = "AccountInfo.findByAccountId",
-query = "select u from AccountInfo as u where u.accountId = ?1 and 1=1")
+query = "select u from AccountInfo as u where u.id = ?1 and 1=1")
 public class AccountInfo extends AbstractAuditable<UserInfo,Long>  implements Serializable {
 
 	private static final long serialVersionUID = -2756264350039887233L;

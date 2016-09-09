@@ -21,10 +21,11 @@ public interface UserDao extends  JpaRepository<AccountInfo, Long>,JpaSpecificat
 	 
 
 	// first use @Query then @NamesQuery annotation
-	@Query(value = "select u from AccountInfo as u where u.accountId >= :id and 1=1")
+	//use spel replace class type
+	@Query(value = "select u from #{#entityName} as u where u.id >= :id and 1=1")
 	public AccountInfo findByAccountId(@Param("id") long id);
 
-	@Query(value = "select u from AccountInfo as u where u.accountId >= ?1 and 1=1")
+	@Query(value = "select u from #{#entityName} as u where u.id >= ?1 and 1=1")
 	public AccountInfo findByAccountIdOrderByAccountIdAsc(long id);
 	
 	//failed
@@ -38,7 +39,7 @@ public interface UserDao extends  JpaRepository<AccountInfo, Long>,JpaSpecificat
 	//TODO:must  @Transactional  ,只是因为用了@Query，所以需要显示添加事务标注
 	@Transactional
 	@Modifying
-	@Query("update AccountInfo  u set u.balance=?1 where u.accountId =?2")
+	@Query("update #{#entityName}  u set u.balance=?1 where u.id =?2")
 	int updateData(int balance,long id);
 
 }
