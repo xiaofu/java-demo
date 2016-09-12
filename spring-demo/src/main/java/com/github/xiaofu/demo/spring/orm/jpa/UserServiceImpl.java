@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 		userInfo.setUsername(user);
 		userInfo.setPassword(pwd);
 		accountInfo.setBalance(init);
-		accountInfo.setUserInfo(userInfo);
+		//accountInfo.setUserInfo(userInfo);
 		// 调用持久层，完成数据的保存
 		return userDao.save(accountInfo);
 	}

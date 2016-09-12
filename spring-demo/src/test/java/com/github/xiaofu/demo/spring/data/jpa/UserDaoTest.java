@@ -6,11 +6,14 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 
 import com.github.xiaofu.demo.spring.orm.jpa.AccountInfo;
+import com.github.xiaofu.demo.spring.orm.jpa.UserInfo;
 
 public class UserDaoTest {
 	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(
@@ -18,10 +21,15 @@ public class UserDaoTest {
 	UserDao service = ctx.getBean(UserDao.class);
 	@Test
 	public void testSaveAccountInfo() {
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 10; i++) {
 			AccountInfo model=new AccountInfo();
 			model.setBalance(22);
-			model.setUserInfo(null);
+			UserInfo user=new UserInfo();
+			user.setUsername("aa");
+			user.setPassword("bb");
+			//model.setCreatedBy(user);
+			model.setFirstname("xiao");
+			model.setLastname("fu");
 			service.save(model);
 		}
 		
@@ -48,7 +56,7 @@ public class UserDaoTest {
 	public void testQueryBybalance() {
 		Slice<AccountInfo> result= service.queryBybalance(22, new PageRequest(1,10));
 		 
-		   System.out.println(result.getNumberOfElements());
+		System.out.println(result.getNumberOfElements());
 	}
 
 	@Test
@@ -63,5 +71,16 @@ public class UserDaoTest {
 	public void testUpdate() {
 		System.out.println(service.updateData( 33,2));
 		
+	}
+	
+	@Test
+	public void testExample()
+	{
+		AccountInfo model=new AccountInfo();
+		model.setFirstname("xiao");
+		ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase()
+				  .withIgnorePaths("lastname")                         ;
+		Example<AccountInfo> example = Example.of(model,matcher);
+		service.findAll(example);
 	}
 }
