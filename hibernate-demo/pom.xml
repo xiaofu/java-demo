@@ -6,13 +6,15 @@
 		<artifactId>java-demo-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.github.xiaofu.demo</groupId>
 	<artifactId>hibernate-demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<hibernate>4.3.11.Final</hibernate>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -28,5 +30,13 @@
 			<artifactId>jtds</artifactId>
 			<version>1.2.4</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/hsqldb/hsqldb -->
+		<!-- https://mvnrepository.com/artifact/org.hsqldb/hsqldb -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.3.3</version>
+		</dependency>
+
 	</dependencies>
 </project>
