@@ -3,23 +3,40 @@ package com.github.xiaofu.demo.hibernate.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+@Entity
 public class Person {
 
+	@Id
+	@GeneratedValue
     private Long id;
     private int age;
     private String firstname;
     private String lastname;
     private String name;
     
-    private Set<String> emailAddresses = new HashSet<String>();
+    @Embedded
+    private  Country bornIn;
+    //private Set<String> emailAddresses = new HashSet<String>();
 
-    public Set<String> getEmailAddresses() {
+    public Country getBornIn() {
+		return bornIn;
+	}
+
+	public void setBornIn(Country bornIn) {
+		this.bornIn = bornIn;
+	}
+
+	/*public void setEmailAddresses(Set<String> emailAddresses) {
+		this.emailAddresses = emailAddresses;
+	}
+
+	public Set<String> getEmailAddresses() {
         return emailAddresses;
-    }
-
-    public void setEmailAddresses(Set emailAddresses) {
-        this.emailAddresses = emailAddresses;
-    }
+    }*/
     
     public String getName() {
 		return name;
@@ -60,7 +77,7 @@ public class Person {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	private Set<Event> events = new HashSet<Event>();
+/*	private Set<Event> events = new HashSet<Event>();
 
     public Set<Event> getEvents() {
         return events;
@@ -68,7 +85,7 @@ public class Person {
 
     public void setEvents(Set<Event> events) {
         this.events = events;
-    }
+    }*/
     public Person() {}
 
     // Accessor methods for all properties, private setter for 'id'

@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.github.xiaofu.demo.hibernate.domain.Country;
 import com.github.xiaofu.demo.hibernate.domain.Person;
 
  
@@ -30,6 +31,10 @@ public class PersonTest {
 	        EntityManager em = factory.createEntityManager();  
 	        em.getTransaction().begin();  
 	        Person person = new Person(); //person为new状态  
+	        Country country=new Country();
+	        person.setBornIn(country);
+	        country.setName("222");
+	        country.setIso2("aaaa");
 	        person.setName("zhang san");  
 	        em.persist(person); //持久化实体  
 	        em.getTransaction().commit();  

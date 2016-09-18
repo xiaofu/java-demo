@@ -55,7 +55,7 @@ public class EventTest {
 
 	        // End of first unit of work
 
-	        aPerson.getEvents().add(anEvent); // aPerson (and its collection) is detached
+	    //    aPerson.getEvents().add(anEvent); // aPerson (and its collection) is detached
 
 	        // Begin second unit of work
 
@@ -74,7 +74,7 @@ public class EventTest {
 
         Person aPerson = (Person) session.load(Person.class, personId);
         // adding to the emailAddress collection might trigger a lazy load of the collection
-        aPerson.getEmailAddresses().add(emailAddress);
+        //aPerson.getEmailAddresses().add(emailAddress);
 
         session.getTransaction().commit();
     }
