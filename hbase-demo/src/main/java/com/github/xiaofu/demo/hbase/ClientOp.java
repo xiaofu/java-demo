@@ -42,6 +42,9 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Row;
 import org.apache.hadoop.hbase.client.Scan;
+import org.apache.hadoop.hbase.filter.FilterList;
+import org.apache.hadoop.hbase.filter.KeyOnlyFilter;
+import org.apache.hadoop.hbase.filter.SingleColumnValueFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.hbase.util.MD5Hash;
 import org.apache.hadoop.hbase.util.RegionSplitter;
@@ -56,7 +59,7 @@ public class ClientOp {
 	public static Configuration conf = null;
 	private static HTable onlineTable;
 	private static HTable localTable;
-	public static String TABLE = "test_flh";
+	public static String TABLE = "flh_test";
 	static {
 		conf = HBaseConfiguration.create();
 		try {
@@ -105,7 +108,7 @@ public class ClientOp {
 		// deleteRowsForJCZ();
 		//oneRowMultipleCols(TABLE);
 		//move("5e30225f17d3723528cb65d07face13d" ,"node205.vipcloud,60020,1461580533463");
-		compact("user_recommendation_info");
+		//compact("user_recommendation_info");
 		//System.out.println(new HRegionInfo(Bytes.toBytes("user_test"),"aaaaaa".getBytes(),"cccccc".getBytes()).getRegionNameAsString());
 	}
 
@@ -256,7 +259,7 @@ public class ClientOp {
 	public static void selectRow(String tablename, String rowKey)
 			throws IOException {
 		HTable table = new HTable(conf, tablename);
-		Get g = new Get(rowKey.getBytes());
+		Get g = new Get(idToMD5Hash(rowKey).getBytes());
 		// select all versions of all columns specified row
 		g.setMaxVersions();
 
@@ -273,13 +276,22 @@ public class ClientOp {
 			throws IOException {
 		HTable table = new HTable(conf, tablename);
 		List<Delete> list = new ArrayList<Delete>();
-		Delete d1 = new Delete(rowkey.getBytes());
+		Delete d1 = new Delete(idToMD5Hash(rowkey).getBytes());
 		// d1.deleteColumn("bb".getBytes(), "dd".getBytes());
 		list.add(d1);
 		table.delete(list);
 		System.out.println("删除行成功！");
 	}
-
+	public static void deleteRowColumn(String tablename, String rowkey,String family,String column)
+			throws IOException {
+		HTable table = new HTable(conf, tablename);
+		List<Delete> list = new ArrayList<Delete>();
+		Delete d1 = new Delete(idToMD5Hash(rowkey).getBytes());
+		 d1.deleteColumn(family.getBytes(),column.getBytes());
+		list.add(d1);
+		table.delete(list);
+		System.out.println("删除行成功！");
+	}
 	/**
 	 * get all rows,all columns latest version
 	 * 
@@ -289,13 +301,20 @@ public class ClientOp {
 		try {
 			HTable table = new HTable(conf, tablename);
 			Scan s = new Scan();
-		 
+			s.addFamily(Bytes.toBytes("main"));
+			s.addColumn(Bytes.toBytes("main"), Bytes.toBytes("type"));
+			FilterList filterLists=new FilterList();
+			filterLists.addFilter(new KeyOnlyFilter());
+			filterLists.addFilter(new SingleColumnValueFilter());
+			s.setCaching(1000);
+			s.setCacheBlocks(false);
+			s.setFilter(filterLists);
 			ResultScanner rs = table.getScanner(s);
 
 			for (Result r : rs) {
 				KeyValue[] kv = r.raw();
 				for (int i = 0; i < kv.length; i++) {
-
+					 
 					System.out.print(new String(kv[i].getRow()) + " ");
 					System.out.print(new String(kv[i].getFamily()) + " ");
 					System.out.print( Bytes.toLong( kv[i].getQualifier()) + " ");

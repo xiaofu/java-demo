@@ -37,11 +37,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>com.hadoop.compression</groupId>
-			<artifactId>hadooplzo</artifactId>
-			<version>0.4.15</version>
-		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

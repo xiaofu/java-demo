@@ -52,18 +52,26 @@ public class ClientOpTest {
 	}
 
 	@Test
-	public void writeRow() throws IOException {
-		ClientOp.writeRow(ClientOp.TABLE, "row1","colfam1", "a", "value1");
-		ClientOp.writeRow(ClientOp.TABLE, "row1","colfam1", "b", "value1");
+	public void selectRow() throws IOException {
+		 
 		ClientOp.selectRow(TABLE, "row1");
-		ClientOp.deleteRow(TABLE, "row1");
+	
+	}
+	
+	@Test
+	public void writeRow() throws IOException {
+		ClientOp.writeRow(TABLE, "row1","main", "a", "value1");
+		ClientOp.writeRow(TABLE, "row1","main", "a", "value2");
+
+	
 	}
 
-	// @Test
-	public void deleteRow() throws IOException {
-		ClientOp.writeRow(ClientOp.TABLE, "row1","colfam1", "a", "value1");
-		ClientOp.writeRow(ClientOp.TABLE, "row1","colfam1", "b", "value1");
-		ClientOp.deleteRow(TABLE, "row1");
+	@Test
+	public void deleteRowColumn() throws IOException {
+		//ClientOp.writeRow(ClientOp.TABLE, "row1","colfam1", "a", "value1");
+		//ClientOp.writeRow(ClientOp.TABLE, "row1","colfam1", "b", "value1");
+		//ClientOp.deleteRow(TABLE, "row1");
+		ClientOp.deleteRowColumn(TABLE, "row1","main","a");
 	}
 
 	@Test
@@ -150,7 +158,7 @@ public class ClientOpTest {
 			}
 			SplitAlgorithm splitAlgor = new RegionSplitter.HexStringSplit();
 			admin.createTableWithAutoSplittableQualifier(tableDesc,
-					splitAlgor.split(50));
+					splitAlgor.split(2));
 			System.out.println("表创建成功！");
 		}
 	}
