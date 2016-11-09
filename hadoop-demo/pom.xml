@@ -7,23 +7,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<properties>
-		<!--core.xml -->
-		<ha.zookeeper.quorum>node203.vipcloud:2181,node204.vipcloud:2181,node205.vipcloud:2181</ha.zookeeper.quorum>
-		<!--hdfs.xml -->
-		<dfs.replication>2</dfs.replication>
-		<nn1>vnamenode</nn1>
-		<nn2>vdatanode1</nn2>
-		<dfs.namenode.shared.edits.dir>qjournal://vnamenode:8485;vdatanode1:8485;vdatanode2:8485/vipcluster</dfs.namenode.shared.edits.dir>
-	</properties>
+ 
 	<artifactId>hadoop-demo</artifactId>
 	<build>
-		<resources>
-			<resource>
-				<directory>${project.basedir}/src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
+ 
 
 	</build>
 	<dependencies>

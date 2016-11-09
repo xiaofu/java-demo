@@ -26,7 +26,7 @@
 	</property>
 	<property>
 		<name>dfs.replication</name>
-		<value>${dfs.replication}</value>
+		<value>2</value>
 	</property>
 	<property>
 		<name>dfs.support.append</name>
@@ -71,24 +71,23 @@
 	</property>
 	<property>
 		<name>dfs.namenode.rpc-address.vipcluster.nn1</name>
-		<value>${nn1}:9000</value>
+		<value>vnamenode:9000</value>
 	</property>
 	<property>
 		<name>dfs.namenode.rpc-address.vipcluster.nn2</name>
-		<value>${nn2}:9000</value>
+		<value>vdatanode1:9000</value>
 	</property>
 	<property>
 		<name>dfs.namenode.http-address.vipcluster.nn1</name>
-		<value>${nn1}:50070</value>
+		<value>vnamenode:50070</value>
 	</property>
 	<property>
 		<name>dfs.namenode.http-address.vipcluster.nn2</name>
-		<value>${nn2}:50070</value>
+		<value>vdatanode1:50070</value>
 	</property>
 	<property>
 		<name>dfs.namenode.shared.edits.dir</name>
-		<value>${dfs.namenode.shared.edits.dir}
-		</value>
+		<value>qjournal://vnamenode:8485;vdatanode1:8485;vdatanode2:8485/vipcluster</value>
 	</property>
 	<property>
 		<name>dfs.journalnode.edits.dir</name>
