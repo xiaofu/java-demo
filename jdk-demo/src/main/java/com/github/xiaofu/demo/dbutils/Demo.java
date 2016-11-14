@@ -5,7 +5,9 @@ package com.github.xiaofu.demo.dbutils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -40,7 +42,7 @@ public class Demo {
 		}
 		//空字符串插入DATE,DATETIME,INT,FLOAT
 		runner.update(INSERT_SQL,"","","","");*/
-		 batchTest();
+		testType();
 	}
 	
 	public static void batchTest() throws SQLException
@@ -57,6 +59,25 @@ public class Demo {
 			runner.batch(conn, INSERT_SQL, params);
 		}
 		//conn.rollback();
+	}
+	
+	public static void testType() throws SQLException
+	{
+		Connection conn= DBCPUtils.getDataSource().getConnection();
+		Statement   statement=	conn.createStatement();
+		ResultSet resultSet= statement.executeQuery("select * from test");
+		while(resultSet.next())
+		{
+			System.out.println(resultSet.getString("t1"));
+			System.out.println(resultSet.getObject ("t1"));
+			
+			System.out.println("===============");
+			System.out.println(resultSet.getString("t2"));
+			System.out.println(resultSet.getObject ("t2"));
+			System.out.println("===============");
+			System.out.println(resultSet.getString("t3"));
+			System.out.println(resultSet.getObject ("t3"));
+		}
 	}
 
 }
