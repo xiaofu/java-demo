@@ -10,9 +10,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import javax.sql.rowset.CachedRowSet;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+
+import com.sun.rowset.CachedRowSetImpl;
 
 /**
  * @author home
@@ -42,7 +46,7 @@ public class Demo {
 		}
 		//空字符串插入DATE,DATETIME,INT,FLOAT
 		runner.update(INSERT_SQL,"","","","");*/
-		testType();
+		testTypeWithCacheRowSetImpl();
 	}
 	
 	public static void batchTest() throws SQLException
@@ -79,5 +83,20 @@ public class Demo {
 			System.out.println(resultSet.getObject ("t3"));
 		}
 	}
-
+	public static void testTypeWithCacheRowSetImpl() throws SQLException
+	{
+		String sql="select * from test";
+		Connection conn= DBCPUtils.getDataSource().getConnection();
+		Statement   statement=	conn.createStatement();
+		ResultSet resultSet= statement.executeQuery(sql);
+		CachedRowSet crs = new CachedRowSetImpl();
+		crs.populate(resultSet);
+		while(crs.next())
+		{
+			System.out.println(crs.getString("t1"));
+			System.out.println(crs.getObject ("t1"));
+			break;
+			 
+		}
+	}
 }
