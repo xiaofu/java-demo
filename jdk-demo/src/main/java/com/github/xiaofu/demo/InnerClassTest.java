@@ -28,7 +28,7 @@ public class InnerClassTest {
 		}
 		for (int i = 0; i < 10; i++) {
 			tests[i].doIt();
-			tests[i]=null;//会被垃圾回收？它的回收机制又是什么？
+			tests[i]=null;//会被垃圾回收!!去掉引用
 		}
 		 System.out.println("new inner after=============="+(Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory()));
 		Thread.currentThread().join();
