@@ -1,0 +1,17 @@
+option java_generic_services = true;
+option java_generate_equals_and_hash = true;
+package com.github.xiaofu.demo.proto;
+import  "PersonProtos.proto";
+message SinglePersonRequestProto{
+  required  int32  id  = 1 ;
+}
+
+message SinglePersonResponseProto{
+  required Person cqPersion =1;
+}
+
+
+service PersonProtocol
+{
+	rpc  getSinglePerson (SinglePersonRequestProto)   returns (SinglePersonResponseProto);
+}
