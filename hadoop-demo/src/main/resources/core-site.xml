@@ -82,13 +82,13 @@
 
 	<property>
 		<name>io.compression.codecs</name>
-		<value>org.apache.hadoop.io.compress.SnappyCodec,org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,com.hadoop.compression.lzo.LzoCodec,org.apache.hadoop.io.compress.BZip2Codec</value>
+		<value>org.apache.hadoop.io.compress.SnappyCodec,org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.BZip2Codec</value>
 	</property>
 
-	<property>
+<!-- 	<property>
 		<name>io.compression.codec.lzo.class</name>
 		<value>com.hadoop.compression.lzo.LzoCodec</value>
-	</property>
+	</property> -->
 
 	<property>
 		<name>io.seqfile.compress.blocksize</name>

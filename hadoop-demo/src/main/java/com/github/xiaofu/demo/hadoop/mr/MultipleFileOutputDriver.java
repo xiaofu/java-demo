@@ -109,7 +109,7 @@ public class MultipleFileOutputDriver extends Configured implements Tool {
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.setProperty("HADOOP_USER_NAME", "vipcloud");
+		//System.setProperty("HADOOP_USER_NAME", "vipcloud");
 		int exitCode = ToolRunner.run(new MultipleFileOutputDriver(), args);
 		System.exit(exitCode);
 	}
