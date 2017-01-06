@@ -35,10 +35,6 @@
 		<value>vdatanode1:2181,vnamenode:2181,node205.vdatanode2:2181</value>
 	</property>
 
-	<property>
-		<name>mapreduce.jobtracker.webinterface.trusted</name>
-		<value>true</value>
-	</property>
  
 
 	<property>
@@ -64,10 +60,6 @@
 		<value>org.apache.hadoop.io.compress.SnappyCodec,org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.BZip2Codec</value>
 	</property>
 
-   <property>
-		<name>io.compression.codec.lzo.class</name>
-		<value>com.hadoop.compression.lzo.LzoCodec</value>
-	</property>
 
 	<property>
 		<name>topology.node.switch.mapping.impl</name>
