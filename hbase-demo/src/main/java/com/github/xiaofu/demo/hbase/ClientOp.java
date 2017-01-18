@@ -59,14 +59,14 @@ public class ClientOp {
 	public static Configuration conf = null;
 	private static HTable onlineTable;
 	private static HTable localTable;
-	public static String TABLE = "flh_test";
+	public static String TABLE = "flh_test2";
 	static {
 		conf = HBaseConfiguration.create();
 		try {
 
 			conf.set("hbase.zookeeper.quorum",
 					"node203.vipcloud,node204.vipcloud,node205.vipcloud");
-			localTable = new HTable(conf, TABLE);
+			//localTable = new HTable(conf, TABLE);
 			/*
 			 * conf.set( "hbase.zookeeper.quorum",
 			 * "node600.vipcloud,node601.vipcloud,node602.vipcloud,node603.vipcloud,node604.vipcloud"
@@ -85,6 +85,8 @@ public class ClientOp {
 	 */
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
+		deleteTable(TABLE);
+		// scanRootOrMeta();
 		 //deleteTable(TABLE);
 		// deleteRow(TABLE,"aa");
 		 //createTable(TABLE, new String[] { "colfam1" });
@@ -231,7 +233,7 @@ public class ClientOp {
 	public static void deleteTable(String tablename) throws IOException {
 		try {
 			HBaseAdmin admin = new HBaseAdmin(conf);
-			admin.disableTable(tablename);
+			//admin.disableTable(tablename);
 			admin.deleteTable(tablename);
 			System.out.println("表删除成功！");
 		} catch (MasterNotRunningException e) {
@@ -267,7 +269,8 @@ public class ClientOp {
 		if (rs.raw().length == 0)
 			System.out.println("no data");
 		for (KeyValue kv : rs.raw()) {
-			System.out.println(kv);
+			 
+			System.out.println(Bytes.toString(kv.getValue()));
 
 		}
 	}
@@ -421,8 +424,8 @@ public class ClientOp {
 	}
 
 	public static void scanRootOrMeta() throws IOException {
-		;
-		Scan scan = MetaReader.getScanForTableName(Bytes.toBytes("test_flh"));
+ 
+		Scan scan = MetaReader.getScanForTableName(HConstants.META_TABLE_NAME);
 		// scan.addColumn(Bytes.toBytes("info"), Bytes.toBytes("regioninfo"));
 		scan.setCaching(1000);
 		scan.addFamily(HConstants.CATALOG_FAMILY);

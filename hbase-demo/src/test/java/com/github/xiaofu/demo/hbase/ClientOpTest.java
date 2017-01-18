@@ -28,7 +28,7 @@ import org.junit.Test;
 
 public class ClientOpTest {
 	private static Configuration conf = null;
-	private static String TABLE = "flh_test";
+	private static String TABLE = "user_history_log_info";
 	static {
 		conf = HBaseConfiguration.create();
 		try {
@@ -54,7 +54,7 @@ public class ClientOpTest {
 	@Test
 	public void selectRow() throws IOException {
 		 
-		ClientOp.selectRow(TABLE, "row1");
+		ClientOp.selectRow(TABLE, "2:1:2_1_root_1:0");
 	
 	}
 	
@@ -139,7 +139,7 @@ public class ClientOpTest {
 	public  void testMetaEditor() throws IOException
 	{
 		CatalogTracker catalogTracker=new CatalogTracker(HBaseConfiguration.create());
-		HRegionInfo regionInfo=new HRegionInfo(Bytes.toBytes(TABLE), Bytes.toBytes("b3333313"), null,false,1471342179526l);
+		HRegionInfo regionInfo=new HRegionInfo(Bytes.toBytes(TABLE),Bytes.toBytes("80000000"),null,false,1484211569379l);
 		MetaEditor.deleteRegion(catalogTracker, regionInfo);
 	 
 	}
