@@ -14,10 +14,12 @@ import org.apache.hadoop.hdfs.protocol.LocatedBlocks;
 
 public class Demo {
 	public static void main(String[] args) throws IOException {
-		Path path = new Path("/vipcloud/journal/down_infos/current_vnamenode_2016-11-09");
+		Path path = new Path("/user/hive/warehouse/view_down_infos/year=2016/month=12/day=1/catalog=1/virtual=0/44906a4b993c25e-57b63834353b50a6_771350048_data.0");
 		DistributedFileSystem fs = (DistributedFileSystem)  FileSystem.get(new Configuration());
 		
 		DFSClient client =fs.getClient();
+		fs.mkdirs(new Path("/temp"),null);
+	 
 		LocatedBlocks locateBlocks = client.getLocatedBlocks(path.toUri().toString(), 0);
 		for (LocatedBlock locateBlock : locateBlocks.getLocatedBlocks()) {
 			for (DatanodeInfo datanodeInfo : locateBlock.getLocations()) {

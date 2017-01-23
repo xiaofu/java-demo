@@ -77,6 +77,7 @@ public class MultipleFileOutputDriver extends Configured implements Tool {
 	@Override
 	public int run(String[] args) throws Exception {
 		Job job = Job.getInstance(getConf());
+	//	job.getConfiguration().set("fs.hdfs.impl", "fs.hdfs.impl=org.apache.hadoop.hdfs.DistributedFileSystem");;
 		job.setJobName(this.getClass().getSimpleName());
 		job.setJarByClass(this.getClass());
 		job.setJar("d:\\open-source-projects\\github\\java-demo-parent\\hadoop-demo\\target\\hadoop-demo-0.0.1-SNAPSHOT.jar");
@@ -84,10 +85,11 @@ public class MultipleFileOutputDriver extends Configured implements Tool {
 		job.setReducerClass(DemoReducer.class);
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(Text.class);
-		job.getConfiguration().set(MRJobConfig.MAP_JAVA_OPTS, "-Xmx4096m");
-		job.getConfiguration().set(MRJobConfig.MAP_MEMORY_MB, "4096");
-		job.getConfiguration().set(MRJobConfig.REDUCE_MEMORY_MB, "4096");
-		job.getConfiguration().set(MRJobConfig.REDUCE_JAVA_OPTS, "-Xmx4096m");
+		job.getConfiguration().set(MRJobConfig.MAP_JAVA_OPTS, "-Xmx2048m");
+		job.getConfiguration().set(MRJobConfig.MAP_MEMORY_MB, "2048");
+		job.getConfiguration().set(MRJobConfig.REDUCE_MEMORY_MB, "2048");
+		job.getConfiguration().set(MRJobConfig.REDUCE_JAVA_OPTS, "-Xmx2048m");
+		job.getConfiguration().set(MRJobConfig.MR_AM_ENV, "CLASSPATH=job.jar,LD_LIBRARY_PATH=/usr/local/vipcloud");
 		job.setMaxMapAttempts(1);
 		job.setMaxReduceAttempts(2);
 		job.setInputFormatClass(TextInputFormat.class);
