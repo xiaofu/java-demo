@@ -35,13 +35,19 @@ public class NornalThread
 			@Override
 			public void run()
 			{
-				int a=2;
-				int b=0;
-				int c=a/b;
+				 for (int i = 0; i < 10000000; i++) {
+					System.out.println(i);
+					try {
+						Thread.sleep(1*1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			}
 		};
 		thread.start();
-		Thread.currentThread().join(200);
+		Thread.currentThread().join();
 		System.out.println("fdsafasdfsd");
 	}
 
