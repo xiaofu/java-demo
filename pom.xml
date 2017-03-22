@@ -38,7 +38,6 @@
 		<module>plugin-service-impl-demo</module>
 		<module>common-demo</module>
 		<module>jdk-demo</module>
-		<module>cxf-demo</module>
 		<module>zookeeper-demo</module>
 		<module>parquet-demo</module>
 		<module>gson-demo</module>
