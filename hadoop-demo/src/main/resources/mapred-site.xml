@@ -1,12 +1,97 @@
 <configuration>
+<!--  ==============modify begin================== -->
+	<property>
+		<name>mapreduce.jobhistory.webapp.address</name>
+		<value>Hadoop2x-03:19888</value>
+	</property>
+	<property>
+		<name>mapreduce.jobhistory.address</name>
+		<value>Hadoop2x-03:10020</value>
+	</property>
+	<property>
+		<name>mapreduce.map.memory.mb</name>
+		<value>2048</value>
+	</property>
+	<property>
+		<name>mapreduce.map.java.opts </name>
+		<value>-Xmx1638m</value>
+	</property>
+	<property>
+		<name>mapreduce.map.cpu.vcores</name>
+		<value>1</value>
+	</property>
+	<property>
+		<name>mapreduce.reduce.memory.mb</name>
+		<value>2048</value>
+	</property>
+	<property>
+		<name>mapreduce.reduce.java.opts </name>
+		<value>-Xmx1638m</value>
+	</property>
+	<property>
+		<name>mapreduce.reduce.cpu.vcores</name>
+		<value>1</value>
+	</property>
+	<property>
+		<name>mapreduce.map.speculative</name>
+		<value>false</value>
+		<final>true</final>
+	</property>
+	<property>
+		<name>mapreduce.reduce.speculative</name>
+		<value>false</value>
+		<final>true</final>
+	</property>
+	<property>
+		<name>mapreduce.job.ubertask.enable</name>
+		<value>false</value>
+		<description>Whether to enable the small-jobs "ubertask" optimization,
+			which runs "sufficiently small" jobs sequentially within a single
+			JVM. "Small" is defined by the following maxmaps, maxreduces, and
+			maxbytes settings. Note that configurations for application masters
+			also affect the "Small" definition -
+			yarn.app.mapreduce.am.resource.mb must be larger than both
+			mapreduce.map.memory.mb and mapreduce.reduce.memory.mb, and
+			yarn.app.mapreduce.am.resource.cpu-vcores must be larger than both
+			mapreduce.map.cpu.vcores and mapreduce.reduce.cpu.vcores to enable
+			ubertask. Users may override this value. </description>
+	</property>
+	<property>
+		<name>mapreduce.output.fileoutputformat.compress</name>
+		<value>false</value>
+	</property>
+	<property>
+		<name>mapreduce.output.fileoutputformat.compress.codec</name>
+		<value>com.hadoop.compression.lzo.LzoCodec</value>
+	</property>
+	<property>
+		<name>mapreduce.job.queuename</name>
+		<value>default</value>
+	</property>
+	<property>
+		<name>mapreduce.job.tags</name>
+		<value></value>
+		<description>Tags for the job that will be passed to YARN at submission time. Queries to YARN for applications can filter on these tags. 
+		</description>
+	</property>
+		<property>
+		<name>mapreduce.shuffle.port</name>
+		<value>13562</value>
+	</property>
+<!--  ==============modify end=================== -->
+	<property>
+		<name>mapreduce.app-submission.cross-platform</name>
+		<value>true</value>
+	</property>
 	<property>
 		<name>mapreduce.framework.name</name>
 		<value>yarn</value>
 	</property>
 	<property>
 		<name>yarn.app.mapreduce.am.staging-dir</name>
-		<value>/yarn</value>
+		<value>/yarn/staging</value>
 	</property>
+
 	<property>
 		<name>mapreduce.jobhistory.recovery.enable</name>
 		<value>true</value>
@@ -19,7 +104,6 @@
 	<property>
 		<name>mapreduce.jobhistory.recovery.store.fs.uri</name>
 		<value>/yarn/mapred/history/recoverystore</value>
-		<!--value>hdfs://localhost:9000/mapred/history/recoverystore</value -->
 		<description>The URI where history server state will be stored if
 			HistoryServerFileSystemStateStoreService is configured as the
 			recovery
@@ -27,33 +111,17 @@
 		</description>
 	</property>
 
-
 	<property>
 		<name>mapred.compress.map.output</name>
 		<value>true</value>
 	</property>
 	<property>
 		<name>mapred.map.output.compression.codec</name>
-		<value>org.apache.hadoop.io.compress.SnappyCodec</value>
+		<value>com.hadoop.compression.lzo.LzoCodec</value>
 	</property>
 	<property>
 		<name>mapred.child.env</name>
 		<value>LD_LIBRARY_PATH=/usr/local/vipcloud/hadoop/lib/native</value>
 	</property>
-	<property>
-		<name>mapred.remote.os</name>
-		<value>Linux</value>
-		<description>Remote MapReduce framework's OS, can be either Linux or
-			Windows
-		</description>
-	</property>
-	<!-- 这两个还必须成对出现，AM在获取 webapp地址时主机名参考的是mapreduce.jobhistory.address，不获取当前参数的主机名 -->
-	<property>
-		<name>mapreduce.jobhistory.webapp.address</name>
-		<value>vdatanode2:19888</value>
-	</property>
-	<property>
-		<name>mapreduce.jobhistory.address</name>
-		<value>vdatanode2:10020</value>
-	</property>
+	
 </configuration>

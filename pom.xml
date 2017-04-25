@@ -28,6 +28,7 @@
 		<dfs.namenode.shared.edits.dir>qjournal://vnamenode:8485;vdatanode1:8485;vdatanode2:8485/vipcluster</dfs.namenode.shared.edits.dir>
 		<!-- no use -->
 		<dfs.ha.fencing.ssh.private-key-files>/home/vipcloud/.ssh/id_rsa</dfs.ha.fencing.ssh.private-key-files>
+		<java.version>1.7</java.version>
 	</properties>
 	<modules>
 		<module>linq-demo</module>
@@ -48,6 +49,26 @@
 		<module>dbcp-demo</module>
 	</modules>
 <repositories>
+		 <repository>
+      <id>3rdparty</id>
+      <name>3rdparty</name>
+      <url>http://192.168.30.55:8081/nexus/content/repositories/thirdparty/</url>
+    </repository>
+    <repository>
+      <id>releases</id>
+      <name>releases</name>
+      <url>http://192.168.30.55:8081/nexus/content/repositories/releases/</url>
+    </repository>
+    <repository>
+      <id>snapshots</id>
+      <name>Snapshots</name>
+      <url>http://192.168.30.55:8081/nexus/content/repositories/snapshots/</url>
+    </repository>
+    <repository>
+      <id>VipRepositoryGroup</id>
+      <name>Snapshots</name>
+      <url>http://192.168.30.55:8081/nexus/content/groups/VipRepositoryGroup/</url>
+    </repository>
 		<repository>
 			<id>cdh.rcs.releases.repo</id>
 			<url>https://repository.cloudera.com/content/groups/cdh-releases-rcs</url>
@@ -415,6 +436,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<encoding>UTF-8</encoding>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -65,7 +65,8 @@ public class ClientOp {
 		try {
 
 			conf.set("hbase.zookeeper.quorum",
-					"node203.vipcloud,node204.vipcloud,node205.vipcloud");
+					"node103.vipcloud,node104.vipcloud,node105.vipcloud");
+			conf.set("", "/hbase2");
 			//localTable = new HTable(conf, TABLE);
 			/*
 			 * conf.set( "hbase.zookeeper.quorum",

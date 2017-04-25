@@ -7,6 +7,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>hbase-demo</artifactId>
+ 	<properties>
+ 		<hadoop.version>2.6.0-cdh5.10.0-cqvip</hadoop.version>
+		<hbase.version>0.94.10-hadoop-2.6.0-cdh5.10.0-cqvip</hbase.version>
+ 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -14,7 +18,7 @@
 
 		</dependency>
 
-		<dependency>
+	<!-- 	<dependency>
 			<groupId>com.cqvip.vipcloud</groupId>
 			<artifactId>hadoop-core</artifactId>
 			<version>0.20.2-SNAPSHOT</version>
@@ -36,8 +40,38 @@
 					<groupId>org.apache.hadoop</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-
+		</dependency> -->
+	 	<dependency>
+			<groupId>com.cqvip.vipcloud</groupId>
+			<artifactId>hbase</artifactId>
+			<version>${hbase.version}</version>
+			<exclusions>
+				<exclusion>
+					 <groupId>org.apache.hadoop</groupId>
+      				<artifactId>hadoop-mapreduce-client-app</artifactId>
+				</exclusion>
+				<exclusion>
+				 		<groupId>org.apache.hadoop</groupId>
+    				   <artifactId>hadoop-yarn-api</artifactId>
+				</exclusion>
+				<exclusion>
+				  		<groupId>org.apache.hadoop</groupId>
+      					<artifactId>hadoop-mapreduce-client-core</artifactId>
+				</exclusion>
+				<exclusion>
+						 <groupId>org.apache.hadoop</groupId>
+      					<artifactId>hadoop-mapreduce-client-jobclient</artifactId>
+				</exclusion>
+				<exclusion>
+						<groupId>org.apache.hadoop</groupId>
+     					 <artifactId>hadoop-aws</artifactId>
+				</exclusion>
+				<exclusion>
+					 <groupId>org.apache.hadoop</groupId>
+      				<artifactId>hadoop-mapreduce-client-app</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> 
 	</dependencies>
 	<build>
 		<plugins>

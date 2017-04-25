@@ -65,9 +65,9 @@
   <value>/hbase2</value>
 </property>
 
- <property>
+<!--  <property>
 	<name>autosplit.compression</name>
 	<value>snappy</value>
-</property>
+</property> -->
 	
 </configuration>
