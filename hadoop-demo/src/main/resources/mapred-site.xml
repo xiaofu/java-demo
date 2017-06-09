@@ -1,6 +1,10 @@
 <configuration>
 <!--  ==============modify begin================== -->
 	<property>
+		 <name>mapreduce.job.reduce.slowstart.completedmaps</name>
+		 <value>0.3</value>
+	</property>
+	<property>
 		<name>mapreduce.jobhistory.webapp.address</name>
 		<value>Hadoop2x-03:19888</value>
 	</property>
@@ -13,8 +17,8 @@
 		<value>2048</value>
 	</property>
 	<property>
-		<name>mapreduce.map.java.opts </name>
-		<value>-Xmx1638m</value>
+		<name>mapreduce.map.java.opts</name>
+		<value>-Xmx2000m</value>
 	</property>
 	<property>
 		<name>mapreduce.map.cpu.vcores</name>
@@ -25,8 +29,8 @@
 		<value>2048</value>
 	</property>
 	<property>
-		<name>mapreduce.reduce.java.opts </name>
-		<value>-Xmx1638m</value>
+		<name>mapreduce.reduce.java.opts</name>
+		<value>-Xmx2000m</value>
 	</property>
 	<property>
 		<name>mapreduce.reduce.cpu.vcores</name>

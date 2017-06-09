@@ -17,7 +17,7 @@
 		<name>hbase.rootdir</name>
 		
 		<!--<value>hdfs://node500.vipcloud:9000/hbase</value>-->
-		<value>hdfs://vipcluster/hbase2</value> 
+		<value>hdfs://node1029.vipcloud:9000/hbase</value> 
 		<!--<value>hdfs://node802.sky:9000/hbase</value>-->
 	</property>
 	<property>
@@ -27,8 +27,8 @@
 	<property>
 		<name>hbase.zookeeper.quorum</name>
 		 
-		<!-- <value>node600.vipcloud,node601.vipcloud,node602.vipcloud,node603.vipcloud,node604.vipcloud</value> -->
-		<value>node203.vipcloud,node204.vipcloud,node205.vipcloud</value>
+		<value>node600.vipcloud,node601.vipcloud,node602.vipcloud,node603.vipcloud,node604.vipcloud</value> 
+		<!--<value>node203.vipcloud,node204.vipcloud,node205.vipcloud</value>-->
 		
 		<!--<value>node301.sky,node302.sky,node303.sky,node304.sky,node801.sky</value>-->
 	</property>
@@ -59,15 +59,5 @@
 			empty.
 		</description>
 	</property>
-	
-	<property>
-  <name>zookeeper.znode.parent</name>
-  <value>/hbase2</value>
-</property>
-
-<!--  <property>
-	<name>autosplit.compression</name>
-	<value>snappy</value>
-</property> -->
 	
 </configuration>

@@ -14,7 +14,20 @@
 		<hbase.version>0.94.10-hadoop-2.6.0-cdh5.10.0-cqvip</hbase.version>
 	</properties>
 	<build>
- 
+ 	<plugins>
+ 		<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				 <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.github.xiaofu.demo.hadoop.mr.TestOutputText</mainClass>
+                                </manifest>
+                            </archive>
+                        </configuration>
+			</plugin>
+ 	</plugins>
 
 	</build>
 	<dependencies>

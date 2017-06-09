@@ -1,190 +1,83 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-<!-- Licensed under the Apache License, Version 2.0 (the "License"); you 
-	may not use this file except in compliance with the License. You may obtain 
-	a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless 
-	required by applicable law or agreed to in writing, software distributed 
-	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
-	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
-	the specific language governing permissions and limitations under the License. 
-	See accompanying LICENSE file. -->
-
-<!-- Put site-specific property overrides in this file. -->
 
 <configuration>
 	<property>
-		<name>dfs.namenode.name.dir</name>
-		<!--must create dir path -->
-		<value>file://${hadoop.tmp.dir}/data/data2/dfs/name,file://${hadoop.tmp.dir}/data/data3/dfs/name
-		</value>
+		<name>dfs.name.dir</name>
+		<value>${hadoop.tmp.dir}/dfs/name</value>
+		<description>Determines where on the local filesystem the DFS name
+			node
+			should store the name table(fsimage). If this is a
+			comma-delimited list
+			of directories then the name table is replicated
+			in all of the
+			directories, for redundancy.
+		</description>
 	</property>
+
 	<property>
-		<name>dfs.datanode.data.dir</name>
-		<!--must create dir path -->
-		<value>file://${hadoop.tmp.dir}/data/data2/dfs/data,file://${hadoop.tmp.dir}/data/data3/dfs/data
-		</value>
+		<name>dfs.permissions</name>
+		<value>false</value>
+		<description>
+			If "true", enable permission checking in HDFS.
+			If "false",
+			permission checking is turned off,
+			but all other behavior is
+			unchanged.
+			Switching from one parameter value to the other does not
+			change the mode,
+			owner or group of files or directories.
+		</description>
 	</property>
+
+	<property>
+		<name>dfs.data.dir</name>
+		<value>${hadoop.tmp.dir}/dfs/data</value>
+		<description>Determines where on the local filesystem an DFS data node
+			should store its blocks. If this is a comma-delimited
+			list of
+			directories, then data will be stored in all named
+			directories,
+			typically on different devices.
+			Directories that do not exist are
+			ignored.
+		</description>
+	</property>
+
+	<property>
+		<name>dfs.block.size</name>
+		<value>268435456</value>
+		<description>The default block size for new files.</description>
+	</property>
+
 	<property>
 		<name>dfs.replication</name>
-		<value>2</value>
+		<value>3</value>
+		<description>Default block replication.
+			The actual number of
+			replications can be specified when the file is
+			created.
+			The default is
+			used if replication is not specified in create time.
+		</description>
 	</property>
+
+	<property>
+		<name>dfs.datanode.max.xcievers</name>
+		<value>4096</value>
+		<description>An Hadoop HDFS datanode has an upper bound on the number
+			of files
+			that it will serve at any one time.The upper bound parameter
+			is called
+			xcievers
+			(yes, this is misspelled).
+		</description>
+	</property>
+
 	<property>
 		<name>dfs.support.append</name>
 		<value>true</value>
-	</property>
-	<property>
-		<name>dfs.webhdfs.enabled</name>
-		<value>true</value>
-	</property>
-	<property>
-		<name>dfs.permissions.enabled</name>
-		<value>false</value>
-	</property>
-	<!--impala begin -->
-	<property>
-		<name>dfs.client.read.shortcircuit</name>
-		<value>true</value>
-	</property>
-	<property>
-		<name>dfs.domain.socket.path</name>
-		<!--must create dir path -->
-		<value>${hadoop.tmp.dir}/data/data2/dfs/run/hadoop-hdfs/dn._PORT
-		</value>
-	</property>
-	<property>
-		<name>dfs.client.file-block-storage-locations.timeout.millis</name>
-		<value>10000</value>
-	</property>
-	<property>
-		<name>dfs.datanode.hdfs-blocks-metadata.enabled</name>
-		<value>true</value>
-	</property>
-	<!--impala end -->
-	<!--ha begin -->
-	<property>
-		<name>dfs.nameservices</name>
-		<value>vipcluster</value>
-	</property>
-	<property>
-		<name>dfs.ha.namenodes.vipcluster</name>
-		<value>nn1,nn2</value>
-	</property>
-	<property>
-		<name>dfs.namenode.rpc-address.vipcluster.nn1</name>
-		<value>vnamenode:9000</value>
-	</property>
-	<property>
-		<name>dfs.namenode.rpc-address.vipcluster.nn2</name>
-		<value>vdatanode1:9000</value>
-	</property>
-	<property>
-		<name>dfs.namenode.http-address.vipcluster.nn1</name>
-		<value>vnamenode:50070</value>
-	</property>
-	<property>
-		<name>dfs.namenode.http-address.vipcluster.nn2</name>
-		<value>vdatanode1:50070</value>
-	</property>
-	<property>
-		<name>dfs.namenode.shared.edits.dir</name>
-		<value>qjournal://vnamenode:8485;vdatanode1:8485;vdatanode2:8485/vipcluster</value>
-	</property>
-	<property>
-		<name>dfs.journalnode.edits.dir</name>
-		<!--must create dir path -->
-		<value>${hadoop.tmp.dir}/data/data2/dfs/temp/journal</value>
-	</property>
-	<property>
-		<name>dfs.client.failover.proxy.provider.vipcluster</name>
-		<value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider
-		</value>
-	</property>
-	<property>
-		<name>dfs.ha.fencing.methods</name>
-		<value>shell(true)</value>
-	</property>
-	<property>
-		<name>dfs.ha.fencing.ssh.private-key-files</name>
-		<value>${dfs.ha.fencing.ssh.private-key-files}</value>
-	</property>
-	<property>
-		<name>dfs.ha.fencing.ssh.connect-timeout</name>
-		<value>30000</value>
-		<description>
-			SSH connection timeout, in milliseconds, to use with the builtin
-			sshfence fencer.
-		</description>
-	</property>
-
-	<property>
-		<name>dfs.ha.automatic-failover.enabled</name>
-		<value>true</value>
-	</property>
-	<!--ha end -->
- 
-
-	<property>
-		<name>dfs.namenode.handler.count</name>
-		<value>100</value>
-		<description>The number of server threads for the namenode.
-		</description>
-	</property>
-
-	<property>
-		<name>dfs.namenode.replication.considerLoad</name>
-		<value>true</value>
-		<description>Decide if chooseTarget considers the target's load or not
-		</description>
-	</property>
-
-	<property>
-		<name>dfs.datanode.du.reserved</name>
-		<value>1073741824</value>
-		<description>Reserved space in bytes per volume. Always leave this
-			much space free for non dfs use.
-		</description>
-	</property>
-
-	<property>
-		<name>dfs.datanode.failed.volumes.tolerated</name>
-		<value>1</value>
-		<description>The number of volumes that are allowed to
-			fail before a
-			datanode stops offering service. By default
-			any volume failure will
-			cause a datanode to shutdown.
-		</description>
-	</property>
-
- 
-
-	<property>
-		<name>dfs.blocksize</name>
-		<value>1073741824</value>
-		<description>
-			The default block size for new files.
-			Default is
-			67108864(64M).268435456(256M)
-		</description>
-	</property>
-
-	<property>
-		<name>dfs.datanode.handler.count</name>
-		<value>100</value>
-		<description>
-			The number of server threads for the datanode.
-		</description>
-	</property>
-
-	<property>
-		<name>dfs.datanode.max.transfer.threads</name>
-		<value>10240</value>
-	</property>
- 
-	<!-- don't need 2.0 -->
-	<property>
-		<name>dfs.block.local-path-access.user</name>
-		<value>vipcloud</value>
+		<description>Does HDFS allow appends to files?</description>
 	</property>
 
 </configuration>

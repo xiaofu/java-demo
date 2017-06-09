@@ -1,6 +1,13 @@
 package com.github.xiaofu.demo.hadoop;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 
 import org.apache.hadoop.conf.Configuration;
@@ -15,25 +22,15 @@ import org.apache.hadoop.hdfs.protocol.LocatedBlocks;
 import org.apache.hadoop.yarn.conf.YarnConfiguration;
 
 public class Demo {
-	static {
 
-		System.setProperty("hadoop.home.dir",
-				"D:\\open-source-projects\\big-data\\Hadoop\\windows\\hadoop-2.6.0-cdh5.9.0");
-	}
-	private static void test()
-	{
-		 YarnConfiguration conf=new YarnConfiguration();
-		 String aa=conf.get(YarnConfiguration.RM_SCHEDULER);
-			System.out.println(conf.get(YarnConfiguration.RM_SCHEDULER, YarnConfiguration.DEFAULT_RM_SCHEDULER));
-			System.out.println("==============");
-	}
+
 	private static void fileRead() throws IllegalArgumentException, IOException
 	{
-		Path path = new Path("/user/hive/warehouse/view_down_infos/year=2016/month=12/day=1/catalog=1/virtual=0/44906a4b993c25e-57b63834353b50a6_771350048_data.0");
+		Path path = new Path("/user/flh/HRegion/modify_title_info_zt/part-m-00000");
 		DistributedFileSystem fs = (DistributedFileSystem)  FileSystem.get(new Configuration());
 	
 		DFSClient client =fs.getClient();
-		fs.mkdirs(new Path("/temp"),null);
+		 
 	 
 		LocatedBlocks locateBlocks = client.getLocatedBlocks(path.toUri().toString(), 0);
 		for (LocatedBlock locateBlock : locateBlocks.getLocatedBlocks()) {
@@ -42,13 +39,20 @@ public class Demo {
 			}
 
 		}
-		for (BlockLocation blockLocation : client.getBlockLocations(path.toUri().toString(), 0, fs.getLength(path))) {
+		
+		for (BlockLocation blockLocation : fs.getFileBlockLocations(path, 0, fs.getLength(path))) {
 			for (String host : blockLocation.getHosts()) {
-				System.out.println("host:" + host);
+				System.out.println("replication host:" + host);
 				
 			}
+			for (String name : blockLocation.getCachedHosts()) {
+				System.out.println("replication cached host:" + name);
+			}
+			for (String name : blockLocation.getTopologyPaths()) {
+				System.out.println("replication TopologyPath:" + name);
+			}
 			for (String name : blockLocation.getNames()) {
-				System.out.println("host:" + name);
+				System.out.println("replication ip:data_port:" + name);
 			}
 		}
 	}
@@ -70,6 +74,7 @@ public class Demo {
 		    System.out.println(initialAddress);
 	}
 	public static void main(String[] args) throws IOException {
-		initialSocket();
+		 fileRead();
+	 
 	}
 }
