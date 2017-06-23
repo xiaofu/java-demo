@@ -1,6 +1,10 @@
 <configuration>
 <!--  ==============modify begin================== -->
 	<property>
+		<name>mapreduce.reduce.shuffle.input.buffer.percent</name>
+		<value>0.5</value>
+	</property>
+	<property>
 		 <name>mapreduce.job.reduce.slowstart.completedmaps</name>
 		 <value>0.3</value>
 	</property>

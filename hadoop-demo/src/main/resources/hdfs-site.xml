@@ -16,12 +16,14 @@
 	<property>
 		<name>dfs.namenode.name.dir</name>
 		<!--must create dir path -->
-		<value>${hadoop.tmp.dir}/data/data1/dfs/name,${hadoop.tmp.dir}/data/data2/dfs/name,${hadoop.tmp.dir}/data/data3/dfs/name</value>
+		<value>${hadoop.tmp.dir}/data/data1/dfs/name,${hadoop.tmp.dir}/data/data2/dfs/name,${hadoop.tmp.dir}/data/data3/dfs/name
+		</value>
 	</property>
 	<property>
 		<name>dfs.datanode.data.dir</name>
 		<!--must create dir path -->
-		<value>${hadoop.tmp.dir}/data/data1/dfs/data,${hadoop.tmp.dir}/data/data2/dfs/data,${hadoop.tmp.dir}/data/data3/dfs/data,${hadoop.tmp.dir}/data/data4/dfs/data,${hadoop.tmp.dir}/data/data5/dfs/data,${hadoop.tmp.dir}/data/data6/dfs/data,${hadoop.tmp.dir}/data/data7/dfs/data,${hadoop.tmp.dir}/data/data8/dfs/data</value>
+		<value>${hadoop.tmp.dir}/data/data1/dfs/data,${hadoop.tmp.dir}/data/data2/dfs/data,${hadoop.tmp.dir}/data/data3/dfs/data,${hadoop.tmp.dir}/data/data4/dfs/data,${hadoop.tmp.dir}/data/data5/dfs/data,${hadoop.tmp.dir}/data/data6/dfs/data,${hadoop.tmp.dir}/data/data7/dfs/data,${hadoop.tmp.dir}/data/data8/dfs/data
+		</value>
 	</property>
 	<property>
 		<name>dfs.datanode.max.transfer.threads</name>
@@ -64,6 +66,14 @@
 	<property>
 		<name>dfs.namenode.support.allow.format</name>
 		<value>false</value>
+	</property>
+	<property>
+		<name>cqvip.dfs.data.dir</name>
+		<value>${hadoop.tmp.dir}/data/data7/dfs/data</value>
+	</property>
+	<property>
+		<name>cqvip.dfs.data.dir.reserved</name>
+		<value>268435456000</value>
 	</property>
 	<!--=============== modify end================= -->
 
@@ -121,7 +131,8 @@
 	</property>
 	<property>
 		<name>dfs.namenode.shared.edits.dir</name>
-		<value>qjournal://Hadoop2x-01:8485;Hadoop2x-02:8485;Hadoop2x-03:8485/mrcluster</value>
+		<value>qjournal://Hadoop2x-01:8485;Hadoop2x-02:8485;Hadoop2x-03:8485/mrcluster
+		</value>
 	</property>
 	<property>
 		<name>dfs.journalnode.edits.dir</name>
@@ -180,8 +191,10 @@
 		<value>true</value>
 	</property>
 	<property>
-		<name>dfs.datanode.available-space-volume-choosing-policy.balanced-space-preference-fraction</name>
-		<value>org.apache.hadoop.hdfs.server.datanode.fsdataset.AvailableSpaceVolumeChoosingPolicy</value>
+		<name>dfs.datanode.available-space-volume-choosing-policy.balanced-space-preference-fraction
+		</name>
+		<value>org.apache.hadoop.hdfs.server.datanode.fsdataset.AvailableSpaceVolumeChoosingPolicy
+		</value>
 	</property>
 	<property>
 		<name>dfs.namenode.logging.level</name>
@@ -284,5 +297,9 @@
 	<property>
 		<name>dfs.checksum.type</name>
 		<value>CRC32</value>
-	</property> 
+	</property>
+	<property>
+		<name>dfs.block.local-path-access.user</name>
+		<value>vipcloud,root</value>
+	</property>
 </configuration>
