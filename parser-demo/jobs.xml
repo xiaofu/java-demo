@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='utf-8'?>
+<job-scheduling-data
+	xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData http://www.quartz-scheduler.org/xml/job_scheduling_data_1_8.xsd"
+	version="1.8">
+	<schedule>
+		<job>
+			<name>icbc</name>
+			<group>icbcGroup</group>
+			<description>parse icbc</description>
+			<job-class>com.siteparser.www.task.ICBCParserJob</job-class>
+		</job>
+		<trigger>
+			<cron>
+				<name>icbc1</name>
+				<group>icbcGroupTrigger</group>
+				<job-name>icbc</job-name>
+				<job-group>icbcGroup</job-group>
+				<!--1:00 every day  -->
+				<cron-expression>0 0 1 * * ?</cron-expression>
+			</cron>
+		</trigger>
+		<trigger>
+			<cron>
+				<name>icbc2</name>
+				<group>icbcGroupTrigger</group>
+				<job-name>icbc</job-name>
+				<job-group>icbcGroup</job-group>
+				<!--9:30 every day  -->
+				<cron-expression>0 30 9 * * ?</cron-expression>
+			</cron>
+		</trigger>
+		<trigger>
+			<cron>
+				<name>icbc3</name>
+				<group>icbcGroupTrigger</group>
+				<job-name>icbc</job-name>
+				<job-group>icbcGroup</job-group>
+				<!--11:00 every day  -->
+				<cron-expression>0 0 11 * * ?</cron-expression>
+			</cron>
+		</trigger>
+		<trigger>
+			<cron>
+				<name>icbc4</name>
+				<group>icbcGroupTrigger</group>
+				<job-name>icbc</job-name>
+				<job-group>icbcGroup</job-group>
+				<!--14:30 every day  -->
+				<cron-expression>0 30 14 * * ?</cron-expression>
+			</cron>
+		</trigger>
+		<trigger>
+			<cron>
+				<name>icbc5</name>
+				<group>icbcGroupTrigger</group>
+				<job-name>icbc</job-name>
+				<job-group>icbcGroup</job-group>
+				<!--19:30 every day  -->
+				<cron-expression>0 30 19 * * ?</cron-expression>
+			</cron>
+		</trigger>
+		<trigger>
+			<cron>
+				<name>icbc6</name>
+				<group>icbcGroupTrigger</group>
+				<job-name>icbc</job-name>
+				<job-group>icbcGroup</job-group>
+				<!--22:00 every day  -->
+				<cron-expression>0 0 22 * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</schedule>
+	<schedule>
+		<job>
+			<name>ws</name>
+			<group>wsGroup</group>
+			<description>ws parser</description>
+			<job-class>com.siteparser.www.task.WallStreetParserJob</job-class>
+		</job>
+		<trigger>
+			<cron>
+				<name>ws1</name>
+				<group>wsGroupTrigger</group>
+				<job-name>ws</job-name>
+				<job-group>wsGroup</job-group>
+				<!--1:00 every day  -->
+				<cron-expression>0 0 1 * * ?</cron-expression>
+			</cron>
+		</trigger>
+		<trigger>
+			<cron>
+				<name>ws2</name>
+				<group>wsGroupTrigger</group>
+				<job-name>ws</job-name>
+				<job-group>wsGroup</job-group>
+				<!--9:30 every day  -->
+				<cron-expression>0 30 9 * * ?</cron-expression>
+			</cron>
+		</trigger>
+		<trigger>
+			<cron>
+				<name>ws3</name>
+				<group>wsGroupTrigger</group>
+				<job-name>ws</job-name>
+				<job-group>wsGroup</job-group>
+				<!--11:00 every day  -->
+				<cron-expression>0 0 11 * * ?</cron-expression>
+			</cron>
+		</trigger>
+		<trigger>
+			<cron>
+				<name>ws4</name>
+				<group>wsGroupTrigger</group>
+				<job-name>ws</job-name>
+				<job-group>wsGroup</job-group>
+				<!--14:30 every day  -->
+				<cron-expression>0 30 14 * * ?</cron-expression>
+			</cron>
+		</trigger>
+		<trigger>
+			<cron>
+				<name>ws5</name>
+				<group>wsGroupTrigger</group>
+				<job-name>ws</job-name>
+				<job-group>wsGroup</job-group>
+				<!--19:30 every day  -->
+				<cron-expression>0 30 19 * * ?</cron-expression>
+			</cron>
+		</trigger>
+		<trigger>
+			<cron>
+				<name>ws6</name>
+				<group>wsGroupTrigger</group>
+				<job-name>ws</job-name>
+				<job-group>wsGroup</job-group>
+				<!--22:00 every day  -->
+				<cron-expression>0 0 22 * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</schedule>
+</job-scheduling-data>
