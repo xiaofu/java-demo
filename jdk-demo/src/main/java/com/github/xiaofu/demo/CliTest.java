@@ -1,5 +1,8 @@
 package com.github.xiaofu.demo;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
@@ -25,7 +28,9 @@ public class CliTest {
 		 for (String item : cmd.getOptionValues("conf")) {
 				System.out.println(item);
 			}
-		 
+		 System.out.println(String.format("%1$tF %1$tT", Calendar.getInstance() .getTime()));
+		 System.out.println(Calendar.getInstance() .getTime());
+		System.out.println(TimeZone.getDefault());
 
 	}
 }

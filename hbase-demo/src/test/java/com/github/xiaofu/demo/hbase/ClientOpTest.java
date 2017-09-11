@@ -26,15 +26,17 @@ import org.apache.hadoop.hbase.util.RegionSplitter.SplitAlgorithm;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.collect.Lists;
+
 public class ClientOpTest {
 	private static Configuration conf = null;
-	private static String TABLE = "user_history_log_info";
+	private static String TABLE = "test2";
 	static {
 		conf = HBaseConfiguration.create();
 		try {
 
 			conf.set("hbase.zookeeper.quorum",
-					"node203.vipcloud,node204.vipcloud,node205.vipcloud");
+					"vdatanode1,vnamenode,vdatanode2");
 			/*
 			 * conf.set( "hbase.zookeeper.quorum",
 			 * "node600.vipcloud,node601.vipcloud,node602.vipcloud,node603.vipcloud,node604.vipcloud"
@@ -46,22 +48,45 @@ public class ClientOpTest {
 		}
 	}
 
-
+	
 	@Before
 	public void setUp() throws Exception {
+		
+		
 	}
-
+	@Test
+	public void deleteData() throws IOException
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			List<String> rowKeyLists=ClientOp.scanerReturnRow(TABLE);
+			List<Delete> deleteLists=Lists.newArrayList();
+			for (String item : rowKeyLists)
+			{
+				deleteLists.add(new Delete(Bytes.toBytes(item)));
+			}
+			ClientOp.deleteRow(TABLE, deleteLists);
+		}
+	
+	}
 	@Test
 	public void selectRow() throws IOException {
 		 
-		ClientOp.selectRow(TABLE, "2:1:2_1_root_1:0");
+		ClientOp.selectRow(TABLE, "2420500");
+		//ClientOp.selectRow(TABLE, "row2");
+		//ClientOp.selectRow(TABLE, "row3");
 	
 	}
+	@Test
+	public void writeRowMore() throws IOException {
+		ClientOp.writeRow(TABLE, "row2","main", "b", "value3");
+		ClientOp.writeRow(TABLE, "row3","main", "c", "value4");
+
 	
+	}
 	@Test
 	public void writeRow() throws IOException {
 		ClientOp.writeRow(TABLE, "row1","main", "a", "value1");
-		ClientOp.writeRow(TABLE, "row1","main", "a", "value2");
 
 	
 	}
@@ -71,7 +96,9 @@ public class ClientOpTest {
 		//ClientOp.writeRow(ClientOp.TABLE, "row1","colfam1", "a", "value1");
 		//ClientOp.writeRow(ClientOp.TABLE, "row1","colfam1", "b", "value1");
 		//ClientOp.deleteRow(TABLE, "row1");
-		ClientOp.deleteRowColumn(TABLE, "row1","main","a");
+		ClientOp.deleteRow(TABLE, "row1");
+		//ClientOp.deleteRow(TABLE, "row2");
+		//ClientOp.deleteRow(TABLE, "row3");
 	}
 
 	@Test

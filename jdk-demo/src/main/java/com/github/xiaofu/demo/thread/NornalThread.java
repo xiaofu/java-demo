@@ -25,30 +25,55 @@ public class NornalThread
 	/**
 	 * @author fulaihua 2014-9-21 上午1:13:36
 	 * @param args
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException
 	{
-		Thread thread = new Thread()
+		try
 		{
+			MyThread thread = new MyThread();
+			thread.start();
+			Thread.sleep(2000);
+			thread.interrupt();// 请求中断MyThread线程
+		}
+		catch (InterruptedException e)
+		{
+			System.out.println("main catch");
+			e.printStackTrace();
+		}
+		System.out.println("end!");
 
-			@Override
-			public void run()
+	}
+
+	static class MyThread extends Thread
+	{
+		@Override
+		public void run()
+		{
+			super.run();
+			try
 			{
-				 for (int i = 0; i < 10000000; i++) {
-					System.out.println(i);
-					try {
-						Thread.sleep(1*1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+				for (int i = 0; i < 500000; i++)
+				{
+					if (this.interrupted())
+					{
+						System.out.println("should be stopped and exit");
+						throw new InterruptedException();
 					}
+					System.out.println("i=" + (i + 1));
 				}
+				System.out
+						.println("this line cannot be executed. cause thread throws exception");
 			}
-		};
-		thread.start();
-		Thread.currentThread().join();
-		System.out.println("fdsafasdfsd");
+			catch (InterruptedException e)
+			{
+				/**
+				 * 这样处理不好 System.out.println("catch interrupted exception");
+				 * e.printStackTrace();
+				 */
+				Thread.currentThread().interrupt();// 这样处理比较好
+			}
+		}
 	}
 
 }
