@@ -98,7 +98,7 @@ public class ListenerParentNode implements IZkStateListener, IZkDataListener,
 	}
 
 	/**
-	 * 当前节点创建;当前节点的数据被修改;如果会话过期第四步调用此方法
+	 * 当前节点创建;当前节点的数据被修改;此方法会话过期不会调用，因为读取数据时已经异常，直接跑到handleDataDeleted方法中进行处理
 	 * @param dataPath 数据改变节点的绝对路径
 	 * @param data 数据
 	 */
