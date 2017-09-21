@@ -80,8 +80,8 @@ public class ListenerParentNode implements IZkStateListener, IZkDataListener,
 	}
 
 	/**
-	 * 如果由于过期而产生了一个新会话会回调此方法，所谓的新会话就是创建一个新的Zookeeper对象
-	 * 会话过期第二步调用此方法
+	 * 如果由于过期而产生了一个新会话会回调此方法，关闭旧连接，建立一个新的连接，再触发此方法
+	 * 会话过期第二步调用此方法，状态改变是首先调用的
 	 */
 	@Override
 	public void handleNewSession() throws Exception {
@@ -110,7 +110,7 @@ public class ListenerParentNode implements IZkStateListener, IZkDataListener,
 	}
 
 	/**
-	 * 如果当前节点被删除：读不到数据抛异常，所以需要回调此方法;如果会话过期最后调用此方法，前提是节点不存在，如果存在不会调用此方法！
+	 * 如果当前节点被删除：读不到数据抛异常，所以需要回调此方法;如果会话过期调用此方法的前提是节点不存在，如果存在不会调用此方法，而调用handleDataChange！
 	 * @param dataPath 被删除节点的绝对路径
 	 */
 	@Override
