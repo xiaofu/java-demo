@@ -8,6 +8,9 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>jdk-demo</artifactId>
+	<properties>
+		<jzmq.version>3.1.0</jzmq.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -113,35 +116,42 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>1.8.9</version>
 		</dependency>
+		<!-- need jzmq native lib and zeromq native lib ,must jzmq version and zeromq version -->
+		<dependency>
+			<groupId>org.zeromq</groupId>
+			<artifactId>jzmq</artifactId>
+			<version>${jzmq.version}</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
-		 <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>aspectj-maven-plugin</artifactId>
-        <version>1.10</version>
-        <configuration>
-          <complianceLevel>${java.version}</complianceLevel>
-       	  <source>${java.version}</source>
-          <target>${java.version}</target>
-          <sources>
-            <source>
-              <basedir>src/main/java</basedir>
-              <includes>
-                <include>**/TestAspect.java</include>
-                 <include>**/TestTarget.java</include>
-              </includes>
-            </source>
-          </sources>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>compile</goal>       <!-- use this goal to weave all your main classes -->
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.10</version>
+				<configuration>
+					<complianceLevel>${java.version}</complianceLevel>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<sources>
+						<source>
+							<basedir>src/main/java</basedir>
+							<includes>
+								<include>**/TestAspect.java</include>
+								<include>**/TestTarget.java</include>
+							</includes>
+						</source>
+					</sources>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>       <!-- use this goal to weave all your main classes -->
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.xolstice.maven.plugins</groupId>
 				<artifactId>protobuf-maven-plugin</artifactId>
