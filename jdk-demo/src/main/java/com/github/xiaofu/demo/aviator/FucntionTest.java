@@ -136,7 +136,7 @@ public class FucntionTest {
 	}
 
 	public static void main(String[] args) {
-		String aa = " xxxobj.type=='1'   && splitStartsWith('class',' ','F8','')";
+		String aa = " xxxobj.type=='1'  && splitStartsWith('class',' ','F8','') && (xxxobj.modify==nil || xxobj.modify!='JG' )";
 	
 		AviatorEvaluator.addFunction(new SplitEquals());
 		AviatorEvaluator.addFunction(new SplitContains());

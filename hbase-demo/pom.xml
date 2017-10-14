@@ -17,8 +17,148 @@
 			<artifactId>junit</artifactId>
 
 		</dependency>
-
-	<!-- 	<dependency>
+	 <dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-client</artifactId>
+			<version>${hadoop.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-aws</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-mapreduce-client-app</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-yarn-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-mapreduce-client-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-mapreduce-client-jobclient</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+ 
+		<dependency>
+			<groupId>com.cqvip.vipcloud</groupId>
+			<artifactId>hbase</artifactId>
+			<version>${hbase.version}</version>
+			<exclusions>
+				 	<exclusion>
+							<groupId>org.apache.hadoop</groupId>
+							<artifactId>hadoop-client</artifactId>
+						</exclusion>
+						<exclusion>
+							<artifactId>jersey-server</artifactId>
+							<groupId>com.sun.jersey</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>libthrift</artifactId>
+							<groupId>org.apache.thrift</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>metrics-core</artifactId>
+							<groupId>com.yammer.metrics</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>jamon-runtime</artifactId>
+							<groupId>org.jamon</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>jetty</artifactId>
+							<groupId>org.mortbay.jetty</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>velocity</artifactId>
+							<groupId>org.apache.velocity</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>jersey-json</artifactId>
+							<groupId>com.sun.jersey</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>avro-ipc</artifactId>
+							<groupId>org.apache.avro</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>activation</artifactId>
+							<groupId>javax.activation</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>avro</artifactId>
+							<groupId>org.apache.avro</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>commons-beanutils-core</artifactId>
+							<groupId>commons-beanutils</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>commons-digester</artifactId>
+							<groupId>commons-digester</groupId>
+						</exclusion>
+						<!-- <exclusion> <artifactId>guava</artifactId> <groupId>com.google.guava</groupId> 
+							</exclusion> -->
+						<exclusion>
+							<artifactId>jackson-jaxrs</artifactId>
+							<groupId>org.codehaus.jackson</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>high-scale-lib</artifactId>
+							<groupId>com.github.stephenc.high-scale-lib</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>jackson-xc</artifactId>
+							<groupId>org.codehaus.jackson</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>jersey-core</artifactId>
+							<groupId>com.sun.jersey</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>jetty-util</artifactId>
+							<groupId>org.mortbay.jetty</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>jruby-complete</artifactId>
+							<groupId>org.jruby</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>netty</artifactId>
+							<groupId>org.jboss.netty</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>jsp-api-2.1</artifactId>
+							<groupId>org.mortbay.jetty</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>servlet-api-2.5</artifactId>
+							<groupId>org.mortbay.jetty</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>jsp-2.1</artifactId>
+							<groupId>org.mortbay.jetty</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>jasper-runtime</artifactId>
+							<groupId>tomcat</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>jasper-compiler</artifactId>
+							<groupId>tomcat</groupId>
+						</exclusion>
+						<exclusion>
+							<artifactId>zookeeper</artifactId>
+							<groupId>org.apache.zookeeper</groupId>
+						</exclusion>
+			</exclusions>
+		</dependency>
+	 	<!-- <dependency>
 			<groupId>com.cqvip.vipcloud</groupId>
 			<artifactId>hadoop-core</artifactId>
 			<version>0.20.2-SNAPSHOT</version>
@@ -40,8 +180,8 @@
 					<groupId>org.apache.hadoop</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency> -->
-	 	<dependency>
+		</dependency>  -->
+	 	<!-- <dependency>
 			<groupId>com.cqvip.vipcloud</groupId>
 			<artifactId>hbase</artifactId>
 			<version>${hbase.version}</version>
@@ -71,7 +211,7 @@
       				<artifactId>hadoop-mapreduce-client-app</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency> 
+		</dependency>  -->
 	</dependencies>
 	<build>
 		<plugins>
@@ -92,7 +232,7 @@
 									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>com.github.xiaofu.demo.hbase.HbaseTableRegionMerge</mainClass>
+									<mainClass>com.github.xiaofu.demo.hbase.ClientOp</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>

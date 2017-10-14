@@ -51,6 +51,8 @@ import org.apache.hadoop.hbase.util.RegionSplitter;
 import org.apache.hadoop.hbase.util.RegionSplitter.SplitAlgorithm;
 import org.apache.hadoop.hbase.util.Writables;
 
+import com.google.common.collect.Lists;
+
 /**
  * @author fulaihua
  * 
@@ -59,20 +61,11 @@ public class ClientOp {
 	public static Configuration conf = null;
 	private static HTable onlineTable;
 	private static HTable localTable;
-	public static String TABLE = "flh_test2";
+	public static String TABLE = "flh_test";
 	static {
 		conf = HBaseConfiguration.create();
 		try {
-
-			conf.set("hbase.zookeeper.quorum",
-					"node103.vipcloud,node104.vipcloud,node105.vipcloud");
-			conf.set("", "/hbase2");
-			//localTable = new HTable(conf, TABLE);
-			/*
-			 * conf.set( "hbase.zookeeper.quorum",
-			 * "node600.vipcloud,node601.vipcloud,node602.vipcloud,node603.vipcloud,node604.vipcloud"
-			 * ); onlineTable = new HTable(conf, "file_uploader");
-			 */
+			conf.set("hbase.zookeeper.quorum","vdatanode1,vnamenode,vdatanode2");
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -86,7 +79,7 @@ public class ClientOp {
 	 */
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
-		deleteTable(TABLE);
+		//deleteTable(TABLE);
 		// scanRootOrMeta();
 		 //deleteTable(TABLE);
 		// deleteRow(TABLE,"aa");
@@ -274,8 +267,16 @@ public class ClientOp {
 			System.out.println(Bytes.toString(kv.getValue()));
 
 		}
+		table.close();
 	}
-
+	public static void deleteRow(String tablename, List<Delete> list)
+			throws IOException {
+		HTable table = new HTable(conf, tablename);
+		table.delete(list);
+		System.out.println("删除行成功！");
+		table.close();
+	}
+	
 	public static void deleteRow(String tablename, String rowkey)
 			throws IOException {
 		HTable table = new HTable(conf, tablename);
@@ -294,6 +295,7 @@ public class ClientOp {
 		 d1.deleteColumn(family.getBytes(),column.getBytes());
 		list.add(d1);
 		table.delete(list);
+		table.close();
 		System.out.println("删除行成功！");
 	}
 	/**
@@ -306,7 +308,7 @@ public class ClientOp {
 			HTable table = new HTable(conf, tablename);
 			Scan s = new Scan();
 			s.addFamily(Bytes.toBytes("main"));
-			s.addColumn(Bytes.toBytes("main"), Bytes.toBytes("type"));
+			//s.addColumn(Bytes.toBytes("main"), Bytes.toBytes("_keyid"));
 			FilterList filterLists=new FilterList();
 			filterLists.addFilter(new KeyOnlyFilter());
 			filterLists.addFilter(new SingleColumnValueFilter());
@@ -314,11 +316,9 @@ public class ClientOp {
 			s.setCacheBlocks(false);
 			s.setFilter(filterLists);
 			ResultScanner rs = table.getScanner(s);
-
 			for (Result r : rs) {
 				KeyValue[] kv = r.raw();
-				for (int i = 0; i < kv.length; i++) {
-					 
+				for (int i = 0; i < kv.length; i++) { 
 					System.out.print(new String(kv[i].getRow()) + " ");
 					System.out.print(new String(kv[i].getFamily()) + " ");
 					System.out.print( Bytes.toLong( kv[i].getQualifier()) + " ");
@@ -330,7 +330,40 @@ public class ClientOp {
 			e.printStackTrace();
 		}
 	}
-
+	public static List<String> scanerReturnRow(String tablename) throws IOException {
+		List<String> lists=Lists.newArrayList();
+		HTable table =null;
+		try {
+			  table = new HTable(conf, tablename);
+			Scan s = new Scan();
+			s.addFamily(Bytes.toBytes("main"));
+			//s.addColumn(Bytes.toBytes("main"), Bytes.toBytes("_keyid"));
+			FilterList filterLists=new FilterList();
+			filterLists.addFilter(new KeyOnlyFilter());
+			filterLists.addFilter(new SingleColumnValueFilter());
+			s.setCaching(1000);
+			s.setCacheBlocks(false);
+			//s.setFilter(filterLists);
+			ResultScanner rs = table.getScanner(s);
+			int count=0;
+			final int len=50000;
+			for (Result r : rs) {
+				KeyValue[] kv = r.raw();
+				lists.add(new String(r.getRow()));
+				count++;
+				if(count==len)
+					break;
+			}
+			rs.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally
+		{
+			table.close();
+		}
+		return lists;
+	}
 	public static void batchTest(String tablename) throws IOException {
 		HTable table = new HTable(conf, tablename);
 		byte[] ROW1 = Bytes.toBytes("row1");
