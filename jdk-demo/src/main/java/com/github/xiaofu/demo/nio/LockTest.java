@@ -1,4 +1,4 @@
-package com.github.xiaofu.demo.filechannel;
+package com.github.xiaofu.demo.nio;
 
 import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;

@@ -1,4 +1,4 @@
-package com.github.xiaofu.demo.filechannel;
+package com.github.xiaofu.demo.nio;
 
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;

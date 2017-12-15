@@ -1,6 +1,6 @@
 
  
-package com.github.xiaofu.demo.filechannel;
+package com.github.xiaofu.demo.nio;
 import java.nio.channels.FileChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.channels.Channels;
