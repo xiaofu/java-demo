@@ -67,7 +67,7 @@ public class WallStreetParserJob  implements Job{
 						{
 							DynaBean bean=new LazyDynaBean();
 							bean.set("code", model.getCode());
-							bean.set("price", div.child(2).child(0).text().trim());
+							bean.set("price", div.child(1).child(0).child(0).text().trim());
 							bean.set("tYear", dateTime.getYear());
 							bean.set("tMonth", dateTime.getMonthOfYear());
 							bean.set("tDay", dateTime.getDayOfMonth());
