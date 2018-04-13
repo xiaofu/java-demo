@@ -15,6 +15,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.Set;
 
 import org.apache.commons.httpclient.HttpClient;
@@ -27,14 +30,17 @@ import org.apache.hadoop.fs.BlockLocation;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.FileUtil;
+import org.apache.hadoop.fs.FsShell;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.permission.FsCreateModes;
 import org.apache.hadoop.fs.permission.FsPermission;
-import org.apache.hadoop.hbase.util.Bytes;
+
 import org.apache.hadoop.hdfs.DFSClient;
 import org.apache.hadoop.hdfs.DFSConfigKeys;
 import org.apache.hadoop.hdfs.DFSOutputStream;
 import org.apache.hadoop.hdfs.DistributedFileSystem;
+import org.apache.hadoop.hdfs.HdfsConfiguration;
 import org.apache.hadoop.hdfs.client.HdfsDataOutputStream;
 import org.apache.hadoop.hdfs.protocol.DatanodeInfo;
 import org.apache.hadoop.hdfs.protocol.LocatedBlock;
@@ -54,18 +60,21 @@ import org.apache.hadoop.yarn.conf.YarnConfiguration;
 import org.apache.hadoop.yarn.exceptions.YarnException;
 import org.apache.hadoop.yarn.util.ConverterUtils;
  
-
-
-import org.apache.tools.ant.taskdefs.TempFile;
+ 
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 public class Demo
 {
+	/*static
+	{
+		System.setProperty("HADOOP_USER_NAME", "vipcloud");
+	}*/
 
 	private static void fileRead() throws IllegalArgumentException, IOException
 	{
+		
 		Path path = new Path(
 				"/temp/libvipudf.so");
 		DistributedFileSystem fs = (DistributedFileSystem) FileSystem
@@ -103,47 +112,104 @@ public class Demo
 		}
 	}
 
-	private static void initialSocket()
+ 
+	private static void favorNodes() throws IOException
 	{
-		YarnConfiguration conf = new YarnConfiguration();
-		final InetSocketAddress initialAddress = conf.getSocketAddr(
-				YarnConfiguration.NM_BIND_HOST, YarnConfiguration.NM_ADDRESS,
-				YarnConfiguration.DEFAULT_NM_ADDRESS,
-				YarnConfiguration.DEFAULT_NM_PORT);
-		boolean usingEphemeralPort = (initialAddress.getPort() == 0);
-		if (usingEphemeralPort)
-		{
-			throw new IllegalArgumentException(
-					"Cannot support recovery with an "
-							+ "ephemeral server port. Check the setting of "
-							+ YarnConfiguration.NM_ADDRESS);
-		}
-		System.out.println(initialAddress.getPort());
-		System.out.println(initialAddress);
-	}
-
-	public static void main(String[] args) throws IOException, IllegalArgumentException, YarnException
-	{
-		 
 		Configuration conf=new Configuration();
-		conf.set("fs.client.htrace.span.receiver.classes", "StandardOutSpanReceiver");
-		conf.set("fs.client.htrace.sampler.classes", "AlwaysSampler");
-		
+		conf.set("cqvip.dfs.favored.nodes", "vdatanode2:50010,vdatanode1:50010");
 		DistributedFileSystem fs = (DistributedFileSystem) FileSystem
 				.get(conf);
-		FileStatus[] statuses= fs.listStatus(new Path("/vipcloud/jobs"));
-		File tmpFile=new File("/tmp");
-		tmpFile.mkdir();
-		for (FileStatus status : statuses)
+		FSDataOutputStream outputstream= fs.create(new Path("/user/test/t1"));
+		outputstream.write(2);
+		FileSystem.closeAll();
+	}
+	
+	private static void writeTest(String[] args) throws IOException, InterruptedException
+	{
+		Configuration conf=new HdfsConfiguration();
+		conf.setLong("dfs.client.socket-timeout", 5*60*1000);
+		final DistributedFileSystem fs = (DistributedFileSystem) FileSystem
+				.get(conf);
+		FSDataOutputStream outStream= fs.create(new Path(args[0]));
+		BufferedInputStream inputStream=new BufferedInputStream(new FileInputStream(args[1]));
+		byte[] bytes=new byte[8192];
+		int counts=0;
+		counts=inputStream.read(bytes);
+		while(counts!=-1)
 		{
-			fs.copyToLocalFile (status.getPath(), new Path("/tmp"));
+			outStream.write(bytes,0,counts);
+			counts=inputStream.read(bytes);
+			//Thread.currentThread().sleep(100);
 		}
+		inputStream.close();
+		outStream.close();
+	}
+
+	public static void main(String[] args) throws Exception
+	{
+		 
+		writeTest(args);
+		/*ExecutorService pools=Executors.newFixedThreadPool(10);
+		Future<?> futures=null;
+		for (int i = 0; i < 10; i++)
+		{
+			final int j=i;
+			pools.submit(new Runnable()
+			{
+				
+				@Override
+				public void run()
+				{
+					int k=0;
+					FSDataOutputStream outputStream= null;
+					while(true)
+					{
+						Path path=new Path("/temp/path_"+j+"_"+k);
+						try
+						{
+							outputStream= fs.create(path);
+							for (int j = 0; j < 10; j++)
+							{
+								outputStream.write(124);
+							}
+						}
+						catch (IOException e)
+						{
+							 
+							e.printStackTrace();
+						}
+						finally
+						{
+							IOUtils.closeQuietly(outputStream);
+							try
+							{
+								fs.delete(path,false);
+							}
+							catch (IOException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						k++;
+					}
+				}
+			});
+		}
+		pools.shutdown();
+		Thread.currentThread().join();*/
 		/*Path path = new Path(
 				"/temp/t9");
 		//fs.listStatus(path);
 		fs.create(path);*/
 		//fs.mkdirs(path);
 		//fs.delete(path,true);
+/*		
+		FileSystem fs=FileSystem.get(conf);
+		//FileUtil.copy(fs, new Path("/vipcloud/journal/tmp_cqu_user_log/2017-08-27/hbase"), fs, new Path("/user/test"), false, conf);
+		fs.delete(new Path("/user/test/2017-08-27"), true);
+		FsShell shell=new FsShell(conf);
+		shell.run(new String[]{"-cp","/vipcloud/journal/tmp_cqu_user_log/2017-08-27/hbase/*","/user/test"});*/
 	}
 	 
 }

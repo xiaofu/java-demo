@@ -21,7 +21,7 @@ public class NewMaxTemperature {
 	static {
 
 		System.setProperty("hadoop.home.dir",
-				"E:\\open-source-projects\\big-data\\hadoop\\install\\hadoop-2.3.0-cdh5.0.0");
+				"D:\\open-source-projects\\big-data\\Hadoop\\src\\hadoop-2.6.0-cdh5.10.0\\hadoop-dist\\target\\hadoop-2.6.0-cdh5.10.0");
 	}
 
 	static class NewMaxTemperatureMapper
@@ -86,7 +86,7 @@ public class NewMaxTemperature {
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
 		job.getConfiguration().set("fs.defaultFS", "file:///");
-		job.getConfiguration().set("mapred.job.tracker", "local");
+		job.getConfiguration().set("mapreduce.framework.name", "local");
 		 
 		job.getConfiguration().setBoolean(MRJobConfig.MAP_OUTPUT_COMPRESS,
 			
