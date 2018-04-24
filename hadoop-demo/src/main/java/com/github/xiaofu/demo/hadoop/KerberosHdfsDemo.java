@@ -35,7 +35,7 @@ public class KerberosHdfsDemo
 	 */
 	public static void main(String[] args) throws Exception
 	{
-		testWithShellLogin();
+		testWithUserGroupInformationLogin("d:/krb5.conf");
 	}
 	public static void testWithShellLogin() throws IOException
 	{
@@ -63,10 +63,10 @@ public class KerberosHdfsDemo
 			
 	         conf.set("hadoop.security.authentication", "kerberos");
 	         UserGroupInformation.setConfiguration(conf);
-	         UserGroupInformation.loginUserFromKeytab("test@CQVIP.COM","test.keytab");
+	         UserGroupInformation.loginUserFromKeytab("test","d:/test.keytab");
 	         try {
 	                 FileSystem fs = FileSystem.get(conf);
-	                 FileStatus[] fsStatus = fs.listStatus(new Path("/yarn"));
+	                 FileStatus[] fsStatus = fs.listStatus(new Path("/"));
 	                 for(int i = 0; i < fsStatus.length; i++){
 	                 System.out.println(fsStatus[i].getPath().toString());
 	                 }
