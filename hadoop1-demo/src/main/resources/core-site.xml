@@ -1,0 +1,289 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+	<!--- global properties -->
+	<property>
+		<name>hadoop.tmp.dir</name>
+		<value>/usr/local/vipcloud</value>
+		<description>A base for other temporary directories.</description>
+	</property>
+
+	<!-- file system properties -->
+	<property>
+		<name>fs.default.name</name>
+		<value>hdfs://node102.vipcloud:9000</value>
+		<description>The name of the default file system. A URI whose
+			scheme
+			and authority determine the FileSystem implementation. The
+			uri's
+			scheme determines the config property (fs.SCHEME.impl) naming
+			the
+			FileSystem implementation class. The uri's authority is used to
+			determine the host, port, etc. for a filesystem.
+		</description>
+	</property>
+
+	<property>
+		<name>hadoop.native.lib</name>
+		<value>true</value>
+		<description>Should native hadoop libraries, if present, be used.
+		</description>
+	</property>
+
+	<!-- i/o properties -->
+	<property>
+		<name>io.file.buffer.size</name>
+		<value>16384</value>
+		<description>The size of buffer for use in sequence files.
+			The size of
+			this buffer should probably be a multiple of hardware
+			page size (4096
+			on Intel x86), and it determines how much data is
+			buffered during read
+			and write operations.
+			Default is 4096
+		</description>
+	</property>
+
+	<property>
+		<name>io.bytes.per.checksum</name>
+		<value>2048</value>
+		<description>The number of bytes per checksum. Must not be larger than
+			io.file.buffer.size.
+			Default is 512
+		</description>
+	</property>
+
+	<property>
+		<name>io.skip.checksum.errors</name>
+		<value>false</value>
+		<description>If true, when a checksum error is encountered while
+			reading a sequence file, entries are skipped, instead of throwing an
+			exception.
+		</description>
+	</property>
+
+	<property>
+		<name>io.serializations</name>
+		<value>org.apache.hadoop.io.serializer.WritableSerialization</value>
+		<description>A list of serialization classes that can be used for
+			obtaining serializers and deserializers.
+		</description>
+	</property>
+
+	<property>
+		<name>io.compression.codecs</name>
+		<value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,com.hadoop.compression.lzo.LzoCodec,org.apache.hadoop.io.compress.BZip2Codec</value>
+	</property>
+
+	<property>
+		<name>io.compression.codec.lzo.class</name>
+		<value>com.hadoop.compression.lzo.LzoCodec</value>
+	</property>
+
+	<property>
+		<name>io.seqfile.compress.blocksize</name>
+		<value>1000000</value>
+		<description>
+			The minimum block size for compression in block
+			compressed SequenceFiles. now is 2M.Default 1M
+		</description>
+	</property>
+
+	<property>
+		<name>io.seqfile.lazydecompress</name>
+		<value>true</value>
+		<description>
+			Should values of block-compressed SequenceFiles be
+			decompressed only when necessary.
+		</description>
+	</property>
+
+	<property>
+		<name>io.seqfile.sorter.recordlimit</name>
+		<value>1000000</value>
+		<description>
+			The limit on number of records to be kept in memory in a
+			spill in SequenceFiles.Sorter
+		</description>
+	</property>
+
+	<property>
+		<name>io.mapfile.bloom.size</name>
+		<value>1048576</value>
+		<description>The size of BloomFilter-s used in BloomMapFile. Each time
+			this many
+			keys is appended the next BloomFilter will be created
+			(inside a
+			DynamicBloomFilter).
+			Larger values minimize the number of
+			filters, which slightly increases the
+			performance,
+			but may waste too
+			much space if the total number of keys is usually much
+			smaller
+			than
+			this number.
+		</description>
+	</property>
+
+	<property>
+		<name>io.mapfile.bloom.error.rate</name>
+		<value>0.005</value>
+		<description>The rate of false positives in BloomFilter-s used in
+			BloomMapFile.
+			As this value decreases, the size of BloomFilter-s
+			increases
+			exponentially. This
+			value is the probability of encountering
+			false positives (default is
+			0.5%).
+		</description>
+	</property>
+
+	<property>
+		<name>hadoop.util.hash.type</name>
+		<value>murmur</value>
+		<description>The default implementation of Hash. Currently this can
+			take one of the
+			two values: 'murmur' to select MurmurHash and
+			'jenkins' to select
+			JenkinsHash.
+		</description>
+	</property>
+
+	<property>
+		<name>hadoop.logfile.size</name>
+		<value>10000000</value>
+		<description>The max size of each log file</description>
+	</property>
+
+	<property>
+		<name>hadoop.logfile.count</name>
+		<value>10</value>
+		<description>The max number of log files</description>
+	</property>
+
+	<!-- ipc properties -->
+	<property>
+		<name>ipc.client.idlethreshold</name>
+		<value>4000</value>
+		<description>Defines the threshold number of connections after which
+			connections will be inspected for idleness.
+		</description>
+	</property>
+
+	<property>
+		<name>ipc.client.kill.max</name>
+		<value>10</value>
+		<description>Defines the maximum number of clients to disconnect in
+			one go.
+		</description>
+	</property>
+
+	<property>
+		<name>ipc.client.connection.maxidletime</name>
+		<value>10000</value>
+		<description>The maximum time in msec after which a client will bring
+			down the
+			connection to the server.
+		</description>
+	</property>
+
+	<property>
+		<name>ipc.client.connect.max.retries</name>
+		<value>10</value>
+		<description>Indicates the number of retries a client will make to
+			establish
+			a server connection.
+		</description>
+	</property>
+
+	<property>
+		<name>ipc.server.listen.queue.size</name>
+		<value>256</value>
+		<description>Indicates the length of the listen queue for servers
+			accepting
+			client connections.
+		</description>
+	</property>
+
+	<property>
+		<name>ipc.server.tcpnodelay</name>
+		<value>true</value>
+		<description>Turn on/off Nagle's algorithm for the TCP socket
+			connection on
+			the server. Setting to true disables the algorithm and
+			may decrease
+			latency
+			with a cost of more/smaller packets.
+		</description>
+	</property>
+
+	<property>
+		<name>ipc.client.tcpnodelay</name>
+		<value>true</value>
+		<description>Turn on/off Nagle's algorithm for the TCP socket
+			connection on
+			the client. Setting to true disables the algorithm and
+			may decrease
+			latency
+			with a cost of more/smaller packets.
+		</description>
+	</property>
+
+	<!-- Web Interface Configuration -->
+	<property>
+		<name>webinterface.private.actions</name>
+		<value>true</value>
+		<description> If set to true, the web interfaces of JT and NN may
+			contain
+			actions, such as kill job, delete file, etc., that should
+			not
+			be exposed to public. Enable this option if the interfaces
+			are only
+			reachable by those who have the right authorization.
+		</description>
+	</property>
+
+	<!-- Rack Configuration -->
+	<property>
+		<name>topology.node.switch.mapping.impl</name>
+		<value>org.apache.hadoop.net.ScriptBasedMapping</value>
+		<description> The default implementation of the DNSToSwitchMapping. It
+			invokes a script specified in topology.script.file.name to resolve
+			node names. If the value for topology.script.file.name is not set,
+			the
+			default value of DEFAULT_RACK is returned for all node names.
+		</description>
+	</property>
+
+	<property>
+		<name>topology.script.file.name</name>
+		<value></value>
+		<description> The script name that should be invoked to resolve DNS
+			names to
+			NetworkTopology names. Example: the script would take
+			host.foo.bar as an
+			argument, and return /rack1 as the output.
+		</description>
+	</property>
+
+	<property>
+		<name>topology.script.number.args</name>
+		<value>2000</value>
+		<description> The max number of args that the script configured with
+			topology.script.file.name should be run with. Each arg is an
+			IP
+			address.
+		</description>
+	</property>
+	<property>
+		<name>hadoop.security.authentication</name>
+		<value>kerberos</value>
+	</property>
+	<property>
+		<name>hadoop.security.authorization</name>
+		<value>true</value>
+	</property>
+</configuration>

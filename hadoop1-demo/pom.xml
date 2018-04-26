@@ -1,0 +1,136 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.xiaofu</groupId>
+	<artifactId>hadoop1-demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<repositories>
+		<repository>
+			<id>3rdparty</id>
+			<name>3rdparty</name>
+			<url>http://192.168.30.55:8081/nexus/content/repositories/thirdparty/</url>
+		</repository>
+		<repository>
+			<id>releases</id>
+			<name>releases</name>
+			<url>http://192.168.30.55:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>snapshots</id>
+			<name>Snapshots</name>
+			<url>http://192.168.30.55:8081/nexus/content/repositories/snapshots/</url>
+		</repository>
+		<repository>
+			<id>VipRepositoryGroup</id>
+			<name>Snapshots</name>
+			<url>http://192.168.30.55:8081/nexus/content/groups/VipRepositoryGroup/</url>
+		</repository>
+		<repository>
+			<id>cdh.rcs.releases.repo</id>
+			<url>https://repository.cloudera.com/content/groups/cdh-releases-rcs</url>
+			<name>CDH Releases Repository</name>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>cdh.releases.repo</id>
+			<url>https://repository.cloudera.com/content/repositories/releases</url>
+			<name>CDH Releases Repository</name>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>cdh.snapshots.repo</id>
+			<url>https://repository.cloudera.com/content/repositories/snapshots</url>
+			<name>CDH Snapshots Repository</name>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>cloudera.thirdparty.repo</id>
+			<url>https://repository.cloudera.com/content/repositories/third-party</url>
+			<name>Cloudera Third Party Repository</name>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>cloudera.thirdparty.repo</id>
+			<url>https://repository.cloudera.com/content/repositories/third-party</url>
+			<name>Cloudera Third Party Repository</name>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>cloudera.snapshot.repo</id>
+			<url>https://repository.cloudera.com/content/repositories/snapshots</url>
+			<name>Cloudera Snapshot Repository</name>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+
+		<pluginRepository>
+			<id>dtrott</id>
+			<url>http://maven.davidtrott.com/repository</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	<dependencies>
+		<dependency>
+			<groupId>com.cqvip.vipcloud</groupId>
+			<artifactId>hadoop-core</artifactId>
+			<version>0.20.2-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-jdk14</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

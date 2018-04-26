@@ -1,0 +1,172 @@
+2018-04-26 11:16:08,860 INFO  [main] security.UserGroupInformation (UserGroupInformation.java:loginUserFromKeytab(812)) - Login successful for user vipcloud/node102.vipcloud@CQVIP.COM using keytab file d:/vipcloud.keytab
+2018-04-26 11:17:04,743 INFO  [main] security.UserGroupInformation (UserGroupInformation.java:loginUserFromKeytab(812)) - Login successful for user vipcloud/node102.vipcloud@CQVIP.COM using keytab file d:/vipcloud.keytab
+2018-04-26 11:19:22,682 INFO  [main] security.UserGroupInformation (UserGroupInformation.java:loginUserFromKeytab(812)) - Login successful for user vipcloud/node102.vipcloud@CQVIP.COM using keytab file d:/vipcloud.keytab
+2018-04-26 11:19:53,967 INFO  [main] security.UserGroupInformation (UserGroupInformation.java:loginUserFromKeytab(812)) - Login successful for user vipcloud/node102.vipcloud@CQVIP.COM using keytab file d:/vipcloud.keytab
+2018-04-26 11:19:54,009 INFO  [main] fs.FileSystem (HftpFileSystem.java:run(186)) - Couldn't get a delegation token from https://192.168.30.138:50470 using https.
+2018-04-26 11:19:54,817 WARN  [main] security.ShellBasedUnixGroupsMapping (ShellBasedUnixGroupsMapping.java:getUnixGroups(69)) - got exception trying to get groups for user vipcloud
+org.apache.hadoop.util.Shell$ExitCodeException: id: 'vipcloud': no such user
+
+	at org.apache.hadoop.util.Shell.runCommand(Shell.java:316)
+	at org.apache.hadoop.util.Shell.run(Shell.java:226)
+	at org.apache.hadoop.util.Shell$ShellCommandExecutor.execute(Shell.java:468)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:570)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:548)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getUnixGroups(ShellBasedUnixGroupsMapping.java:66)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getGroups(ShellBasedUnixGroupsMapping.java:43)
+	at org.apache.hadoop.security.Groups.getGroups(Groups.java:79)
+	at org.apache.hadoop.security.UserGroupInformation.getGroupNames(UserGroupInformation.java:1273)
+	at org.apache.hadoop.hdfs.HftpFileSystem.getEncodedUgiParameter(HftpFileSystem.java:224)
+	at org.apache.hadoop.hdfs.HftpFileSystem.access$100(HftpFileSystem.java:77)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.fetchList(HftpFileSystem.java:329)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:352)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:360)
+	at org.apache.hadoop.hdfs.HftpFileSystem.listStatus(HftpFileSystem.java:367)
+	at com.github.xiaofu.hdfs.demo.KerberosHdfsDemo.main(KerberosHdfsDemo.java:39)
+2018-04-26 11:23:07,752 INFO  [main] security.UserGroupInformation (UserGroupInformation.java:loginUserFromKeytab(812)) - Login successful for user vipcloud/node102.vipcloud@CQVIP.COM using keytab file d:/vipcloud.keytab
+2018-04-26 11:23:07,779 INFO  [main] fs.FileSystem (HftpFileSystem.java:run(186)) - Couldn't get a delegation token from https://192.168.30.138:50470 using https.
+2018-04-26 11:23:43,630 WARN  [main] security.ShellBasedUnixGroupsMapping (ShellBasedUnixGroupsMapping.java:getUnixGroups(69)) - got exception trying to get groups for user vipcloud
+org.apache.hadoop.util.Shell$ExitCodeException: id: 'vipcloud': no such user
+
+	at org.apache.hadoop.util.Shell.runCommand(Shell.java:316)
+	at org.apache.hadoop.util.Shell.run(Shell.java:226)
+	at org.apache.hadoop.util.Shell$ShellCommandExecutor.execute(Shell.java:468)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:570)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:548)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getUnixGroups(ShellBasedUnixGroupsMapping.java:66)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getGroups(ShellBasedUnixGroupsMapping.java:43)
+	at org.apache.hadoop.security.Groups.getGroups(Groups.java:79)
+	at org.apache.hadoop.security.UserGroupInformation.getGroupNames(UserGroupInformation.java:1273)
+	at org.apache.hadoop.hdfs.HftpFileSystem.getEncodedUgiParameter(HftpFileSystem.java:224)
+	at org.apache.hadoop.hdfs.HftpFileSystem.access$100(HftpFileSystem.java:77)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.fetchList(HftpFileSystem.java:329)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:352)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:360)
+	at org.apache.hadoop.hdfs.HftpFileSystem.listStatus(HftpFileSystem.java:367)
+	at com.github.xiaofu.hdfs.demo.KerberosHdfsDemo.main(KerberosHdfsDemo.java:39)
+2018-04-26 11:24:20,285 INFO  [main] security.UserGroupInformation (UserGroupInformation.java:loginUserFromKeytab(812)) - Login successful for user vipcloud/node102.vipcloud@CQVIP.COM using keytab file d:/vipcloud.keytab
+2018-04-26 11:24:20,307 INFO  [main] fs.FileSystem (HftpFileSystem.java:run(186)) - Couldn't get a delegation token from https://192.168.30.138:50470 using https.
+2018-04-26 11:24:20,365 WARN  [main] security.ShellBasedUnixGroupsMapping (ShellBasedUnixGroupsMapping.java:getUnixGroups(69)) - got exception trying to get groups for user vipcloud
+org.apache.hadoop.util.Shell$ExitCodeException: id: 'vipcloud': no such user
+
+	at org.apache.hadoop.util.Shell.runCommand(Shell.java:316)
+	at org.apache.hadoop.util.Shell.run(Shell.java:226)
+	at org.apache.hadoop.util.Shell$ShellCommandExecutor.execute(Shell.java:468)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:570)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:548)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getUnixGroups(ShellBasedUnixGroupsMapping.java:66)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getGroups(ShellBasedUnixGroupsMapping.java:43)
+	at org.apache.hadoop.security.Groups.getGroups(Groups.java:79)
+	at org.apache.hadoop.security.UserGroupInformation.getGroupNames(UserGroupInformation.java:1273)
+	at org.apache.hadoop.hdfs.HftpFileSystem.getEncodedUgiParameter(HftpFileSystem.java:224)
+	at org.apache.hadoop.hdfs.HftpFileSystem.access$100(HftpFileSystem.java:77)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.fetchList(HftpFileSystem.java:329)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:352)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:360)
+	at org.apache.hadoop.hdfs.HftpFileSystem.listStatus(HftpFileSystem.java:367)
+	at com.github.xiaofu.hdfs.demo.KerberosHdfsDemo.main(KerberosHdfsDemo.java:39)
+2018-04-26 11:24:45,147 INFO  [main] security.UserGroupInformation (UserGroupInformation.java:loginUserFromKeytab(812)) - Login successful for user vipcloud/node102.vipcloud@CQVIP.COM using keytab file d:/vipcloud.keytab
+2018-04-26 11:24:45,171 INFO  [main] fs.FileSystem (HftpFileSystem.java:run(186)) - Couldn't get a delegation token from https://192.168.30.82:50470 using https.
+2018-04-26 11:24:45,251 WARN  [main] security.ShellBasedUnixGroupsMapping (ShellBasedUnixGroupsMapping.java:getUnixGroups(69)) - got exception trying to get groups for user vipcloud
+org.apache.hadoop.util.Shell$ExitCodeException: id: 'vipcloud': no such user
+
+	at org.apache.hadoop.util.Shell.runCommand(Shell.java:316)
+	at org.apache.hadoop.util.Shell.run(Shell.java:226)
+	at org.apache.hadoop.util.Shell$ShellCommandExecutor.execute(Shell.java:468)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:570)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:548)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getUnixGroups(ShellBasedUnixGroupsMapping.java:66)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getGroups(ShellBasedUnixGroupsMapping.java:43)
+	at org.apache.hadoop.security.Groups.getGroups(Groups.java:79)
+	at org.apache.hadoop.security.UserGroupInformation.getGroupNames(UserGroupInformation.java:1273)
+	at org.apache.hadoop.hdfs.HftpFileSystem.getEncodedUgiParameter(HftpFileSystem.java:224)
+	at org.apache.hadoop.hdfs.HftpFileSystem.access$100(HftpFileSystem.java:77)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.fetchList(HftpFileSystem.java:329)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:352)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:360)
+	at org.apache.hadoop.hdfs.HftpFileSystem.listStatus(HftpFileSystem.java:367)
+	at com.github.xiaofu.hdfs.demo.KerberosHdfsDemo.main(KerberosHdfsDemo.java:39)
+2018-04-26 11:25:08,333 INFO  [main] security.UserGroupInformation (UserGroupInformation.java:loginUserFromKeytab(812)) - Login successful for user vipcloud/node102.vipcloud@CQVIP.COM using keytab file d:/vipcloud.keytab
+2018-04-26 11:25:08,365 INFO  [main] fs.FileSystem (HftpFileSystem.java:run(186)) - Couldn't get a delegation token from https://192.168.30.82:50470 using https.
+2018-04-26 11:25:10,969 WARN  [main] security.ShellBasedUnixGroupsMapping (ShellBasedUnixGroupsMapping.java:getUnixGroups(69)) - got exception trying to get groups for user vipcloud
+org.apache.hadoop.util.Shell$ExitCodeException: id: 'vipcloud': no such user
+
+	at org.apache.hadoop.util.Shell.runCommand(Shell.java:316)
+	at org.apache.hadoop.util.Shell.run(Shell.java:226)
+	at org.apache.hadoop.util.Shell$ShellCommandExecutor.execute(Shell.java:468)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:570)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:548)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getUnixGroups(ShellBasedUnixGroupsMapping.java:66)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getGroups(ShellBasedUnixGroupsMapping.java:43)
+	at org.apache.hadoop.security.Groups.getGroups(Groups.java:79)
+	at org.apache.hadoop.security.UserGroupInformation.getGroupNames(UserGroupInformation.java:1273)
+	at org.apache.hadoop.hdfs.HftpFileSystem.getEncodedUgiParameter(HftpFileSystem.java:224)
+	at org.apache.hadoop.hdfs.HftpFileSystem.access$100(HftpFileSystem.java:77)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.fetchList(HftpFileSystem.java:329)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:352)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:360)
+	at org.apache.hadoop.hdfs.HftpFileSystem.listStatus(HftpFileSystem.java:367)
+	at com.github.xiaofu.hdfs.demo.KerberosHdfsDemo.main(KerberosHdfsDemo.java:39)
+2018-04-26 11:29:13,705 INFO  [main] security.UserGroupInformation (UserGroupInformation.java:loginUserFromKeytab(812)) - Login successful for user vipcloud/node102.vipcloud@CQVIP.COM using keytab file d:/vipcloud.keytab
+2018-04-26 11:30:30,328 INFO  [main] fs.FileSystem (HftpFileSystem.java:run(186)) - Couldn't get a delegation token from https://192.168.30.82:50470 using https.
+2018-04-26 11:30:46,711 WARN  [main] security.ShellBasedUnixGroupsMapping (ShellBasedUnixGroupsMapping.java:getUnixGroups(69)) - got exception trying to get groups for user vipcloud
+org.apache.hadoop.util.Shell$ExitCodeException: id: 'vipcloud': no such user
+
+	at org.apache.hadoop.util.Shell.runCommand(Shell.java:316)
+	at org.apache.hadoop.util.Shell.run(Shell.java:226)
+	at org.apache.hadoop.util.Shell$ShellCommandExecutor.execute(Shell.java:468)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:570)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:548)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getUnixGroups(ShellBasedUnixGroupsMapping.java:66)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getGroups(ShellBasedUnixGroupsMapping.java:43)
+	at org.apache.hadoop.security.Groups.getGroups(Groups.java:79)
+	at org.apache.hadoop.security.UserGroupInformation.getGroupNames(UserGroupInformation.java:1273)
+	at org.apache.hadoop.hdfs.HftpFileSystem.getEncodedUgiParameter(HftpFileSystem.java:224)
+	at org.apache.hadoop.hdfs.HftpFileSystem.access$100(HftpFileSystem.java:77)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.fetchList(HftpFileSystem.java:329)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:352)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:360)
+	at org.apache.hadoop.hdfs.HftpFileSystem.listStatus(HftpFileSystem.java:367)
+	at com.github.xiaofu.hdfs.demo.KerberosHdfsDemo.main(KerberosHdfsDemo.java:39)
+2018-04-26 11:30:56,643 INFO  [main] security.UserGroupInformation (UserGroupInformation.java:loginUserFromKeytab(812)) - Login successful for user vipcloud/node102.vipcloud@CQVIP.COM using keytab file d:/vipcloud.keytab
+2018-04-26 11:35:35,813 INFO  [main] security.UserGroupInformation (UserGroupInformation.java:loginUserFromKeytab(812)) - Login successful for user vipcloud/node102.vipcloud@CQVIP.COM using keytab file d:/vipcloud.keytab
+2018-04-26 11:35:35,837 INFO  [main] fs.FileSystem (HftpFileSystem.java:run(186)) - Couldn't get a delegation token from https://192.168.30.82:50470 using https.
+2018-04-26 11:35:35,913 WARN  [main] security.ShellBasedUnixGroupsMapping (ShellBasedUnixGroupsMapping.java:getUnixGroups(69)) - got exception trying to get groups for user vipcloud
+org.apache.hadoop.util.Shell$ExitCodeException: id: 'vipcloud': no such user
+
+	at org.apache.hadoop.util.Shell.runCommand(Shell.java:316)
+	at org.apache.hadoop.util.Shell.run(Shell.java:226)
+	at org.apache.hadoop.util.Shell$ShellCommandExecutor.execute(Shell.java:468)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:570)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:548)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getUnixGroups(ShellBasedUnixGroupsMapping.java:66)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getGroups(ShellBasedUnixGroupsMapping.java:43)
+	at org.apache.hadoop.security.Groups.getGroups(Groups.java:79)
+	at org.apache.hadoop.security.UserGroupInformation.getGroupNames(UserGroupInformation.java:1273)
+	at org.apache.hadoop.hdfs.HftpFileSystem.getEncodedUgiParameter(HftpFileSystem.java:224)
+	at org.apache.hadoop.hdfs.HftpFileSystem.access$100(HftpFileSystem.java:77)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.fetchList(HftpFileSystem.java:329)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:352)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:360)
+	at org.apache.hadoop.hdfs.HftpFileSystem.listStatus(HftpFileSystem.java:367)
+	at com.github.xiaofu.hdfs.demo.KerberosHdfsDemo.main(KerberosHdfsDemo.java:39)
+2018-04-26 11:37:23,261 INFO  [main] security.UserGroupInformation (UserGroupInformation.java:loginUserFromKeytab(812)) - Login successful for user vipcloud/node102.vipcloud@CQVIP.COM using keytab file d:/vipcloud.keytab
+2018-04-26 11:37:23,284 INFO  [main] fs.FileSystem (HftpFileSystem.java:run(186)) - Couldn't get a delegation token from https://192.168.30.82:50470 using https.
+2018-04-26 11:37:23,352 WARN  [main] security.ShellBasedUnixGroupsMapping (ShellBasedUnixGroupsMapping.java:getUnixGroups(69)) - got exception trying to get groups for user vipcloud
+org.apache.hadoop.util.Shell$ExitCodeException: id: 'vipcloud': no such user
+
+	at org.apache.hadoop.util.Shell.runCommand(Shell.java:316)
+	at org.apache.hadoop.util.Shell.run(Shell.java:226)
+	at org.apache.hadoop.util.Shell$ShellCommandExecutor.execute(Shell.java:468)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:570)
+	at org.apache.hadoop.util.Shell.execCommand(Shell.java:548)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getUnixGroups(ShellBasedUnixGroupsMapping.java:66)
+	at org.apache.hadoop.security.ShellBasedUnixGroupsMapping.getGroups(ShellBasedUnixGroupsMapping.java:43)
+	at org.apache.hadoop.security.Groups.getGroups(Groups.java:79)
+	at org.apache.hadoop.security.UserGroupInformation.getGroupNames(UserGroupInformation.java:1273)
+	at org.apache.hadoop.hdfs.HftpFileSystem.getEncodedUgiParameter(HftpFileSystem.java:224)
+	at org.apache.hadoop.hdfs.HftpFileSystem.access$100(HftpFileSystem.java:77)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.fetchList(HftpFileSystem.java:329)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:352)
+	at org.apache.hadoop.hdfs.HftpFileSystem$LsParser.listStatus(HftpFileSystem.java:360)
+	at org.apache.hadoop.hdfs.HftpFileSystem.listStatus(HftpFileSystem.java:367)
+	at com.github.xiaofu.hdfs.demo.KerberosHdfsDemo.main(KerberosHdfsDemo.java:39)
