@@ -7,9 +7,11 @@
  */
 package com.github.xiaofu.demo.hadoop;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -58,18 +60,29 @@ public class KerberosHdfsDemo
 	{
 		 
 		  	System.setProperty("java.security.krb5.conf", krb5Conf);
-			//System.setProperty("sun.security.krb5.debug","true");
+			System.setProperty("sun.security.krb5.debug","true");
 			Configuration conf = new Configuration();
-			
 	         conf.set("hadoop.security.authentication", "kerberos");
+	         conf.set("fs.defaultFS", "hftp://hadoop-auth-01:50070");
 	         UserGroupInformation.setConfiguration(conf);
-	         UserGroupInformation.loginUserFromKeytab("test","d:/test.keytab");
+	         UserGroupInformation.loginUserFromKeytab("vipcloud/node102.vipcloud@CQVIP.COM","d:/vipcloud.keytab");
 	         try {
 	                 FileSystem fs = FileSystem.get(conf);
-	                 FileStatus[] fsStatus = fs.listStatus(new Path("/"));
-	                 for(int i = 0; i < fsStatus.length; i++){
-	                 System.out.println(fsStatus[i].getPath().toString());
+	                 FSDataInputStream input = fs.open(new Path("/user/fulh/zookeeper.out"));
+	                 FileOutputStream output=new FileOutputStream("zookeeer.out");
+	                 byte buf[]=new byte[2048];
+	                 int count=input.read(buf);
+	                 while(count!=-1)
+	                 {
+	                	 output.write(buf, 0, count);
+	                	 count=input.read(buf);
 	                 }
+	                 output.close();
+	                 input.close();
+	                /* FileStatus[] fsStatus= fs.listStatus(new Path("/"));
+	                 for(int i = 0; i < fsStatus.length; i++){
+	                 System.out.println(fsStatus[i].getPath().toString());}*/
+	                 
 	         } catch (IOException e) {
 	                 e.printStackTrace();
 	         }
