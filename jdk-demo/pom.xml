@@ -118,12 +118,8 @@
 		</dependency>
 		<!-- need jzmq native lib and zeromq native lib ,must jzmq version and 
 			zeromq version -->
-		<dependency>
-			<groupId>org.zeromq</groupId>
-			<artifactId>jzmq</artifactId>
-			<version>${jzmq.version}</version>
-			<scope>compile</scope>
-		</dependency>
+		<!-- <dependency> <groupId>org.zeromq</groupId> <artifactId>jzmq</artifactId> 
+			<version>${jzmq.version}</version> <scope>compile</scope> </dependency> -->
 		<!-- spark -->
 		<dependency>
 			<groupId>com.cloudera.livy</groupId>
@@ -135,7 +131,11 @@
 			<artifactId>zookeeper</artifactId>
 			<version>3.4.5-cdh5.10.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.zeromq</groupId>
+			<artifactId>jeromq</artifactId>
+			<version>0.4.3</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

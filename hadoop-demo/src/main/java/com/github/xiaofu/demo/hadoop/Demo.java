@@ -12,6 +12,8 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -35,7 +37,6 @@ import org.apache.hadoop.fs.FsShell;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.permission.FsCreateModes;
 import org.apache.hadoop.fs.permission.FsPermission;
-
 import org.apache.hadoop.hdfs.DFSClient;
 import org.apache.hadoop.hdfs.DFSConfigKeys;
 import org.apache.hadoop.hdfs.DFSOutputStream;
@@ -62,15 +63,17 @@ import org.apache.hadoop.yarn.util.ConverterUtils;
  
  
 
+
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 public class Demo
 {
-	/*static
+	static
 	{
 		System.setProperty("HADOOP_USER_NAME", "vipcloud");
-	}*/
+	}
 
 	private static void fileRead() throws IllegalArgumentException, IOException
 	{
@@ -148,68 +151,11 @@ public class Demo
 	public static void main(String[] args) throws Exception
 	{
 		 
-		writeTest(args);
-		/*ExecutorService pools=Executors.newFixedThreadPool(10);
-		Future<?> futures=null;
-		for (int i = 0; i < 10; i++)
-		{
-			final int j=i;
-			pools.submit(new Runnable()
-			{
-				
-				@Override
-				public void run()
-				{
-					int k=0;
-					FSDataOutputStream outputStream= null;
-					while(true)
-					{
-						Path path=new Path("/temp/path_"+j+"_"+k);
-						try
-						{
-							outputStream= fs.create(path);
-							for (int j = 0; j < 10; j++)
-							{
-								outputStream.write(124);
-							}
-						}
-						catch (IOException e)
-						{
-							 
-							e.printStackTrace();
-						}
-						finally
-						{
-							IOUtils.closeQuietly(outputStream);
-							try
-							{
-								fs.delete(path,false);
-							}
-							catch (IOException e)
-							{
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-						k++;
-					}
-				}
-			});
-		}
-		pools.shutdown();
-		Thread.currentThread().join();*/
-		/*Path path = new Path(
-				"/temp/t9");
-		//fs.listStatus(path);
-		fs.create(path);*/
-		//fs.mkdirs(path);
-		//fs.delete(path,true);
-/*		
-		FileSystem fs=FileSystem.get(conf);
-		//FileUtil.copy(fs, new Path("/vipcloud/journal/tmp_cqu_user_log/2017-08-27/hbase"), fs, new Path("/user/test"), false, conf);
-		fs.delete(new Path("/user/test/2017-08-27"), true);
+		Configuration conf=new HdfsConfiguration();
+		final DistributedFileSystem fs = (DistributedFileSystem) FileSystem
+				.get(conf);
 		FsShell shell=new FsShell(conf);
-		shell.run(new String[]{"-cp","/vipcloud/journal/tmp_cqu_user_log/2017-08-27/hbase/*","/user/test"});*/
+		shell.run(new String[]{"-setfacl","--set","user:fulh:r--,group:fulh:r--,other::---","/user/root"});
 	}
 	 
 }
