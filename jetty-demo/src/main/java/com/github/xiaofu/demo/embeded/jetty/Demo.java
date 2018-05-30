@@ -2,8 +2,8 @@ package com.github.xiaofu.demo.embeded.jetty;
 
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.handler.ContextHandlerCollection;
-import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.webapp.WebAppContext;
 
@@ -56,13 +56,11 @@ public class Demo {
 	 * @throws Exception
 	 */
 	public void initServer() throws Exception {
-		server = new Server();
+		server = new Server(createThreadPool());
 		// add connector
-		listener = createConnector();
+		listener = createConnector(server);
 		server.addConnector(listener);
 		server.setStopAtShutdown(true);
-		// set threadpool
-		server.setThreadPool(createThreadPool());
 	}
 
 	/**
@@ -72,17 +70,12 @@ public class Demo {
 	 * @return
 	 * @throws Exception
 	 */
-	private Connector createConnector() {
-		SelectChannelConnector connector = new SelectChannelConnector();
+	private Connector createConnector(Server server) {
+		ServerConnector connector = new ServerConnector(server);
 		connector.setHost("localhost");
 		connector.setPort(port);
-		connector.setAcceptors(2);
-		connector.setMaxIdleTime(30000);
-		connector.setLowResourceMaxIdleTime(5000);
-		connector.setLowResourcesConnections(5000);
 		connector.setAcceptQueueSize(128);
-		connector.setResolveNames(false);
-		connector.setUseDirectBuffers(false);
+		
 		return connector;
 	}
 

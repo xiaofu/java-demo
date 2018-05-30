@@ -9,7 +9,7 @@
 	<artifactId>jetty-demo</artifactId>
 	<properties>
 		<cxf.version>3.0.5</cxf.version>
-		<jetty.version>8.2.0.v20160908</jetty.version>
+		<jetty.version>9.2.24.v20180105</jetty.version>
 	</properties>
 	<dependencies>
 
