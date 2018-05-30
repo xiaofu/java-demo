@@ -1,14 +1,13 @@
 package com.github.xiaofu.demo.embeded.jetty;
 
-import org.mortbay.jetty.Connector;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.deployer.ContextDeployer;
-import org.mortbay.jetty.handler.ContextHandlerCollection;
-import org.mortbay.jetty.nio.SelectChannelConnector;
-import org.mortbay.jetty.servlet.Context;
-import org.mortbay.jetty.servlet.ServletHolder;
-import org.mortbay.thread.QueuedThreadPool;
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.ContextHandlerCollection;
+import org.eclipse.jetty.server.nio.SelectChannelConnector;
+import org.eclipse.jetty.util.thread.QueuedThreadPool;
+import org.eclipse.jetty.webapp.WebAppContext;
 
+ 
 /**
  * 
  */
@@ -17,7 +16,7 @@ import org.mortbay.thread.QueuedThreadPool;
  * @author xiaofu
  * 
  */
-public class CxfWithJety6 {
+public class Demo {
 	private static int port = 9200;// default port
 
 	private Server server;
@@ -89,7 +88,6 @@ public class CxfWithJety6 {
 
 	private QueuedThreadPool createThreadPool() {
 		QueuedThreadPool threadPool = new QueuedThreadPool();
-		threadPool.setLowThreads(20);
 		threadPool.setMaxThreads(200);
 		threadPool.setMinThreads(10);
 		return threadPool;
@@ -103,12 +101,12 @@ public class CxfWithJety6 {
 		 
 		// add servlet
 		ContextHandlerCollection contexts = new ContextHandlerCollection();
-		ContextDeployer deployer = new ContextDeployer();
+		WebAppContext deployer = new WebAppContext();
+
 		//配置目录只会查找XML文件，这里放context（每一个站点配置的地方），WAR包或WEB目录由XML指定，这里测试是放在一起的
-		deployer.setConfigurationDir("E:\\open-source-projects\\github\\java-demo\\jetty-demo\\webapp");
-		deployer.setContexts(contexts);
-	 
-		server.addLifeCycle(deployer);
+		//deployer.setConfigurationDir("E:\\open-source-projects\\github\\java-demo\\jetty-demo\\webapp");
+		//deployer.setContexts(contexts);
+		//server.addLifeCycle(deployer);
 		server.setHandler(contexts);
 		server.start();
 		server.join();
@@ -121,7 +119,7 @@ public class CxfWithJety6 {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		new CxfWithJety6().startServer();
+		new Demo().startServer();
 	}
 
 }

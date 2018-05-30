@@ -9,49 +9,24 @@
 	<artifactId>jetty-demo</artifactId>
 	<properties>
 		<cxf.version>3.0.5</cxf.version>
-		<jetty.version>6.1.26</jetty.version>
+		<jetty.version>8.2.0.v20160908</jetty.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jetty-embedded</artifactId>
-			<version>${jetty.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jetty</artifactId>
-			<version>${jetty.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jetty-util</artifactId>
-			<version>${jetty.version}</version>
-		</dependency>
-		<!-- cxf begin -->
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http</artifactId>
-		</dependency>
 
 		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-rs-extension-providers</artifactId>
-			<version>${cxf.version}</version>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>${jetty.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-rs-extension-search</artifactId>
-			<version>${cxf.version}</version>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlet</artifactId>
+			<version>${jetty.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.apache.cxf</groupId> <artifactId>cxf-rt-bindings-soap</artifactId> 
-			<version>${cxf.version}</version> </dependency> <dependency> <groupId>org.apache.cxf</groupId> 
-			<artifactId>cxf-rt-frontend-jaxws</artifactId> <version>${cxf.version}</version> 
-			</dependency> <dependency> <groupId>org.apache.cxf</groupId> <artifactId>cxf-rt-transports-http</artifactId> 
-			<version>${cxf.version}</version> </dependency> -->
-		<!-- cxf end -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
 	</dependencies>
 </project>
