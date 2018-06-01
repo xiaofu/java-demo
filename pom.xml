@@ -10,7 +10,7 @@
 		<!-- <java.version>1.7</java.version> -->
 		<gson.version>2.2.4-my1.0.0</gson.version>
 		<linq.version>0.4</linq.version>
-		<netty.version>3.2.10.Final</netty.version>
+		<netty.version>4.1.25.Final</netty.version>
 		<cxf.version>2.7.14</cxf.version>
 		<spring.version>4.0.6.RELEASE</spring.version>
 		<jetty.version>8.1.15.v20140411</jetty.version>
@@ -33,7 +33,6 @@
 	<modules>
 		<module>linq-demo</module>
 		<module>hadoop-demo</module>
-		<module>netty-demo</module>
 		<module>classloader-demo</module>
 		<module>plugin-service-demo</module>
 		<module>plugin-service-impl-demo</module>
@@ -166,8 +165,8 @@
 			</dependency>
 			<!-- netty -->
 			<dependency>
-				<groupId>org.jboss.netty</groupId>
-				<artifactId>netty</artifactId>
+				<groupId>io.netty</groupId>
+    		<artifactId>netty-all</artifactId>
 				<version>${netty.version}</version>
 			</dependency>
 			<!--parquet, can only use this one -->
