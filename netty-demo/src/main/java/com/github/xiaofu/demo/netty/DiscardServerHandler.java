@@ -1,28 +1,21 @@
 package com.github.xiaofu.demo.netty;
-import org.jboss.netty.channel.Channel;
-import org.jboss.netty.channel.ChannelHandlerContext;
-import org.jboss.netty.channel.ChannelStateEvent;
-import org.jboss.netty.channel.ExceptionEvent;
-import org.jboss.netty.channel.MessageEvent;
-import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
-
-public class DiscardServerHandler extends SimpleChannelUpstreamHandler  {    
-    @Override    
-    public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {    
-       System.out.println("服务器接收1："+e.getMessage());    
-    }    
-     
-
-   @Override    
-    public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) {    
-        e.getChannel().write("Reply");    
-    }  
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
 
-    @Override   
-    public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {   
-    e.getCause().printStackTrace();   
-    Channel ch = e.getChannel();   
-    ch.close();   
-    }   
+public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
+
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) { // (2)
+        // Discard the received data silently.
+        ((ByteBuf) msg).release(); // (3)
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) { // (4)
+        // Close the connection when an exception is raised.
+        cause.printStackTrace();
+        ctx.close();
+    }
 }  
