@@ -20,13 +20,12 @@
 			<artifactId>netty-all</artifactId>
 			<version>${netty.version}</version>
 		</dependency>
-		<!--  解决另一个类文件的问题 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.eclipse.jetty.aggregate</groupId>
 			<artifactId>jetty-all</artifactId>
 			<version>9.4.7.v20170914</version>
 			<type>pom</type>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -73,6 +72,9 @@
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+					<excludes>
+						**/JerseyBasedJettyDemo.java
+						</excludes>
 				</configuration>
 			</plugin>
 		</plugins>
