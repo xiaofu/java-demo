@@ -5,8 +5,8 @@
 	<artifactId>jersey-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<jersey.version>2.27</jersey.version>
-		<java.version>1.8</java.version>
+		<jersey.version>2.25</jersey.version>
+		<java.version>1.7</java.version>
 		<netty.version>4.1.30.Final</netty.version>
 	</properties>
 	<dependencies>
@@ -41,11 +41,11 @@
 			<artifactId>jersey-server</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.glassfish.jersey.inject</groupId>
 			<artifactId>jersey-hk2</artifactId>
 			<version>${jersey.version}</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-servlet</artifactId>
@@ -68,13 +68,14 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 					<excludes>
+						<exclude>
 						**/JerseyBasedJettyDemo.java
-						</excludes>
+						</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 		</plugins>
