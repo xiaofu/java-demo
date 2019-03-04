@@ -48,26 +48,6 @@
 		<module>dbcp-demo</module>
 	</modules>
 <repositories>
-		 <repository>
-      <id>3rdparty</id>
-      <name>3rdparty</name>
-      <url>http://192.168.30.55:8081/nexus/content/repositories/thirdparty/</url>
-    </repository>
-    <repository>
-      <id>releases</id>
-      <name>releases</name>
-      <url>http://192.168.30.55:8081/nexus/content/repositories/releases/</url>
-    </repository>
-    <repository>
-      <id>snapshots</id>
-      <name>Snapshots</name>
-      <url>http://192.168.30.55:8081/nexus/content/repositories/snapshots/</url>
-    </repository>
-    <repository>
-      <id>VipRepositoryGroup</id>
-      <name>Snapshots</name>
-      <url>http://192.168.30.55:8081/nexus/content/groups/VipRepositoryGroup/</url>
-    </repository>
 		<repository>
 			<id>cdh.rcs.releases.repo</id>
 			<url>https://repository.cloudera.com/content/groups/cdh-releases-rcs</url>
