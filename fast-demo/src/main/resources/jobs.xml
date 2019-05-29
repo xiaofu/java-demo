@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<job-scheduling-data
+	xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData http://www.quartz-scheduler.org/xml/job_scheduling_data_1_8.xsd"
+	version="1.8">
+	<schedule>
+		<job>
+			<name>BlockedScheduledJob</name>
+			<group>BlockedScheduledJob</group>
+			<description>every 10 seconds</description>
+			<job-class>com.cqvip.runwork.fast.demo.quartz.BlockedScheduledJob</job-class>
+			<job-data-map>
+				<entry>
+					<key>nn1</key>
+					<value>http://hadoop2x-01:50070/jmx</value>
+				</entry>
+				<entry>
+					<key>nn2</key>
+					<value>http://hadoop2x-02:50070/jmx</value>
+				</entry>
+				<entry>
+					<key>state</key>
+					<value>Hadoop:service=NameNode,name=NameNodeStatus</value>
+				</entry>
+				<entry>
+					<key>liveNodes</key>
+					<value>Hadoop:service=NameNode,name=NameNodeInfo::LiveNodes</value>
+				</entry>
+				<entry>
+					<key>FSNamesystemState</key>
+					<value>Hadoop:service=NameNode,name=FSNamesystemState</value>
+				</entry>
+			</job-data-map>
+		</job>
+		<trigger>
+			<cron>
+				<name>BlockedScheduledJob_trigger</name>
+				<group>BlockedScheduledJob_trigger</group>
+				<job-name>BlockedScheduledJob</job-name>
+				<job-group>BlockedScheduledJob</job-group>
+				<!--7:00 every day -->
+				<cron-expression>0/10 * * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</schedule>
+</job-scheduling-data>

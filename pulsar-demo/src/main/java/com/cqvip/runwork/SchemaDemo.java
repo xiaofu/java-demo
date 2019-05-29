@@ -1,19 +1,13 @@
 package com.cqvip.runwork;
 
-import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.pulsar.client.api.Consumer;
 import org.apache.pulsar.client.api.Message;
-import org.apache.pulsar.client.api.MessageId;
 import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.PulsarClientException;
 import org.apache.pulsar.client.api.SubscriptionType;
-import org.apache.pulsar.client.impl.conf.ReaderConfigurationData;
-import org.apache.pulsar.client.impl.schema.JSONSchema;
-import org.apache.pulsar.common.api.EncryptionContext;
 
 public class SchemaDemo
 {
@@ -25,9 +19,13 @@ public class SchemaDemo
 	public static void main(String[] args) throws PulsarClientException
 	{
 		
-		PulsarClient client = PulsarClient.builder()
-		        .serviceUrl("pulsar://hadoop-auth-01:6650")
-		        .build();
+		
+				PulsarClient client = PulsarClient.builder()
+			    .serviceUrl("pulsar+ssl://hadoop-auth-01:6651/")
+			    //.tlsTrustCertsFilePath("/path/to/ca.cert.pem")
+			    .enableTlsHostnameVerification(false) // false by default, in any case
+			    .allowTlsInsecureConnection(false) // false by default, in any case
+			    .build();
 
 		final Producer<byte[]> producer = client.newProducer()
 		        .topic("test-topic").enableBatching(false)

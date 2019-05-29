@@ -59,11 +59,8 @@ import org.apache.hadoop.yarn.api.records.QueueInfo;
 import org.apache.hadoop.yarn.client.api.YarnClient;
 import org.apache.hadoop.yarn.conf.YarnConfiguration;
 import org.apache.hadoop.yarn.exceptions.YarnException;
+import org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore;
 import org.apache.hadoop.yarn.util.ConverterUtils;
- 
- 
-
-
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -77,9 +74,8 @@ public class Demo
 
 	private static void fileRead() throws IllegalArgumentException, IOException
 	{
-		
-		Path path = new Path(
-				"/temp/libvipudf.so");
+
+		Path path = new Path("/temp/libvipudf.so");
 		DistributedFileSystem fs = (DistributedFileSystem) FileSystem
 				.get(new Configuration());
 
@@ -87,7 +83,7 @@ public class Demo
 
 		LocatedBlocks locateBlocks = client.getLocatedBlocks(path.toUri()
 				.toString(), 0);
-		 
+
 		for (BlockLocation blockLocation : fs.getFileBlockLocations(path, 0,
 				fs.getLength(path)))
 		{
@@ -115,34 +111,34 @@ public class Demo
 		}
 	}
 
- 
 	private static void favorNodes() throws IOException
 	{
-		Configuration conf=new Configuration();
+		Configuration conf = new Configuration();
 		conf.set("cqvip.dfs.favored.nodes", "vdatanode2:50010,vdatanode1:50010");
-		DistributedFileSystem fs = (DistributedFileSystem) FileSystem
-				.get(conf);
-		FSDataOutputStream outputstream= fs.create(new Path("/user/test/t1"));
+		DistributedFileSystem fs = (DistributedFileSystem) FileSystem.get(conf);
+		FSDataOutputStream outputstream = fs.create(new Path("/user/test/t1"));
 		outputstream.write(2);
 		FileSystem.closeAll();
 	}
-	
-	private static void writeTest(String[] args) throws IOException, InterruptedException
+
+	private static void writeTest(String[] args) throws IOException,
+			InterruptedException
 	{
-		Configuration conf=new HdfsConfiguration();
-		conf.setLong("dfs.client.socket-timeout", 5*60*1000);
+		Configuration conf = new HdfsConfiguration();
+		conf.setLong("dfs.client.socket-timeout", 5 * 60 * 1000);
 		final DistributedFileSystem fs = (DistributedFileSystem) FileSystem
 				.get(conf);
-		FSDataOutputStream outStream= fs.create(new Path(args[0]));
-		BufferedInputStream inputStream=new BufferedInputStream(new FileInputStream(args[1]));
-		byte[] bytes=new byte[8192];
-		int counts=0;
-		counts=inputStream.read(bytes);
-		while(counts!=-1)
+		FSDataOutputStream outStream = fs.create(new Path(args[0]));
+		BufferedInputStream inputStream = new BufferedInputStream(
+				new FileInputStream(args[1]));
+		byte[] bytes = new byte[8192];
+		int counts = 0;
+		counts = inputStream.read(bytes);
+		while (counts != -1)
 		{
-			outStream.write(bytes,0,counts);
-			counts=inputStream.read(bytes);
-			//Thread.currentThread().sleep(100);
+			outStream.write(bytes, 0, counts);
+			counts = inputStream.read(bytes);
+			// Thread.currentThread().sleep(100);
 		}
 		inputStream.close();
 		outStream.close();
@@ -150,12 +146,10 @@ public class Demo
 
 	public static void main(String[] args) throws Exception
 	{
-		 
-		Configuration conf=new HdfsConfiguration();
-		final DistributedFileSystem fs = (DistributedFileSystem) FileSystem
-				.get(conf);
-		FsShell shell=new FsShell(conf);
-		shell.run(new String[]{"-setfacl","--set","user:fulh:r--,group:fulh:r--,other::---","/user/root"});
-	}
 	 
+		FileSystem fs = FileSystem.get(new Configuration());
+		 fs.create(new Path("/user/flh/test"));
+		 fs.close();
+	}
+
 }

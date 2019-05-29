@@ -3,14 +3,25 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.cqvip.runwork</groupId>
-	<artifactId>pulsar-demo</artifactId>
+	<artifactId>redis-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.pulsar</groupId>
-			<artifactId>pulsar-client</artifactId>
-			<version>2.3.0</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.6</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -22,17 +33,10 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.25</version>
 		</dependency>
+				<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>14.0</version>
+		</dependency>
 	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>

@@ -24,4 +24,5 @@ public class AtomicIntegerFieldUpdaterTest
 	    	AtomicIntegerFieldUpdaterTest demo = new AtomicIntegerFieldUpdaterTest();
 	        demo.doit();
 	    }
+	    
 }

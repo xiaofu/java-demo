@@ -10,7 +10,7 @@
 
 	<artifactId>hadoop-demo</artifactId>
 	<properties>
-		<hadoop.version>2.6.0-cdh5.10.0-cqvip</hadoop.version>
+		<hadoop.version>2.6.0-cdh5.10.0</hadoop.version>
 	 	<java.version>1.7</java.version>
 	</properties>
 	<build>
@@ -74,7 +74,11 @@
 
 	</build>
 	<dependencies>
-
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-yarn-server-resourcemanager</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-client</artifactId>
@@ -86,11 +90,6 @@
 			<version>1.1.0</version>
 			<classifier>hadoop2</classifier>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.hadoop.gplcompression</groupId>
-			<artifactId>hadoop-lzo</artifactId>
-			<version>0.4.15</version>
 		</dependency>
 		 
 	</dependencies>
