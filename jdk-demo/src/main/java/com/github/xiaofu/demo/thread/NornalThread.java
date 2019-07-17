@@ -7,6 +7,8 @@
  */
 package com.github.xiaofu.demo.thread;
 
+import java.util.concurrent.Semaphore;
+
 /**
  * 
  * 只是想说明的一问题是子线程抛出异常，不影响主线程
@@ -22,6 +24,7 @@ package com.github.xiaofu.demo.thread;
 public class NornalThread
 {
 
+	static Semaphore sem=new Semaphore(1);
 	/**
 	 * @author fulaihua 2014-9-21 上午1:13:36
 	 * @param args
@@ -29,19 +32,7 @@ public class NornalThread
 	 */
 	public static void main(String[] args) throws InterruptedException
 	{
-		try
-		{
-			MyThread thread = new MyThread();
-			thread.start();
-			Thread.sleep(2000);
-			thread.interrupt();// 请求中断MyThread线程
-		}
-		catch (InterruptedException e)
-		{
-			System.out.println("main catch");
-			e.printStackTrace();
-		}
-		System.out.println("end!");
+		sem.release(10);
 
 	}
 
