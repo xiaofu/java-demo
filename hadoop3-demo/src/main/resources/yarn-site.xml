@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configuration>
+	<!-- ========= modify begin ============ -->
+	<!-- rm config -->
+	<property>
+		<name>yarn.resourcemanager.ha.automatic-failover.zk-base-path</name>
+		<value>/yarn-testcluster-leader-election</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.cluster-id</name>
+		<value>yarn-testcluster-cluster</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.zk-address</name>
+		<value>hadoop-auth-01,hadoop-auth-02,hadoop-auth-03</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.zk-timeout-ms</name>
+		<value>20000</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.hostname.rm1</name>
+		<value>hadoop-auth-01</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.hostname.rm2</name>
+		<value>hadoop-auth-02</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.ha.rm-ids</name>
+		<value>rm1,rm2</value>
+	</property>
+	<!-- ========= don't need config begin========== -->
+	<property>
+		<name>yarn.resourcemanager.address.rm1</name>
+		<value>${yarn.resourcemanager.hostname.rm1}:8032</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.scheduler.address.rm1</name>
+		<value>${yarn.resourcemanager.hostname.rm1}:8030</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.resource-tracker.address.rm1</name>
+		<value>${yarn.resourcemanager.hostname.rm1}:8031</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.webapp.address.rm1</name>
+		<value>${yarn.resourcemanager.hostname.rm1}:8088</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.address.rm2</name>
+		<value>${yarn.resourcemanager.hostname.rm2}:8032</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.scheduler.address.rm2</name>
+		<value>${yarn.resourcemanager.hostname.rm2}:8030</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.resource-tracker.address.rm2</name>
+		<value>${yarn.resourcemanager.hostname.rm2}:8031</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.webapp.address.rm2</name>
+		<value>${yarn.resourcemanager.hostname.rm2}:8088</value>
+	</property>
+	<!-- ========= don't need config end========== -->
+	<property>
+		<name>yarn.resourcemanager.nodes.include-path</name>
+		<value></value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.nodes.exclude-path</name>
+		<value></value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.max-completed-applications</name>
+		<value>5000</value>
+		<description>default is 10000, The maximum number of completed
+			applications RM keeps.
+		</description>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.scheduler.monitor.enable</name>
+		<value>false</value>
+		<description> Enable a set of periodic monitors (specified in
+			yarn.resourcemanager.scheduler.monitor.policies) that affect the
+			scheduler.
+		</description>
+	</property>
+	<!-- modify schduler config -->
+	<property>
+		<name>yarn.scheduler.minimum-allocation-mb</name>
+		<value>2048</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.maximum-allocation-mb</name>
+		<value>40960</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.minimum-allocation-vcores</name>
+		<value>1</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.maximum-allocation-vcores</name>
+		<value>4</value>
+	</property>
+	<!-- modify nodemanager config -->
+	<property>
+		<name>yarn.nodemanager.recovery.enabled</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>yarn.nodemanager.recovery.dir</name>
+		<value>${hadoop.tmp.dir}/data/data1/yarn-nm-recovery</value>
+	</property>
+	<property>
+		<name>yarn.nodemanager.local-dirs</name>
+		<value>${hadoop.tmp.dir}/data/data1/yarn/local</value>
+	</property>
+	<property>
+		<name>yarn.nodemanager.log-dirs</name>
+		<value>${hadoop.tmp.dir}/data/data1/yarn/log</value>
+	</property>
+	<property>
+		<name>yarn.nodemanager.resource.memory-mb</name>
+		<value>70000</value>
+	</property>
+	<property>
+		<name>yarn.nodemanager.pmem-check-enabled</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>yarn.nodemanager.vmem-check-enabled</name>
+		<value>false</value>
+	</property>
+	<property>
+		<name>yarn.nodemanager.vmem-pmem-ratio</name>
+		<value>2.1</value>
+	</property>
+	<property>
+		<name>yarn.nodemanager.resource.cpu-vcores</name>
+		<value>45</value>
+		<description> Number of vcores that can be allocated for containers.
+			This is used by the RM scheduler when allocating resources for
+			containers. This is not used to limit the number of physical cores
+			used by YARN containers.
+		</description>
+	</property>
+	<property>
+		<name>yarn.nodemanager.disk-health-checker.min-healthy-disks</name>
+		<value>0.25</value>
+		<description>The minimum fraction of number of disks to be healthy for
+			the nodemanager to launch new containers. This correspond to both
+			yarn-nodemanager.local-dirs and yarn.nodemanager.log-dirs. i.e. If
+			there are less number of healthy local-dirs (or log-dirs) available,
+			then new containers will not be launched on this node.
+		</description>
+	</property>
+	<property>
+		<name>yarn.nodemanager.disk-health-checker.max-disk-utilization-per-disk-percentage
+		</name>
+		<value>98.0</value>
+		<description> The maximum percentage of disk space utilization allowed
+			after which a disk is marked as bad. Values can range from 0.0 to
+			100.0. If the value is greater than or equal to 100, the nodemanager
+			will check for full disk. This applies to yarn-nodemanager.local-dirs
+			and yarn.nodemanager.log-dirs.
+		</description>
+	</property>
+	<property>
+		<name>yarn.nodemanager.disk-health-checker.disk-utilization-watermark-low-per-disk-percentage
+		</name>
+		<value></value>
+		<description>The low threshold percentage of disk space used when a
+			bad disk is marked as good. Values can range from 0.0 to 100.0. This
+			applies to yarn-nodemanager.local-dirs and yarn.nodemanager.log-dirs.
+			Note that if its value is more than
+			yarn.nodemanager.disk-health-checker.
+			max-disk-utilization-per-disk-percentage or not set, it will be set
+			to the same value as
+			yarn.nodemanager.disk-health-checker.max-disk-utilization-per-disk-percentage.
+		</description>
+	</property>
+	<property>
+		<name>yarn.nodemanager.disk-health-checker.min-free-space-per-disk-mb
+		</name>
+		<value>4096</value>
+		<description> The minimum space that must be available on a disk for
+			it to be used. This applies to yarn-nodemanager.local-dirs and
+			yarn.nodemanager.log-dirs.
+		</description>
+	</property>
+	<property>
+		<name>yarn.log.server.url</name>
+		<value>http://hadoop-auth-03:19888/jobhistory/logs</value>
+		<description>job history server </description>
+	</property>
+	<property>
+		<name>yarn.web-proxy.address</name>
+		<value>hadoop-auth-03:29000</value>
+		<description>The address for the web proxy as HOST:PORT, if this is
+			not given then the proxy will run as part of the RM
+		</description>
+	</property>
+	<property>
+		<name>yarn.app.mapreduce.am.job.client.port-range</name>
+		<value>40000-50000</value>
+	</property>
+	<property>
+		<name>cqvip.yarn.nodemanager.resource.memory.percentage</name>
+		<value>0.70</value>
+	</property>
+	<!-- ========= modify end ============ -->
+	<property>
+		<name>yarn.resourcemanager.connect.retry-interval.ms</name>
+		<value>2000</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.ha.enabled</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.ha.automatic-failover.enabled</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.ha.automatic-failover.embedded</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.recovery.enabled</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.work-preserving-recovery.enabled</name>
+		<value>true</value>
+		<description> Enable RM work preserving recovery. This configuration
+			is private to YARN for experimenting the feature.
+		</description>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.store.class</name>
+		<value>org.apache.hadoop.yarn.server.resourcemanager.recovery.FileSystemRMStateStore</value>
+	</property>
+	<property>
+		<name>yarn.resourcemanager.fs.state-store.uri</name>
+		<value>/yarn/system/rmstore</value>
+	</property>
+
+	<property>
+		<name>yarn.node-labels.manager-class</name>
+		<value>org.apache.hadoop.yarn.server.resourcemanager.nodelabels.RMNodeLabelsManager</value>
+	</property>
+	<property>
+		<name>yarn.node-labels.fs-store.root-dir</name>
+		<value>${fs.defaultFS}/yarn/node-labels</value>
+	</property>
+
+	<!-- nm config -->
+	<property>
+		<name>yarn.app.mapreduce.am.scheduler.connection.wait.interval-ms</name>
+		<value>5000</value>
+	</property>
+
+	<property>
+		<name>yarn.nodemanager.address</name>
+		<value>0.0.0.0:8041</value>
+	</property>
+	<property>
+		<name>yarn.nodemanager.aux-services</name>
+		<value>mapreduce_shuffle</value>
+	</property>
+	<property>
+		<name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>
+		<value>org.apache.hadoop.mapred.ShuffleHandler</value>
+	</property>
+	<property>
+		<name>yarn.log-aggregation-enable</name>
+		<value>true</value>
+		<description>Whether to enable log aggregation or not. If disabled,
+			NMs will keep the logs
+			locally (like in 1.x) and not aggregate them
+		</description>
+	</property>
+	<property>
+		<name>yarn.nodemanager.remote-app-log-dir</name>
+		<value>${fs.defaultFS}/yarn/logs/apps</value>
+		<description>
+			NOTICE:<!-- hdfs path need use full path ,otherwise , the path is current 
+				user sub dirs. -->
+			This is on the default file-system, usually HDFS and indictes where
+			the NMs should aggregate logs to. This should not be local
+			file-system, otherwise
+			serving daemons like history-server will not
+			able to serve the aggregated
+			logs.
+			Default is /tmp/logs
+		</description>
+	</property>
+	<property>
+		<name>yarn.nodemanager.remote-app-log-dir-suffix</name>
+		<value>logs</value>
+		<description>The remote log dir will be created at
+			{yarn.nodemanager.remote-app-log-dir}/${user}/{thisParam}. Default
+			value is “logs””.
+		</description>
+	</property>
+	<property>
+		<name>yarn.log-aggregation.retain-seconds</name>
+		<value>604800</value>
+		<description>604800 = 7 * 24 * 60 *60 s, one week.Default is -1,How
+			long to wait before deleting
+			aggregated-logs, -1 or a negative number
+			disables the deletion of
+			aggregated-logs. One needs to be careful and
+			not set this to a too
+			small a value so as to not burden the
+			distributed file-system.
+		</description>
+	</property>
+	<property>
+		<name>yarn.log-aggregation.retain-check-interval-seconds</name>
+		<value>-1</value>
+		<description>Determines how long to wait between aggregated-log
+			retention-checks. If it is set to 0 or a negative value, then the
+			value is computed as one-tenth of the aggregated-log retention-time.
+			As with the previous configuration property, one needs to be careful
+			and not set this to low values. Defaults to -1.
+		</description>
+	</property>
+	<property>
+		<name>yarn.nodemanager.container-monitor.interval-ms</name>
+		<value>10000</value>
+	</property>
+
+
+	<!--fair scheduler config -->
+	<property>
+		<name>yarn.resourcemanager.scheduler.class</name>
+		<value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.fair.allow-undeclared-pools</name>
+		<value>false</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.fair.user-as-default-queue</name>
+		<value>false</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.fair.preemption</name>
+		<value>false</value>
+	</property>
+	<property>
+		<name>yarn.acl.enable</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.fair.locality.threshold.node</name>
+		<value>1.0</value>
+	</property>
+</configuration>

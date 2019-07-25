@@ -18,17 +18,17 @@ public class SchemaDemo
 	}
 	public static void main(String[] args) throws PulsarClientException
 	{
-		
-		
 				PulsarClient client = PulsarClient.builder()
-			    .serviceUrl("pulsar+ssl://hadoop-auth-01:6651/")
-			    //.tlsTrustCertsFilePath("/path/to/ca.cert.pem")
-			    .enableTlsHostnameVerification(false) // false by default, in any case
-			    .allowTlsInsecureConnection(false) // false by default, in any case
+			    .serviceUrl("pulsar://hadoop-auth-01:6650/")
+			    //.enableTlsHostnameVerification(false) // false by default, in any case
+			    //.allowTlsInsecureConnection(true) // false by default, in any case
+			    //.tlsTrustCertsFilePath("ca.cert.pem")
+			   // .authentication("org.apache.pulsar.client.impl.auth.AuthenticationToken",
+			    //                "token:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0LXVzZXIifQ.P9jQPG3cQdFlGAlD1EZzgz5bDKQR1CgQTm9mZXxdgk4")
 			    .build();
 
 		final Producer<byte[]> producer = client.newProducer()
-		        .topic("test-topic").enableBatching(false)
+		        .topic("test2-topic").enableBatching(false)
 		        .sendTimeout(0, TimeUnit.SECONDS)
 		        .producerName("producer2")
 		        .create();
@@ -66,8 +66,14 @@ public class SchemaDemo
 			}
 		});
 		thread.start();
+		PulsarClient client2 = PulsarClient.builder()
+			    .serviceUrl("pulsar://hadoop-auth-01:6650/")
+			    //.tlsTrustCertsFilePath("E:\\open-source-projects\\github\\java-parent-demo\\pulsar-demo\\src\\main\\resources\\ca.cert.pem")
+			    .enableTlsHostnameVerification(false) // false by default, in any case
+			    .allowTlsInsecureConnection(true) // false by default, in any case
+			    .build();
 		final Consumer<byte[]> consumer = client.newConsumer()
-		        .topic("test-topic")
+		        .topic("test2-topic")
 		        .subscriptionName("topic-1")
 		        .receiverQueueSize(0)
 		        .subscriptionType(SubscriptionType.Exclusive)
@@ -91,8 +97,6 @@ public class SchemaDemo
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				
-				 
 			}
 
 			}

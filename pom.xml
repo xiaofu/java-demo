@@ -7,9 +7,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
-		<!-- <java.version>1.7</java.version> -->
 		<linq.version>0.4</linq.version>
-		<netty.version>4.1.25.Final</netty.version>
+		<netty.version>4.1.37.Final</netty.version>
 		<cxf.version>2.7.14</cxf.version>
 		<spring.version>4.0.6.RELEASE</spring.version>
 		<jetty.version>8.1.15.v20140411</jetty.version>
@@ -27,24 +26,8 @@
 		<dfs.namenode.shared.edits.dir>qjournal://vnamenode:8485;vdatanode1:8485;vdatanode2:8485/vipcluster</dfs.namenode.shared.edits.dir>
 		<!-- no use -->
 		<dfs.ha.fencing.ssh.private-key-files>/home/vipcloud/.ssh/id_rsa</dfs.ha.fencing.ssh.private-key-files>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 	</properties>
-	<modules>
-		<module>linq-demo</module>
-		<module>hadoop-demo</module>
-		<module>classloader-demo</module>
-		<module>plugin-service-demo</module>
-		<module>plugin-service-impl-demo</module>
-		<module>common-demo</module>
-		<module>jdk-demo</module>
-		<module>zookeeper-demo</module>
-		<module>parquet-demo</module>
-		<module>jmock-demo</module>
-		<module>cxf-web-demo</module>
-		<module>hbase-demo</module>
-		<module>thrift-demo</module>
-		<module>dbcp-demo</module>
-	</modules>
 <repositories>
 		<repository>
 			<id>cdh.rcs.releases.repo</id>
