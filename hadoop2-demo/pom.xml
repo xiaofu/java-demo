@@ -8,7 +8,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>hadoop-demo</artifactId>
+	<artifactId>hadoop2-demo</artifactId>
 	<properties>
 		<hadoop.version>2.6.0-cdh5.10.0</hadoop.version>
 	 	<java.version>1.7</java.version>
