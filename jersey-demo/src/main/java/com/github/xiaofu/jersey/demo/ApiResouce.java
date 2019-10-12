@@ -10,7 +10,7 @@ package com.github.xiaofu.jersey.demo;
 import java.util.HashMap;
 
 import javax.inject.Singleton;
-import javax.servlet.http.HttpServletRequest;
+ 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -49,13 +49,5 @@ public class ApiResouce
 		return Response.ok(map).build();
 	}
 	
-	@Path("/token")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getToken(@Context
-    		HttpServletRequest reqeust)
-	{
-		System.out.println(reqeust.getParameter("abc"));
-		return "1234";
-	}
+	 
 }

@@ -7,9 +7,21 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<jersey.version>2.29.1</jersey.version>
-		<java.version>1.8</java.version>
+		<java.version>1.7</java.version>
+		<netty.version>4.1.30.Final</netty.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-netty-http</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>${netty.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -25,26 +37,15 @@
 			<artifactId>jersey-server</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.inject</groupId>
-			<artifactId>jersey-hk2</artifactId>
-			<version>${jersey.version}</version>
-		</dependency>
-		<!--need jetty'sservlet ,must reference this -->
-		<dependency>
-			<groupId>org.glassfish.jersey.containers</groupId>
-			<artifactId>jersey-container-jetty-servlet</artifactId>
-			<version>${jersey.version}</version>
-		</dependency>
-		<!--need jetty's container,just this enouch,don't need jersey-container-jetty-servlet-->
-		<dependency>
-			<groupId>org.glassfish.jersey.containers</groupId>
-			<artifactId>jersey-container-jetty-http</artifactId>
-			<version>${jersey.version}</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
 	</dependencies>
@@ -55,6 +56,11 @@
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+					<excludes>
+						<exclude>
+							**/JerseyBasedJettyDemo.java
+						</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 		</plugins>
