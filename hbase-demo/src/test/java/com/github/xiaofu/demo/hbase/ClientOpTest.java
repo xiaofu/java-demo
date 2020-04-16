@@ -4,13 +4,16 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
+import org.apache.hadoop.hbase.HConstants;
 import org.apache.hadoop.hbase.HRegionInfo;
 import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.catalog.CatalogTracker;
 import org.apache.hadoop.hbase.catalog.MetaEditor;
 import org.apache.hadoop.hbase.catalog.MetaReader;
@@ -20,6 +23,9 @@ import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Increment;
 import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.hbase.util.RegionSplitter;
 import org.apache.hadoop.hbase.util.RegionSplitter.SplitAlgorithm;
@@ -150,11 +156,27 @@ public class ClientOpTest {
 	@Test
 	public  void testMetaReader() throws IOException
 	{
-		CatalogTracker catalogTracker=new CatalogTracker(HBaseConfiguration.create());
-	 
-		if(MetaReader.tableExists(catalogTracker, TABLE))
-		{
-			System.out.println("ok");
+		/*
+		 * CatalogTracker catalogTracker=new
+		 * CatalogTracker(HBaseConfiguration.create());
+		 * 
+		 * if(MetaReader.tableExists(catalogTracker, TABLE)) { System.out.println("ok");
+		 * }
+		 */
+		HTable hMeta = new HTable(conf, HConstants.META_TABLE_NAME);
+		Scan scan = new Scan();
+		scan.addColumn(Bytes.toBytes("info"), Bytes.toBytes("server"));
+		scan.setCaching(1000);
+		ResultScanner scanner = hMeta.getScanner(scan);
+		Iterator<Result> iterator = scanner.iterator();
+		// Process the region location info, consider to refactor it using
+		// HRegionInterface.getOnlineRegions()
+		while (iterator.hasNext()) {
+			Result result = iterator.next();
+			KeyValue kv = result.getColumnLatest(Bytes.toBytes("info"), Bytes.toBytes("server"));
+			String rawRegion = Bytes.toString(kv.getRow());
+			System.out.println(Bytes.toString(HRegionInfo.getTableName(Bytes.toBytes(rawRegion))));
+			
 		}
 	}
 	

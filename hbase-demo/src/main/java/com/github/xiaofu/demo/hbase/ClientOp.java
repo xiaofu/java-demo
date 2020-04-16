@@ -85,7 +85,7 @@ public class ClientOp {
 		// deleteRow(TABLE,"aa");
 		 //createTable(TABLE, new String[] { "colfam1" });
 		// batchTest("test_flh");
-		// selectRow(TABLE, "row2");
+		 selectRow("B_writerobject_info", "20412333");
 		// exportOnlineToLocal();
 		// System.out.println(idToMD5Hash("JG@1494"));
 		// inportDataToTest();
