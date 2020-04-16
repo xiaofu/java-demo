@@ -18,7 +18,7 @@ public class ClusterClientTest
 	{
 		Configuration conf=new CombinedConfiguration();
 		conf.addProperty(JedisConfig.JEDIS_DEPLOY, "CLUSTER");
-		conf.addProperty(JedisConfig.JEDIS_ADDRESS, "192.168.31.138:9525,192.168.31.139:9525,192.168.31.141:9525");
+		conf.addProperty(JedisConfig.JEDIS_ADDRESS, "192.168.30.181:7617");
 		client=JedisClientFactory.getJedisClient(conf);
 	}
 	@Test
@@ -54,7 +54,7 @@ public class ClusterClientTest
 	@Test
 	public void testLoadByKey()
 	{
-		fail("Not yet implemented");
+		System.out.println(client.loadByKey("abc".getBytes()));
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class ClusterClientTest
 	@Test
 	public void testExistKey()
 	{
-		fail("Not yet implemented");
+	
 	}
 
 	@Test
