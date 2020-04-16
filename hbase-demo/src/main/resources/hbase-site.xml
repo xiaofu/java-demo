@@ -26,10 +26,7 @@
 	</property>
 	<property>
 		<name>hbase.zookeeper.quorum</name>
-		 
-		<!-- <value>node600.vipcloud,node601.vipcloud,node602.vipcloud,node603.vipcloud,node604.vipcloud</value> -->
-		<value>vdatanode1,vdatanode2,vnamenode</value>
-		
+		<value>vnamenode,vdatanode1,vdatanode2</value>
 		<!--<value>node301.sky,node302.sky,node303.sky,node304.sky,node801.sky</value>-->
 	</property>
 	<property>
@@ -59,15 +56,5 @@
 			empty.
 		</description>
 	</property>
-	
-	<property>
-  <name>zookeeper.znode.parent</name>
-  <value>/hbase</value>
-</property>
-
-<!--  <property>
-	<name>autosplit.compression</name>
-	<value>snappy</value>
-</property> -->
 	
 </configuration>

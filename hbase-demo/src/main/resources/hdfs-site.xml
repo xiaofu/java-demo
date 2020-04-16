@@ -12,35 +12,66 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
+	<!--=============== modify begin================= -->
 	<property>
 		<name>dfs.namenode.name.dir</name>
 		<!--must create dir path -->
-		<value>file://${hadoop.tmp.dir}/data/data2/dfs/name,file://${hadoop.tmp.dir}/data/data3/dfs/name
-		</value>
+		<value>file://${hadoop.tmp.dir}/data/data2/dfs/name,file://${hadoop.tmp.dir}/data/data3/dfs/name</value>
 	</property>
 	<property>
 		<name>dfs.datanode.data.dir</name>
 		<!--must create dir path -->
-		<value>file://${hadoop.tmp.dir}/data/data2/dfs/data,file://${hadoop.tmp.dir}/data/data3/dfs/data
-		</value>
+		<value>file://${hadoop.tmp.dir}/data/data2/dfs/data,file://${hadoop.tmp.dir}/data/data3/dfs/data</value>
 	</property>
 	<property>
-		<name>dfs.replication</name>
-		<value>2</value>
+		<name>dfs.datanode.max.transfer.threads</name>
+		<value>10240</value>
 	</property>
 	<property>
-		<name>dfs.support.append</name>
-		<value>true</value>
+		<name>dfs.blocksize</name>
+		<value>1073741824</value>
+		<description>
+			The default block size for new files.
+			Default is
+			536870912(512M)
+		</description>
 	</property>
 	<property>
-		<name>dfs.webhdfs.enabled</name>
-		<value>true</value>
+		<name>dfs.datanode.du.reserved</name>
+		<value>10737418240</value>
+		<description>Reserved space in bytes per volume. Always leave this
+			much space free for non dfs use.10737418240(10G)
+		</description>
 	</property>
 	<property>
-		<name>dfs.permissions.enabled</name>
-		<value>false</value>
+		<name>dfs.datanode.failed.volumes.tolerated</name>
+		<value>1</value>
+		<description>The number of volumes that are allowed to
+			fail before a
+			datanode stops offering service. By default
+			any volume failure will
+			cause a datanode to shutdown.
+		</description>
 	</property>
-	<!--impala begin -->
+	<property>
+		<name>dfs.hosts</name>
+		<value></value>
+	</property>
+	<property>
+		<name>dfs.hosts.exclude</name>
+		<value>/usr/local/vipcloud/hadoop/etc/hadoop/hosts.exclude</value>
+	</property>
+	<property>
+		<name>cqvip.dfs.data.dir</name>
+		<value>${hadoop.tmp.dir}/data/data3/dfs/data</value>
+	</property>
+	<property>
+		<name>cqvip.dfs.data.dir.reserved</name>
+		<value>10737418240</value>
+	</property>
+	<!--=============== modify end================= -->
+
+	<!--===============shortcircuit and ha modify begin================= -->
 	<property>
 		<name>dfs.client.read.shortcircuit</name>
 		<value>true</value>
@@ -59,7 +90,6 @@
 		<name>dfs.datanode.hdfs-blocks-metadata.enabled</name>
 		<value>true</value>
 	</property>
-	<!--impala end -->
 	<!--ha begin -->
 	<property>
 		<name>dfs.nameservices</name>
@@ -69,31 +99,42 @@
 		<name>dfs.ha.namenodes.vipcluster</name>
 		<value>nn1,nn2</value>
 	</property>
+	<!-- custom hostname var -->
+	<property>
+		<name>dfs.namenode.hostname.nn1</name>
+		<value>vnamenode</value>
+	</property>
+	<property>
+		<name>dfs.namenode.hostname.nn2</name>
+		<value>vdatanode1</value>
+	</property>
 	<property>
 		<name>dfs.namenode.rpc-address.vipcluster.nn1</name>
-		<value>vnamenode:9000</value>
+		<value>${dfs.namenode.hostname.nn1}:9000</value>
 	</property>
 	<property>
 		<name>dfs.namenode.rpc-address.vipcluster.nn2</name>
-		<value>vdatanode1:9000</value>
+		<value>${dfs.namenode.hostname.nn2}:9000</value>
 	</property>
 	<property>
 		<name>dfs.namenode.http-address.vipcluster.nn1</name>
-		<value>vnamenode:50070</value>
+		<value>${dfs.namenode.hostname.nn1}:50070</value>
 	</property>
 	<property>
 		<name>dfs.namenode.http-address.vipcluster.nn2</name>
-		<value>vdatanode1:50070</value>
+		<value>${dfs.namenode.hostname.nn2}:50070</value>
 	</property>
 	<property>
 		<name>dfs.namenode.shared.edits.dir</name>
-		<value>qjournal://vnamenode:8485;vdatanode1:8485;vdatanode2:8485/vipcluster</value>
+		<value>qjournal://vdatanode1:8485;vdatanode2:8485;vnamenode:8485/vipcluster
+		</value>
 	</property>
 	<property>
 		<name>dfs.journalnode.edits.dir</name>
 		<!--must create dir path -->
 		<value>${hadoop.tmp.dir}/data/data2/dfs/temp/journal</value>
 	</property>
+	<!--===============shortcircuit and ha modify end================= -->
 	<property>
 		<name>dfs.client.failover.proxy.provider.vipcluster</name>
 		<value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider
@@ -105,31 +146,66 @@
 	</property>
 	<property>
 		<name>dfs.ha.fencing.ssh.private-key-files</name>
-		<value>${dfs.ha.fencing.ssh.private-key-files}</value>
+		<value>/root/.ssh/id_rsa</value>
 	</property>
 	<property>
 		<name>dfs.ha.fencing.ssh.connect-timeout</name>
 		<value>30000</value>
 		<description>
-			SSH connection timeout, in milliseconds, to use with the builtin
+			SSH connection timeout, in milliseconds, to use with the
+			builtin
 			sshfence fencer.
 		</description>
 	</property>
-
 	<property>
 		<name>dfs.ha.automatic-failover.enabled</name>
 		<value>true</value>
 	</property>
 	<!--ha end -->
+	<property>
+		<name>dfs.replication</name>
+		<value>2</value>
+	</property>
+	<property>
+		<name>dfs.support.append</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>dfs.webhdfs.enabled</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>dfs.permissions.enabled</name>
+		<value>false</value>
+	</property>
+	<property>
+		<name>dfs.namenode.acls.enabled</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>dfs.namenode.posix.acl.inheritance.enabled</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>dfs.disk.balancer.enabled</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>dfs.storage.policy.enabled</name>
+		<value>true</value>
+	</property>
+	<property>
+		<name>dfs.datanode.available-space-volume-choosing-policy.balanced-space-preference-fraction</name>
+		<value>org.apache.hadoop.hdfs.server.datanode.fsdataset.AvailableSpaceVolumeChoosingPolicy
+		</value>
+	</property>
  
-
 	<property>
 		<name>dfs.namenode.handler.count</name>
 		<value>100</value>
 		<description>The number of server threads for the namenode.
 		</description>
 	</property>
-
 	<property>
 		<name>dfs.namenode.replication.considerLoad</name>
 		<value>true</value>
@@ -138,33 +214,25 @@
 	</property>
 
 	<property>
-		<name>dfs.datanode.du.reserved</name>
-		<value>1073741824</value>
-		<description>Reserved space in bytes per volume. Always leave this
-			much space free for non dfs use.
+		<name>fs.df.interval</name>
+		<value>60000</value>
+		<description>Disk usage statistics refresh interval in msec.
 		</description>
 	</property>
 
 	<property>
-		<name>dfs.datanode.failed.volumes.tolerated</name>
-		<value>1</value>
-		<description>The number of volumes that are allowed to
-			fail before a
-			datanode stops offering service. By default
-			any volume failure will
-			cause a datanode to shutdown.
+		<name>dfs.blockreport.intervalMsec</name>
+		<value>3600000</value>
+		<description>Determines block reporting interval in milliseconds.
 		</description>
 	</property>
 
- 
-
 	<property>
-		<name>dfs.blocksize</name>
-		<value>1073741824</value>
-		<description>
-			The default block size for new files.
-			Default is
-			67108864(64M).268435456(256M)
+		<name>dfs.replication.interval</name>
+		<value>3</value>
+		<description>The periodicity in seconds with which the namenode
+			computes
+			repliaction work for datanodes.
 		</description>
 	</property>
 
@@ -176,15 +244,57 @@
 		</description>
 	</property>
 
+
 	<property>
-		<name>dfs.datanode.max.transfer.threads</name>
-		<value>10240</value>
-	</property>
- 
-	<!-- don't need 2.0 -->
-	<property>
-		<name>dfs.block.local-path-access.user</name>
-		<value>vipcloud</value>
+		<name>dfs.balance.bandwidthPerSec</name>
+		<value>52428800</value>
+		<description>
+			Specifies the maximum amount of bandwidth that each
+			datanode can utilize for the balancing purpose in term of the number
+			of bytes per second. now ,is 50M/s, default is 1 MB/s
+		</description>
 	</property>
 
+	<property>
+		<name>dfs.datanode.directoryscan.threads</name>
+		<value>1</value>
+		<description>Number of threads to use when scanning volumes to
+			generate block reports. A value greater than one means means
+			volumes
+			will be scanned in parallel.
+		</description>
+	</property>
+
+	<property>
+		<name>dfs.heartbeat.interval</name>
+		<value>3</value>
+		<description>Determines datanode heartbeat interval in seconds.
+		</description>
+	</property>
+
+	<property>
+		<name>dfs.namenode.accesstime.precision</name>
+		<value>3600000</value>
+		<description>The access time for HDFS file is precise upto this value.
+			The default value is 1 hour. Setting a value of 0 disables
+			access
+			times for HDFS.
+		</description>
+	</property>
+	<property>
+		<name>dfs.ha.log-roll.period</name>
+		<value>180</value>
+	</property>
+	<property>
+		<name>dfs.bytes-per-checksum</name>
+		<value>2048</value>
+	</property>
+	<property>
+		<name>dfs.checksum.type</name>
+		<value>CRC32</value>
+	</property>
+	<property>
+		<name>dfs.block.local-path-access.user</name>
+		<value>vipcloud,root</value>
+	</property>
 </configuration>
