@@ -25,7 +25,7 @@ public class Indexer {
 
 	public static void main(String[] args) throws Exception {
 		 
-		Path indexDir = Paths.get("tempIndex");
+		Path indexDir = Paths.get("firstTest");
 		String dataDir = "E:\\open-source-projects\\big-data\\lucene\\lucene-8.4.1";
 		long start = System.currentTimeMillis();
 		Indexer indexer = new Indexer(indexDir);

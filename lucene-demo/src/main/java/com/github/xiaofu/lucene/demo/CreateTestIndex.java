@@ -18,6 +18,8 @@ package com.github.xiaofu.lucene.demo;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.IntPoint;
+import org.apache.lucene.document.NumericDocValuesField;
+import org.apache.lucene.document.SortedDocValuesField;
 import org.apache.lucene.document.StoredField;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
@@ -29,11 +31,15 @@ import org.apache.lucene.analysis.LowerCaseFilter;
 import org.apache.lucene.analysis.StopFilter;
 import org.apache.lucene.analysis.StopwordAnalyzerBase;
 import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.standard.ClassicAnalyzer;
+import org.apache.lucene.analysis.standard.ClassicFilter;
+import org.apache.lucene.analysis.standard.ClassicTokenizer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
+import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.Version;
 
 import java.io.File;
@@ -74,13 +80,16 @@ public class CreateTestIndex {
 		doc.add(new StringField("category", // 3
 				category, // 3
 				Field.Store.YES)); // 3
+		doc.add(new SortedDocValuesField("category", // 3
+				new BytesRef(category))); // 3
 		doc.add(new TextField("title", // 3
 				title, // 3
 				Field.Store.YES)); // 3
 		doc.add(new StringField("title2", // 3
 				title.toLowerCase(), // 3
 				Field.Store.YES)); // 3
-
+		doc.add(new SortedDocValuesField("title2", // 3
+				new BytesRef(title.toLowerCase()))); // 3
 		// split multiple authors into unique field instances
 		String[] authors = author.split(","); // 3
 		for (String a : authors) { // 3
@@ -97,6 +106,7 @@ public class CreateTestIndex {
 				Field.Store.YES)); // 3 //4
 
 		doc.add(new IntPoint("pubmonth", Integer.parseInt(pubmonth))); // 3
+		doc.add(new NumericDocValuesField("pubmonth", Integer.parseInt(pubmonth))); // 3
 		doc.add(new StoredField("pubmonth", Integer.parseInt(pubmonth))); // 3
 		Date d; // 3
 		try { // 3
@@ -105,6 +115,7 @@ public class CreateTestIndex {
 			throw new RuntimeException(pe); // 3
 		} // 3
 		doc.add(new IntPoint("pubmonthAsDay", (int) (d.getTime() / (1000 * 3600 * 24)))); // 3
+		doc.add(new NumericDocValuesField("pubmonthAsDay", (int) (d.getTime() / (1000 * 3600 * 24)))); // 3
 		doc.add(new StoredField("pubmonthAsDay", (int) (d.getTime() / (1000 * 3600 * 24)))); // 3
 		for (String text : new String[] { title, subject, author, category }) { // 3 // 5
 			doc.add(new TextField("contents", text, Store.NO)); // 3 // 5
@@ -147,14 +158,15 @@ public class CreateTestIndex {
 
 		@Override
 		protected TokenStreamComponents createComponents(String fieldName) {
-			final StandardTokenizer src = new StandardTokenizer();
-			src.setMaxTokenLength(StandardAnalyzer.DEFAULT_MAX_TOKEN_LENGTH);
-			TokenStream tok = new LowerCaseFilter(src);
-			tok = new StopFilter(tok, stopwords);
-			return new TokenStreamComponents(r -> {
-				src.setMaxTokenLength(StandardAnalyzer.DEFAULT_MAX_TOKEN_LENGTH);
-				src.setReader(r);
-			}, tok);
+			final ClassicTokenizer src = new ClassicTokenizer();
+		    src.setMaxTokenLength(ClassicAnalyzer.DEFAULT_MAX_TOKEN_LENGTH);
+		    TokenStream tok = new ClassicFilter(src);
+		    tok = new LowerCaseFilter(tok);
+		    tok = new StopFilter(tok, stopwords);
+		    return new TokenStreamComponents(r -> {
+		      src.setMaxTokenLength(ClassicAnalyzer.DEFAULT_MAX_TOKEN_LENGTH);
+		      src.setReader(r);
+		    }, tok);
 		}
 
 		@Override
@@ -163,6 +175,7 @@ public class CreateTestIndex {
 		}
 
 		public static void main(String[] args) throws IOException {
+			 
 			String dataDir = "E:\\programs-documents\\big-data\\lucene-solr\\lia2e\\data";
 			String indexDir = "tempIndex";
 			List<File> results = new ArrayList<File>();

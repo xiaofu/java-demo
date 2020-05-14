@@ -18,7 +18,7 @@ public class Searcher {
 
 	public static void main(String[] args) throws Exception {
 
-		String indexDir = "tempIndex";
+		String indexDir = "firstTest";
 		String q = "binary";
 		search(indexDir, q);
 
@@ -31,7 +31,7 @@ public class Searcher {
 		Query query = parser.parse(q);
 		long start = System.currentTimeMillis();
 		TopDocs hits = is.search(query, 10);
-		 
+	 
 		long end = System.currentTimeMillis();
 		System.err.println("Found " + hits.totalHits + " document(s) (in " + (end - start)
 				+ " milliseconds) that matched query '" + q + "':");
