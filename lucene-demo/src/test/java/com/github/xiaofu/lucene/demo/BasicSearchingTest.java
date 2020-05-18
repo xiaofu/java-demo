@@ -42,7 +42,6 @@ public class BasicSearchingTest {
 	public void testQueryParser() throws Exception {
 		Directory dir = TestUtil.getBookIndexDirectory();
 		DirectoryReader reader = DirectoryReader.open(dir);
-		 
 		IndexSearcher searcher = new IndexSearcher(reader);
 		QueryParser parser = new QueryParser("contents", new SimpleAnalyzer());
 		Query query = parser.parse("+JUNIT +ANT -MOCK");

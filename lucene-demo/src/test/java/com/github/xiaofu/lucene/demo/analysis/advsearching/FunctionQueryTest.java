@@ -152,18 +152,18 @@ public class FunctionQueryTest {
 
 		@Override
 		public DoubleValues getValues(LeafReaderContext ctx, DoubleValues scores) throws IOException {
-			final NumericDocValues values = DocValues.getNumeric(ctx.reader(), field);
+			final NumericDocValues values = DocValues.getNumeric(ctx.reader(), field);//#A
 			return new DoubleValues() {
 				@Override
 				public double doubleValue() throws IOException {
-					int daysAgo = today - (int) values.longValue();
+					int daysAgo = today - (int) values.longValue();//#B
 					if (daysAgo < maxDaysAgo) { // #C
 						float boost = (float) (multiplier * // #D
 						(maxDaysAgo - daysAgo) // #D
 								/ maxDaysAgo); // #D
 						return (scores.doubleValue() * (1.0 + boost));
 					}
-					return 0;
+					return scores.doubleValue(); //#E
 				}
 
 				@Override
@@ -199,8 +199,11 @@ public class FunctionQueryTest {
 	}
 
 	/*
-	 * #A Retrieve days from field cache #B Compute elapsed days #C Skip old books
-	 * #D Compute simple linear boost #E Return un-boosted score
+	 * #A Retrieve days from field cache 
+	 * #B Compute elapsed days 
+	 * #C Skip old books
+	 * #D Compute simple linear boost 
+	 * #E Return un-boosted score
 	 */
 	@Test
 	public void testRecency() throws Throwable {
@@ -211,9 +214,9 @@ public class FunctionQueryTest {
 	 
 		QueryParser parser = new QueryParser("contents", new ClassicAnalyzer());
 		Query q = parser.parse("java in action"); // #A
-
+		System.out.println(q);
 		FunctionScoreQuery customQ = new FunctionScoreQuery(q,
-				new RecencyBoostingSource(2.0, 14 * 365, "pubmonthAsDay", Double::longBitsToDouble));
+				new RecencyBoostingSource(2.0, 12 * 365, "pubmonthAsDay", Double::longBitsToDouble));
 		Sort sort = new Sort(new SortField[] { SortField.FIELD_SCORE, new SortField("title2", SortField.Type.STRING) });
 		TopDocs hits = s.search(customQ, 5, sort,true);
 
@@ -226,6 +229,7 @@ public class FunctionQueryTest {
 		dir.close();
 	}
 	/*
-	 * #A Parse query #B Create recency boosting query
+	 * #A Parse query 
+	 * #B Create recency boosting query
 	 */
 }

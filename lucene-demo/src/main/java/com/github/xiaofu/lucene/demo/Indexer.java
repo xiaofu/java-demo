@@ -102,5 +102,6 @@ public class Indexer {
 		System.out.println("Indexing " + f.getCanonicalPath());
 		Document doc = getDocument(f);
 		writer.addDocument(doc);
+		 
 	}
 }

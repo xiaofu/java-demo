@@ -27,6 +27,7 @@ public class Searcher {
 	public static void search(String indexDir, String q) throws IOException, ParseException, Exception {
 		DirectoryReader  reader = DirectoryReader.open( FSDirectory.open(Paths.get(indexDir)));
 		IndexSearcher is = new IndexSearcher(reader);
+		 
 		QueryParser  parser = new QueryParser("contents", new StandardAnalyzer());
 		Query query = parser.parse(q);
 		long start = System.currentTimeMillis();
@@ -41,6 +42,7 @@ public class Searcher {
 			Document doc = is.doc(scoreDoc.doc);
 			System.out.println(scoreDoc.score);
 			System.out.println(doc.get("fullpath"));
+			 
 		}
 		reader.close();
 

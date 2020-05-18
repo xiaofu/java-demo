@@ -82,10 +82,10 @@ public class CreateTestIndex {
 				Field.Store.YES)); // 3
 		doc.add(new SortedDocValuesField("category", // 3
 				new BytesRef(category))); // 3
-		doc.add(new TextField("title", // 3
+		doc.add(new TextFieldWithTermVector("title", // 3
 				title, // 3
 				Field.Store.YES)); // 3
-		doc.add(new StringField("title2", // 3
+		doc.add(new StringFieldWithTermVector("title2", // 3
 				title.toLowerCase(), // 3
 				Field.Store.YES)); // 3
 		doc.add(new SortedDocValuesField("title2", // 3
@@ -93,7 +93,7 @@ public class CreateTestIndex {
 		// split multiple authors into unique field instances
 		String[] authors = author.split(","); // 3
 		for (String a : authors) { // 3
-			doc.add(new StringField("author", // 3
+			doc.add(new StringFieldWithTermVector("author", // 3
 					a, // 3
 					Field.Store.YES)); // 3
 		}
@@ -101,7 +101,7 @@ public class CreateTestIndex {
 		doc.add(new StringField("url", // 3
 				url, // 3
 				Field.Store.YES)); // 3
-		doc.add(new TextField("subject", // 3 //4
+		doc.add(new TextFieldWithTermVector("subject", // 3 //4
 				subject, // 3 //4
 				Field.Store.YES)); // 3 //4
 
@@ -118,7 +118,7 @@ public class CreateTestIndex {
 		doc.add(new NumericDocValuesField("pubmonthAsDay", (int) (d.getTime() / (1000 * 3600 * 24)))); // 3
 		doc.add(new StoredField("pubmonthAsDay", (int) (d.getTime() / (1000 * 3600 * 24)))); // 3
 		for (String text : new String[] { title, subject, author, category }) { // 3 // 5
-			doc.add(new TextField("contents", text, Store.NO)); // 3 // 5
+			doc.add(new TextFieldWithTermVector("contents", text, Store.NO)); // 3 // 5
 		}
 
 		return doc;
