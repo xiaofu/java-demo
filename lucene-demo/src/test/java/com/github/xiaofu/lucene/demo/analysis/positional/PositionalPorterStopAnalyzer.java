@@ -23,6 +23,7 @@ import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.core.LetterTokenizer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.en.PorterStemFilter;
+import org.apache.lucene.analysis.standard.ClassicAnalyzer;
 
  
 
@@ -31,7 +32,7 @@ public class PositionalPorterStopAnalyzer extends Analyzer {
 	private CharArraySet stopWords;
 
 	public PositionalPorterStopAnalyzer() {
-		this(EnglishAnalyzer.ENGLISH_STOP_WORDS_SET);
+		this(ClassicAnalyzer.STOP_WORDS_SET);
 	}
 
 	public PositionalPorterStopAnalyzer(CharArraySet stopWords) {

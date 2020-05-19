@@ -101,6 +101,8 @@ public class CreateTestIndex {
 		doc.add(new StringField("url", // 3
 				url, // 3
 				Field.Store.YES)); // 3
+		doc.add(new SortedDocValuesField("url", // 3
+				new BytesRef(url))); // 3
 		doc.add(new TextFieldWithTermVector("subject", // 3 //4
 				subject, // 3 //4
 				Field.Store.YES)); // 3 //4
