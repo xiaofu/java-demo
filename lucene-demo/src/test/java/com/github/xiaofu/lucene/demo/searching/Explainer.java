@@ -1,4 +1,4 @@
-package com.github.xiaofu.lucene.demo;
+package com.github.xiaofu.lucene.demo.searching;
 
 import org.apache.lucene.analysis.core.SimpleAnalyzer;
 

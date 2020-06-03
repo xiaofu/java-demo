@@ -186,7 +186,9 @@ public class CreateTestIndex {
 			Directory dir = FSDirectory.open(Paths.get(indexDir));
 			IndexWriterConfig config = new IndexWriterConfig(new MyStandardAnalyzer());
 			config.setOpenMode(OpenMode.CREATE);
+			//config.setUseCompoundFile(false);
 			IndexWriter w = new IndexWriter(dir, config);
+			 
 			for (File file : results) {
 				Document doc = getDocument(dataDir, file);
 				w.addDocument(doc);

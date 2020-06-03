@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<java.version>1.8</java.version>
-		<lucene.version>8.4.1</lucene.version>
+		<lucene.version>8.5.1</lucene.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -21,6 +21,7 @@
 			<artifactId>lucene-core</artifactId>
 			<version>${lucene.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-queryparser</artifactId>
@@ -36,26 +37,45 @@
 			<artifactId>lucene-analyzers-smartcn</artifactId>
 			<version>${lucene.version}</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-analyzers-phonetic</artifactId>
-			<version>${lucene.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-analyzers-icu</artifactId>
-			<version>${lucene.version}</version>
-		</dependency> -->
+
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-queries</artifactId>
 			<version>${lucene.version}</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency> <groupId>org.apache.lucene</groupId><artifactId>lucene-analyzers-phonetic</artifactId> 
+			<version>${lucene.version}</version> </dependency> -->
+		<!-- <dependency> <groupId>org.apache.lucene</groupId> <artifactId>lucene-analyzers-icu</artifactId><version>${lucene.version}</version> 
+			</dependency> -->
+		<!-- <dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-misc</artifactId>
 			<version>${lucene.version}</version>
+		</dependency> -->
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-highlighter</artifactId>
+			<version>${lucene.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-suggest</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.apache.lucene</groupId> <artifactId>lucene-memory</artifactId> 
+			<version>${lucene.version}</version> </dependency> -->
+		<!-- <dependency> <groupId>org.apache.lucene</groupId> <artifactId>lucene-spatial</artifactId> 
+			<version>${lucene.version}</version> </dependency> -->
+		<!-- <dependency> <groupId>org.apache.lucene</groupId> <artifactId>lucene-join</artifactId> 
+			<version>${lucene.version}</version> </dependency> -->
+		<!-- <dependency> <groupId>org.apache.lucene</groupId> <artifactId>lucene-grouping</artifactId> 
+			<version>${lucene.version}</version> </dependency> -->
+		<!-- <dependency> <groupId>org.apache.lucene</groupId> <artifactId>lucene-facet</artifactId> 
+			<version>${lucene.version}</version> </dependency> -->
+		<!-- <dependency> <groupId>org.apache.lucene</groupId> <artifactId>lucene-expressions</artifactId> 
+			<version>${lucene.version}</version> </dependency> -->
+		<!-- <dependency> <groupId>org.apache.lucene</groupId> <artifactId>lucene-classification</artifactId> 
+			<version>${lucene.version}</version> </dependency> -->
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>

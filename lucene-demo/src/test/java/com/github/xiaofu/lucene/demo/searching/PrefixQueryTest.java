@@ -1,4 +1,4 @@
-package com.github.xiaofu.lucene.demo;
+package com.github.xiaofu.lucene.demo.searching;
 
 /**
  * Copyright Manning Publications Co.
@@ -27,6 +27,8 @@ import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.store.Directory;
 import org.junit.Test;
+
+import com.github.xiaofu.lucene.demo.TestUtil;
 
 // From chapter 3
 public class PrefixQueryTest   {

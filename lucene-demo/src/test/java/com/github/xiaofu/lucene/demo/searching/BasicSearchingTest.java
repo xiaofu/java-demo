@@ -1,4 +1,4 @@
-package com.github.xiaofu.lucene.demo;
+package com.github.xiaofu.lucene.demo.searching;
 
 import static org.junit.Assert.*;
 
@@ -19,6 +19,8 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 import org.junit.Test;
+
+import com.github.xiaofu.lucene.demo.TestUtil;
 
 public class BasicSearchingTest {
 

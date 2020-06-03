@@ -1,4 +1,4 @@
-package com.github.xiaofu.lucene.demo;
+package com.github.xiaofu.lucene.demo.searching;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -43,6 +43,8 @@ import org.apache.lucene.store.Directory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.github.xiaofu.lucene.demo.TestUtil;
 
 // From chapter 3
 public class QueryParserTest {

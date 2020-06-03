@@ -1,4 +1,4 @@
-package com.github.xiaofu.lucene.demo;
+package com.github.xiaofu.lucene.demo.searching;
 
 import static org.junit.Assert.*;
 
@@ -55,7 +55,6 @@ public class FuzzyAndWildcardTest {
 				new TextField("contents", "wuzzy", Field.Store.YES) });
 		IndexSearcher searcher = new IndexSearcher(DirectoryReader.open(directory));
 		Query query = new FuzzyQuery(new Term("contents", "wuzza"));
-		 
 		TopDocs matches = searcher.search(query, 10);
 		assertEquals("both close enough", 2, matches.totalHits.value);
 		assertTrue("wuzzy closer than fuzzy", matches.scoreDocs[0].score != matches.scoreDocs[1].score);

@@ -1,4 +1,4 @@
-package com.github.xiaofu.lucene.demo;
+package com.github.xiaofu.lucene.demo.searching;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,6 +25,8 @@ import org.apache.lucene.util.BytesRef;
 */
 
 import org.junit.Test;
+
+import com.github.xiaofu.lucene.demo.TestUtil;
 
 // From chapter 3
 public class TermRangeQueryTest {

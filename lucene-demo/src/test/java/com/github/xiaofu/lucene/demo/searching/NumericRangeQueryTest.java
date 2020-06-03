@@ -1,4 +1,4 @@
-package com.github.xiaofu.lucene.demo;
+package com.github.xiaofu.lucene.demo.searching;
 
 /**
  * Copyright Manning Publications Co.
@@ -25,6 +25,8 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.store.Directory;
 import org.junit.Test;
+
+import com.github.xiaofu.lucene.demo.TestUtil;
 
 // From chapter 3
 public class NumericRangeQueryTest {
