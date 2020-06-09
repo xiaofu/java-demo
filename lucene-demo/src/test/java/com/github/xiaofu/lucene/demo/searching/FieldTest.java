@@ -35,9 +35,8 @@ public class FieldTest {
 		// 如何不添加此字段，查询时指定此字段排序报错
 		field = new SortedDocValuesField(name, new BytesRef(value));
 		document.add(field);
-		//field = new StoredField(name, new BytesRef(value));//主要是为了解决数字值存储问题，字符串或文本型数据不能使用此字段。
-		document.add(field);
-
+		//field = new StoredField(name, new BytesRef(value));//主要是为了解决数字值存储问题，字符串或文本型数据不需要使用此字段，使用了不起作用。
+		//document.add(field);
 	}
 
 	@Test
