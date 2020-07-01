@@ -21,7 +21,7 @@
 		<jackson.version>2.6.7</jackson.version>
 		<guava.version>20.0</guava.version>
 		<joda.version>2.5</joda.version>
-		<quartz.version>2.2.1</quartz.version>
+		<quartz.version>2.3.2</quartz.version>
 
 	</properties>
 	<repositories>
