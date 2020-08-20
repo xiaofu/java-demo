@@ -16,24 +16,24 @@
 	<property>
 		<name>dfs.namenode.name.dir</name>
 		<!--must create dir path -->
-		<value>${hadoop.tmp.dir}/data/data4/dfs/name,${hadoop.tmp.dir}/data/data5/dfs/name</value>
+		<value>file://${hadoop.tmp.dir}/data/data2/dfs/name,file://${hadoop.tmp.dir}/data/data3/dfs/name</value>
 	</property>
 	<property>
 		<name>dfs.datanode.data.dir</name>
 		<!--must create dir path -->
-		<value>${hadoop.tmp.dir}/data/data8/dfs/data,${hadoop.tmp.dir}/data/data7/dfs/data,${hadoop.tmp.dir}/data/data6/dfs/data,${hadoop.tmp.dir}/data/data5/dfs/data,${hadoop.tmp.dir}/data/data4/dfs/data,${hadoop.tmp.dir}/data/data3/dfs/data,${hadoop.tmp.dir}/data/data2/dfs/data,${hadoop.tmp.dir}/data/data1/dfs/data</value>
+		<value>file://${hadoop.tmp.dir}/data/data2/dfs/data,file://${hadoop.tmp.dir}/data/data3/dfs/data</value>
 	</property>
 	<property>
 		<name>dfs.datanode.max.transfer.threads</name>
-		<value>32768</value>
+		<value>10240</value>
 	</property>
 	<property>
 		<name>dfs.blocksize</name>
-		<value>268435456</value>
+		<value>1073741824</value>
 		<description>
 			The default block size for new files.
 			Default is
-			536870912(512M),268435456(256M)
+			536870912(512M)
 		</description>
 	</property>
 	<property>
@@ -62,34 +62,13 @@
 		<value>/usr/local/vipcloud/hadoop/etc/hadoop/hosts.exclude</value>
 	</property>
 	<property>
-		<name>dfs.namenode.support.allow.format</name>
-		<value>false</value>
-	</property>
-	<property>
-		<name>dfs.datanode.directoryscan.threads</name>
-		<value>8</value>
-	</property>
-	<property>
-		<name>dfs.datanode.balance.max.concurrent.moves</name>
-		<value>300</value>
-	</property>
-	<property>
 		<name>cqvip.dfs.data.dir</name>
-		<value>${hadoop.tmp.dir}/data/data7/dfs/data</value>
+		<value>${hadoop.tmp.dir}/data/data3/dfs/data</value>
 	</property>
 	<property>
 		<name>cqvip.dfs.data.dir.reserved</name>
-		<value>268435456000</value>
+		<value>10737418240</value>
 	</property>
-
-	<property>
-         <name>cqvip.hdfs.disabled.delete.files</name>
-         <value></value>
-    </property>
-    <property>
-          <name>cqvip.hdfs.disabled.recursive.delete.files</name>
-           <value>/VipProcessData,/VipProcessData/DocSim,/VipProcessData/VipPreTables,/VipProcessData/VipPreTables/DicList</value>
-     </property>
 	<!--=============== modify end================= -->
 
 	<!--===============shortcircuit and ha modify begin================= -->
@@ -100,7 +79,8 @@
 	<property>
 		<name>dfs.domain.socket.path</name>
 		<!--must create dir path -->
-		<value>${hadoop.tmp.dir}/data/data1/dn._PORT</value>
+		<value>${hadoop.tmp.dir}/data/data2/dfs/run/hadoop-hdfs/dn._PORT
+		</value>
 	</property>
 	<property>
 		<name>dfs.client.file-block-storage-locations.timeout.millis</name>
@@ -113,50 +93,52 @@
 	<!--ha begin -->
 	<property>
 		<name>dfs.nameservices</name>
-		<value>mrcluster</value>
+		<value>vipcluster</value>
 	</property>
 	<property>
-		<name>dfs.ha.namenodes.mrcluster</name>
+		<name>dfs.ha.namenodes.vipcluster</name>
 		<value>nn1,nn2</value>
 	</property>
 	<!-- custom hostname var -->
 	<property>
 		<name>dfs.namenode.hostname.nn1</name>
-		<value>Hadoop2x-01</value>
+		<value>vnamenode</value>
 	</property>
 	<property>
 		<name>dfs.namenode.hostname.nn2</name>
-		<value>Hadoop2x-02</value>
+		<value>vdatanode1</value>
 	</property>
 	<property>
-		<name>dfs.namenode.rpc-address.mrcluster.nn1</name>
+		<name>dfs.namenode.rpc-address.vipcluster.nn1</name>
 		<value>${dfs.namenode.hostname.nn1}:9000</value>
 	</property>
 	<property>
-		<name>dfs.namenode.rpc-address.mrcluster.nn2</name>
+		<name>dfs.namenode.rpc-address.vipcluster.nn2</name>
 		<value>${dfs.namenode.hostname.nn2}:9000</value>
 	</property>
 	<property>
-		<name>dfs.namenode.http-address.mrcluster.nn1</name>
+		<name>dfs.namenode.http-address.vipcluster.nn1</name>
 		<value>${dfs.namenode.hostname.nn1}:50070</value>
 	</property>
 	<property>
-		<name>dfs.namenode.http-address.mrcluster.nn2</name>
+		<name>dfs.namenode.http-address.vipcluster.nn2</name>
 		<value>${dfs.namenode.hostname.nn2}:50070</value>
 	</property>
 	<property>
 		<name>dfs.namenode.shared.edits.dir</name>
-		<value>qjournal://Hadoop2x-01:8485;Hadoop2x-02:8485;Hadoop2x-03:8485/mrcluster</value>
+		<value>qjournal://vdatanode1:8485;vdatanode2:8485;vnamenode:8485/vipcluster
+		</value>
 	</property>
 	<property>
 		<name>dfs.journalnode.edits.dir</name>
 		<!--must create dir path -->
-		<value>${hadoop.tmp.dir}/data/data4/dfs/temp/journal</value>
+		<value>${hadoop.tmp.dir}/data/data2/dfs/temp/journal</value>
 	</property>
 	<!--===============shortcircuit and ha modify end================= -->
 	<property>
-		<name>dfs.client.failover.proxy.provider.mrcluster</name>
-		<value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+		<name>dfs.client.failover.proxy.provider.vipcluster</name>
+		<value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider
+		</value>
 	</property>
 	<property>
 		<name>dfs.ha.fencing.methods</name>
@@ -182,7 +164,7 @@
 	<!--ha end -->
 	<property>
 		<name>dfs.replication</name>
-		<value>3</value>
+		<value>2</value>
 	</property>
 	<property>
 		<name>dfs.support.append</name>
@@ -194,7 +176,7 @@
 	</property>
 	<property>
 		<name>dfs.permissions.enabled</name>
-		<value>true</value>
+		<value>false</value>
 	</property>
 	<property>
 		<name>dfs.namenode.acls.enabled</name>
@@ -213,21 +195,44 @@
 		<value>true</value>
 	</property>
 	<property>
-		<name>dfs.datanode.fsdataset.volume.choosing.policy</name>
-		<value>org.apache.hadoop.hdfs.server.datanode.fsdataset.AvailableSpaceVolumeChoosingPolicy</value>
+		<name>dfs.datanode.available-space-volume-choosing-policy.balanced-space-preference-fraction</name>
+		<value>org.apache.hadoop.hdfs.server.datanode.fsdataset.AvailableSpaceVolumeChoosingPolicy
+		</value>
 	</property>
-	
+ 
 	<property>
 		<name>dfs.namenode.handler.count</name>
 		<value>100</value>
 		<description>The number of server threads for the namenode.
 		</description>
 	</property>
-	 
+	<property>
+		<name>dfs.namenode.replication.considerLoad</name>
+		<value>true</value>
+		<description>Decide if chooseTarget considers the target's load or not
+		</description>
+	</property>
+
+	<property>
+		<name>fs.df.interval</name>
+		<value>60000</value>
+		<description>Disk usage statistics refresh interval in msec.
+		</description>
+	</property>
+
 	<property>
 		<name>dfs.blockreport.intervalMsec</name>
 		<value>3600000</value>
 		<description>Determines block reporting interval in milliseconds.
+		</description>
+	</property>
+
+	<property>
+		<name>dfs.replication.interval</name>
+		<value>3</value>
+		<description>The periodicity in seconds with which the namenode
+			computes
+			repliaction work for datanodes.
 		</description>
 	</property>
 
@@ -239,10 +244,20 @@
 		</description>
 	</property>
 
-	
+
+	<property>
+		<name>dfs.balance.bandwidthPerSec</name>
+		<value>52428800</value>
+		<description>
+			Specifies the maximum amount of bandwidth that each
+			datanode can utilize for the balancing purpose in term of the number
+			of bytes per second. now ,is 50M/s, default is 1 MB/s
+		</description>
+	</property>
+
 	<property>
 		<name>dfs.datanode.directoryscan.threads</name>
-		<value>8</value>
+		<value>1</value>
 		<description>Number of threads to use when scanning volumes to
 			generate block reports. A value greater than one means means
 			volumes
@@ -250,9 +265,25 @@
 		</description>
 	</property>
 
-	 <property>
-		<name>dfs.stream-buffer-size</name>
-		<value>65536</value>
+	<property>
+		<name>dfs.heartbeat.interval</name>
+		<value>3</value>
+		<description>Determines datanode heartbeat interval in seconds.
+		</description>
+	</property>
+
+	<property>
+		<name>dfs.namenode.accesstime.precision</name>
+		<value>3600000</value>
+		<description>The access time for HDFS file is precise upto this value.
+			The default value is 1 hour. Setting a value of 0 disables
+			access
+			times for HDFS.
+		</description>
+	</property>
+	<property>
+		<name>dfs.ha.log-roll.period</name>
+		<value>180</value>
 	</property>
 	<property>
 		<name>dfs.bytes-per-checksum</name>

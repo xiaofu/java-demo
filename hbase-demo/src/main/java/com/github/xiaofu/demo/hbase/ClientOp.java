@@ -61,11 +61,12 @@ public class ClientOp {
 	public static Configuration conf = null;
 	private static HTable onlineTable;
 	private static HTable localTable;
-	public static String TABLE = "flh_test";
+	public static String TABLE = "modify_classobject_info_nd";
 	static {
 		conf = HBaseConfiguration.create();
 		try {
-			conf.set("hbase.zookeeper.quorum","vdatanode1,vnamenode,vdatanode2");
+			conf.set("hbase.zookeeper.quorum",
+					"node203.vipcloud,node204.vipcloud,node205.vipcloud");
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -85,7 +86,7 @@ public class ClientOp {
 		// deleteRow(TABLE,"aa");
 		 //createTable(TABLE, new String[] { "colfam1" });
 		// batchTest("test_flh");
-		 selectRow("B_writerobject_info", "20412333");
+		 selectRow(TABLE, "35");
 		// exportOnlineToLocal();
 		// System.out.println(idToMD5Hash("JG@1494"));
 		// inportDataToTest();

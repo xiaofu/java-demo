@@ -36,13 +36,13 @@ import com.google.common.collect.Lists;
 
 public class ClientOpTest {
 	private static Configuration conf = null;
-	private static String TABLE = "test2";
+	private static String TABLE = "modify_classobject_info_nd";
 	static {
 		conf = HBaseConfiguration.create();
 		try {
 
 			conf.set("hbase.zookeeper.quorum",
-					"vdatanode1,vnamenode,vdatanode2");
+					"node203.vipcloud,node204.vipcloud,node205.vipcloud");
 			/*
 			 * conf.set( "hbase.zookeeper.quorum",
 			 * "node600.vipcloud,node601.vipcloud,node602.vipcloud,node603.vipcloud,node604.vipcloud"
@@ -78,7 +78,7 @@ public class ClientOpTest {
 	@Test
 	public void selectRow() throws IOException {
 		 
-		ClientOp.selectRow(TABLE, "2420500");
+		ClientOp.selectRow(TABLE, "35"); 
 		//ClientOp.selectRow(TABLE, "row2");
 		//ClientOp.selectRow(TABLE, "row3");
 	
