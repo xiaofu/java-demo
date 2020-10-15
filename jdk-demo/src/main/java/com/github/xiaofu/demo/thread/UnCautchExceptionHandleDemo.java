@@ -8,6 +8,9 @@
 package com.github.xiaofu.demo.thread;
 
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -33,7 +36,8 @@ public class UnCautchExceptionHandleDemo
 				 System.out.println(e.getMessage());
 			}
 		});
-		Thread t = new Thread(new Runnable() {
+		ExecutorService executorService= Executors.newFixedThreadPool(1);
+		executorService.execute(new Runnable() {
 			@Override
 			public void run() {
 				 int a=2;
@@ -41,9 +45,17 @@ public class UnCautchExceptionHandleDemo
 				 int c =a/b;
 			}
 		});
-		t.setName("inner");
-		t.start();
-		Thread.sleep(800);
+		executorService.shutdown();
+		executorService.awaitTermination(500, TimeUnit.MILLISECONDS);
+		/*
+		 * Thread t = new Thread(new Runnable() {
+		 * 
+		 * @Override public void run() { int a=2; int b=0; int c =a/b; } });
+		 */
+		/*
+		 * t.setName("inner"); t.start();
+		 */
+		/* Thread.sleep(800); */
 		System.out.println("over");
   
 	}

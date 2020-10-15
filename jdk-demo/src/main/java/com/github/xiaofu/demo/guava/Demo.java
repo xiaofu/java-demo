@@ -75,7 +75,13 @@ public class Demo
 		final ListeningExecutorService backgroundRefreshPools = MoreExecutors
 				.listeningDecorator(Executors.newFixedThreadPool(20));
 		LoadingCache<String, Object> caches = CacheBuilder.newBuilder()
-				.maximumSize(100).refreshAfterWrite(10, TimeUnit.MINUTES)
+				.maximumSize(100)
+				//滑动窗口时间，最近的访问时间、写入或更新开始计时，如果数据过期或不存在，调用load方法加载数据，不存在旧值
+				.expireAfterAccess(10, TimeUnit.SECONDS)
+				//固定时间，KEY被后的写入或更新的时间为起点计时，如果数据过期或不存在，调用load方法加载数据，不存在旧值
+				.expireAfterWrite(10, TimeUnit.SECONDS)
+				//一般指定了它不再指定expireAfterWrite，它是在KEY还没有过期时再判断是否已经写入过期了，需要重新刷新 ，这种情况有旧值，它调用reload方法重新加载值
+				.refreshAfterWrite(10, TimeUnit.SECONDS)
 				.build(new CacheLoader<String, Object>()
 				{
 					@Override
