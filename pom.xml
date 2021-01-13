@@ -14,7 +14,7 @@
 		<jetty.version>8.1.15.v20140411</jetty.version>
 		<hadoop.version>2.3.0-cdh5.0.0</hadoop.version>
 		<parquet.version>1.2.5-cdh5.0.0</parquet.version>
-		<lucene.version>4.4.0-cdh5.0.0</lucene.version>
+		<lucene.version>8.3.1</lucene.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!--core.xml -->
