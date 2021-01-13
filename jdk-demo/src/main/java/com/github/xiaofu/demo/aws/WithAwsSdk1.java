@@ -27,16 +27,8 @@ public class WithAwsSdk1
 	private static AmazonS3 s3Client;
 	public static void main(String[] args) throws IOException
 	{
-		AWSCredentials credentials = new BasicAWSCredentials("AKIAIOSFODNN7EXAMPLE", "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY");
-        ClientConfiguration clientConfiguration = new ClientConfiguration();
-        clientConfiguration.setSignerOverride("AWSS3V4SignerType");
-
          s3Client = AmazonS3ClientBuilder
                 .standard()
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:9000", Regions.US_EAST_1.name()))
-                .withPathStyleAccessEnabled(true)
-                .withClientConfiguration(clientConfiguration)
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
                 .build();
 
         try {
