@@ -10,7 +10,7 @@
 	<properties>
 		<cxf.version>3.0.5</cxf.version>
 		<!-- jdk 1.7 -->
-		<jetty.version>9.2.24.v20180105</jetty.version>
+		<jetty.version>9.4.34.v20201102</jetty.version>
 	</properties>
 	<dependencies>
 
