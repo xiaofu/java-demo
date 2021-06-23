@@ -11,7 +11,7 @@
 		<netty.version>4.1.37.Final</netty.version>
 		<cxf.version>2.7.14</cxf.version>
 		<spring.version>4.0.6.RELEASE</spring.version>
-		<jetty.version>8.1.15.v20140411</jetty.version>
+		<jetty.version>9.4.41.v20210516</jetty.version>
 		<hadoop.version>2.3.0-cdh5.0.0</hadoop.version>
 		<parquet.version>1.2.5-cdh5.0.0</parquet.version>
 		<lucene.version>4.4.0-cdh5.0.0</lucene.version>
